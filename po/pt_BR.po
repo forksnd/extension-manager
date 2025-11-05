@@ -5,14 +5,14 @@
 # Álvaro Burns, 2025.
 # burns <ahoradocafezinho@gmail.com>, 2025.
 # Óscar Fernández Díaz <42654671+oscfdezdz@users.noreply.github.com>, 2025.
+# Mateus Liberale Gomes <sergiogomes209403@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-28 09:43+0000\n"
-"PO-Revision-Date: 2025-08-14 17:21+0000\n"
-"Last-Translator: Óscar Fernández Díaz <42654671+oscfdezdz@users.noreply."
-"github.com>\n"
+"PO-Revision-Date: 2025-11-06 14:51+0000\n"
+"Last-Translator: Mateus Liberale Gomes <sergiogomes209403@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "extension-manager/app/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.15-dev\n"
 
 #: data/com.mattjakeman.ExtensionManager.desktop.in.in:2
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:6
@@ -99,16 +99,16 @@ msgstr ""
 
 #: src/exm-browse-page.blp:45 src/exm-browse-page.c:362
 msgid "Descending Order"
-msgstr ""
+msgstr "Ordenação decrescente"
 
 #: src/exm-browse-page.blp:54
 msgctxt "Sort search results"
 msgid "None"
-msgstr ""
+msgstr "Nenhum"
 
 #: src/exm-browse-page.blp:55
 msgid "Popularity"
-msgstr ""
+msgstr "Popularidade"
 
 #: src/exm-browse-page.blp:56
 msgctxt "Sort search results"
@@ -117,11 +117,11 @@ msgstr "Baixados"
 
 #: src/exm-browse-page.blp:57
 msgid "Updated"
-msgstr ""
+msgstr "Atualizado"
 
 #: src/exm-browse-page.blp:58
 msgid "Created"
-msgstr ""
+msgstr "Criado"
 
 #: src/exm-browse-page.blp:65
 msgid "Sort search results"
@@ -147,7 +147,7 @@ msgstr "Erro na conexão"
 
 #: src/exm-browse-page.c:357
 msgid "Ascending Order"
-msgstr ""
+msgstr "Ordenação Crescente"
 
 #: src/exm-comment-dialog.blp:13 src/exm-detail-view.blp:249
 msgid "Reviews and Comments"
@@ -386,16 +386,12 @@ msgid "_Search Online"
 msgstr "_Pesquise Online"
 
 #: src/exm-installed-page.blp:79 src/exm-upgrade-assistant.c:496
-#, fuzzy
-#| msgid "No User Extensions Installed"
 msgid "No Extensions Installed"
-msgstr "Não há extensões de usuário instaladas"
+msgstr "Não há extensões instaladas"
 
 #: src/exm-installed-page.blp:80
-#, fuzzy
-#| msgid "Search for installed extensions"
 msgid "Search online to install extensions"
-msgstr "Pesquise por extensões instaladas"
+msgstr "Pesquise extensões on-line para instalar"
 
 #. Translators: '%d' = number of extensions that will be updated
 #: src/exm-installed-page.c:315
@@ -425,23 +421,17 @@ msgstr "Mais Zoom"
 #: src/exm-shortcuts-dialog.blp:6
 msgctxt "shortcuts dialog"
 msgid "Views"
-msgstr ""
+msgstr "Ver"
 
 #: src/exm-shortcuts-dialog.blp:9
-#, fuzzy
-#| msgctxt "shortcut window"
-#| msgid "Show Installed Page"
 msgctxt "shortcuts dialog"
 msgid "Switch to Installed"
-msgstr "Mostrar Página de Instalada"
+msgstr "Mudar para os instalados"
 
 #: src/exm-shortcuts-dialog.blp:14
-#, fuzzy
-#| msgctxt "shortcut window"
-#| msgid "Show Browse Page"
 msgctxt "shortcuts dialog"
 msgid "Switch to Browse"
-msgstr "Mostrar Página de Navegar"
+msgstr "Mudar para a Navegação"
 
 #: src/exm-shortcuts-dialog.blp:20
 msgctxt "shortcuts dialog"
@@ -466,7 +456,7 @@ msgstr "Redefinir Zoom"
 #: src/exm-shortcuts-dialog.blp:39
 msgctxt "shortcuts dialog"
 msgid "App"
-msgstr ""
+msgstr "Aplicação"
 
 #: src/exm-shortcuts-dialog.blp:42
 msgctxt "shortcuts dialog"
@@ -474,11 +464,9 @@ msgid "Toggle Search"
 msgstr "Aternar pesquisa"
 
 #: src/exm-shortcuts-dialog.blp:47
-#, fuzzy
-#| msgid "_Keyboard Shortcuts"
 msgctxt "shortcuts dialog"
 msgid "Keyboard Shortcuts"
-msgstr "_Atalhos de Teclado"
+msgstr "Atalhos de Teclado"
 
 #: src/exm-shortcuts-dialog.blp:52
 msgctxt "shortcuts dialog"
