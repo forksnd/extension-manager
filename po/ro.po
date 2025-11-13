@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-28 09:43+0000\n"
-"PO-Revision-Date: 2025-11-11 20:21+0000\n"
+"PO-Revision-Date: 2025-11-14 11:51+0000\n"
 "Last-Translator: Igor Sorocean <sorocean.igor@gmail.com>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/"
 "extension-manager/app/ro/>\n"
@@ -552,7 +552,7 @@ msgstr "Meniul principal"
 
 #: src/exm-window.blp:58
 msgid "Search for installed extensions"
-msgstr "Caută în extensiile instalate"
+msgstr "Caută extensii instalate"
 
 #: src/exm-window.blp:69
 msgctxt "Navigation"
