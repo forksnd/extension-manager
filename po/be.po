@@ -5,22 +5,24 @@
 # "Troj@" <d.iwowi.b@gmail.com>, 2025.
 # Óscar Fernández Díaz <42654671+oscfdezdz@users.noreply.github.com>, 2025.
 # AnmiTaliDev <anmitali198@gmail.com>, 2025.
+# Sasha Glazko <lenify@tutanota.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-28 09:43+0000\n"
-"PO-Revision-Date: 2025-09-21 12:17+0000\n"
-"Last-Translator: AnmiTaliDev <anmitali198@gmail.com>\n"
-"Language-Team: Belarusian <https://hosted.weblate.org/projects/extension-"
-"manager/app/be/>\n"
+"PO-Revision-Date: 2025-11-23 07:51+0000\n"
+"Last-Translator: Sasha Glazko <lenify@tutanota.com>\n"
+"Language-Team: Belarusian <https://hosted.weblate.org/projects/"
+"extension-manager/app/be/>\n"
 "Language: be\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.14-dev\n"
+"Plural-Forms: nplurals=3; plural="
+"(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? "
+"1 : 2);\n"
+"X-Generator: Weblate 5.15-dev\n"
 
 #: data/com.mattjakeman.ExtensionManager.desktop.in.in:2
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:6
@@ -64,7 +66,7 @@ msgstr "Кіруйце пашырэннямі, якія вы ўжо ўсталя
 
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:30
 msgid "See all the details of your extensions"
-msgstr "Паглядзець ўсе дэталі вашых пашырэнняў"
+msgstr "Паглядзець усе дэталі вашых пашырэнняў"
 
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:34
 msgid "Check your extensions compatibility with the next version of GNOME"
@@ -97,7 +99,7 @@ msgstr "Па зніжэнні"
 #: src/exm-browse-page.blp:54
 msgctxt "Sort search results"
 msgid "None"
-msgstr ""
+msgstr "Без фільтраў"
 
 #: src/exm-browse-page.blp:55
 msgid "Popularity"
@@ -215,13 +217,13 @@ msgstr "Не падтрымліваецца"
 #: src/exm-detail-view.c:535
 #, c-format
 msgid "%s Icon"
-msgstr "%s Значок"
+msgstr "Значок %s"
 
 #. Translators: '%s' = extension name
 #: src/exm-detail-view.c:568
 #, c-format
 msgid "%s Screenshot"
-msgstr "%s Скрыншот"
+msgstr "Скрыншот %s"
 
 #: src/exm-error-dialog.blp:7
 msgid "Error Report"
@@ -229,7 +231,7 @@ msgstr "Справаздача пра памылку"
 
 #: src/exm-error-dialog.blp:22
 msgid "An unexpected error occurred in Extension Manager"
-msgstr "Адбылася нечаканая памылка ў Менеджэра пашырэнняў"
+msgstr "Адбылася нечаканая памылка ў Менеджэры пашырэнняў"
 
 #: src/exm-error-dialog.blp:36
 msgid "Copy to Clipboard"
@@ -259,7 +261,7 @@ msgid ""
 msgstr ""
 "Вы выкарыстоўваеце іншую зборку Менеджэра пашырэнняў. Калі ласка, <span "
 "weight=\"bold\"> спачатку звяжыцеся з дыстрыб'ютарам пакета (%s)</span>, "
-"перш чым падаць заяву. Абавязкова прыкладзеце наступную інфармацыю:"
+"перш чым падаць заяву. Абавязкова прыкладзіце наступную інфармацыю:"
 
 #. Translators: Button's tooltip to open extension's preferences dialog
 #: src/exm-extension-row.blp:28
@@ -357,7 +359,7 @@ msgstr "_Выйсці…"
 
 #: src/exm-installed-page.blp:28
 msgid "Use Extensions"
-msgstr "Выкарыстоўваць пашырэння"
+msgstr "Выкарыстоўваць пашырэнні"
 
 #: src/exm-installed-page.blp:29
 msgid "Extensions can cause performance and stability issues"
@@ -380,16 +382,12 @@ msgid "_Search Online"
 msgstr "_Пошук у Інтэрнэце"
 
 #: src/exm-installed-page.blp:79 src/exm-upgrade-assistant.c:496
-#, fuzzy
-#| msgid "No User Extensions Installed"
 msgid "No Extensions Installed"
-msgstr "Карыстальніцкія пашырэнні не ўсталяваны"
+msgstr "Няма ўсталяваных пашырэнняў"
 
 #: src/exm-installed-page.blp:80
-#, fuzzy
-#| msgid "Search for installed extensions"
 msgid "Search online to install extensions"
-msgstr "Пошук усталяваных пашырэнняў"
+msgstr "Скарыстайцеся пошукам, каб усталяваць пашырэнні"
 
 #. Translators: '%d' = number of extensions that will be updated
 #: src/exm-installed-page.c:315
@@ -421,23 +419,17 @@ msgstr "Павялічыць"
 #: src/exm-shortcuts-dialog.blp:6
 msgctxt "shortcuts dialog"
 msgid "Views"
-msgstr ""
+msgstr "Укладкі"
 
 #: src/exm-shortcuts-dialog.blp:9
-#, fuzzy
-#| msgctxt "shortcut window"
-#| msgid "Show Installed Page"
 msgctxt "shortcuts dialog"
 msgid "Switch to Installed"
-msgstr "Паказаць старонку \"Усталяваныя\""
+msgstr "Пераключыцца на «Усталяваныя»"
 
 #: src/exm-shortcuts-dialog.blp:14
-#, fuzzy
-#| msgctxt "shortcut window"
-#| msgid "Show Browse Page"
 msgctxt "shortcuts dialog"
 msgid "Switch to Browse"
-msgstr "Паказаць старонку \"Пошук\""
+msgstr "Пераключыцца на «Пошук»"
 
 #: src/exm-shortcuts-dialog.blp:20
 msgctxt "shortcuts dialog"
@@ -462,7 +454,7 @@ msgstr "Скінуць маштаб"
 #: src/exm-shortcuts-dialog.blp:39
 msgctxt "shortcuts dialog"
 msgid "App"
-msgstr ""
+msgstr "Праграма"
 
 #: src/exm-shortcuts-dialog.blp:42
 msgctxt "shortcuts dialog"
@@ -470,11 +462,9 @@ msgid "Toggle Search"
 msgstr "Пераключыць пошук"
 
 #: src/exm-shortcuts-dialog.blp:47
-#, fuzzy
-#| msgid "_Keyboard Shortcuts"
 msgctxt "shortcuts dialog"
 msgid "Keyboard Shortcuts"
-msgstr "_Спалучэнні клавіш"
+msgstr "Спалучэнні клавіш"
 
 #: src/exm-shortcuts-dialog.blp:52
 msgctxt "shortcuts dialog"
