@@ -12,9 +12,8 @@ msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-28 09:43+0000\n"
-"PO-Revision-Date: 2025-08-14 17:21+0000\n"
-"Last-Translator: Óscar Fernández Díaz <42654671+oscfdezdz@users.noreply."
-"github.com>\n"
+"PO-Revision-Date: 2025-11-23 07:51+0000\n"
+"Last-Translator: taijuin Lee <taijuin@gmail.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://hosted.weblate.org/"
 "projects/extension-manager/app/zh_Hant/>\n"
 "Language: zh_TW\n"
@@ -22,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.13-dev\n"
+"X-Generator: Weblate 5.15-dev\n"
 
 #: data/com.mattjakeman.ExtensionManager.desktop.in.in:2
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:6
@@ -41,16 +40,12 @@ msgid "extension;manager;shell;"
 msgstr "extension;manager;shell;擴充功能;管理員;管理器;殼層;"
 
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:7
-#, fuzzy
-#| msgid "User-Installed Extensions"
 msgid "Install GNOME Extensions"
-msgstr "使用者安裝的擴充功能"
+msgstr "安裝 GNOME 擴充功能"
 
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:13
-#, fuzzy
-#| msgid "Browse, install, and manage GNOME Shell Extensions."
 msgid "Browse and install GNOME Shell extensions to customise your desktop."
-msgstr "瀏覽、安裝和管理 GNOME Shell 擴充功能。"
+msgstr "瀏覽並安裝 GNOME Shell 擴充功能以自訂您的桌面環境。"
 
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:14
 msgid "Features:"
@@ -97,12 +92,12 @@ msgstr "輸入關鍵字以在 extensions.gnome.org 搜尋 GNOME Shell 擴充功�
 
 #: src/exm-browse-page.blp:45 src/exm-browse-page.c:362
 msgid "Descending Order"
-msgstr ""
+msgstr "降序"
 
 #: src/exm-browse-page.blp:54
 msgctxt "Sort search results"
 msgid "None"
-msgstr ""
+msgstr "無"
 
 #: src/exm-browse-page.blp:55
 msgid "Popularity"
@@ -115,11 +110,11 @@ msgstr "下載次數"
 
 #: src/exm-browse-page.blp:57
 msgid "Updated"
-msgstr ""
+msgstr "已更新"
 
 #: src/exm-browse-page.blp:58
 msgid "Created"
-msgstr ""
+msgstr "已建立"
 
 #: src/exm-browse-page.blp:65
 msgid "Sort search results"
@@ -145,7 +140,7 @@ msgstr "連線錯誤"
 
 #: src/exm-browse-page.c:357
 msgid "Ascending Order"
-msgstr ""
+msgstr "升序"
 
 #: src/exm-comment-dialog.blp:13 src/exm-detail-view.blp:249
 msgid "Reviews and Comments"
@@ -380,16 +375,12 @@ msgid "_Search Online"
 msgstr "線上搜尋(_S)"
 
 #: src/exm-installed-page.blp:79 src/exm-upgrade-assistant.c:496
-#, fuzzy
-#| msgid "No User Extensions Installed"
 msgid "No Extensions Installed"
-msgstr "沒有已安裝的使用者擴充功能"
+msgstr "沒有已安裝的擴充功能"
 
 #: src/exm-installed-page.blp:80
-#, fuzzy
-#| msgid "Search for installed extensions"
 msgid "Search online to install extensions"
-msgstr "搜尋已安裝的擴充功能"
+msgstr "線上搜尋以安裝擴充功能"
 
 #. Translators: '%d' = number of extensions that will be updated
 #: src/exm-installed-page.c:315
@@ -417,23 +408,17 @@ msgstr "放大"
 #: src/exm-shortcuts-dialog.blp:6
 msgctxt "shortcuts dialog"
 msgid "Views"
-msgstr ""
+msgstr "檢視"
 
 #: src/exm-shortcuts-dialog.blp:9
-#, fuzzy
-#| msgctxt "shortcut window"
-#| msgid "Show Installed Page"
 msgctxt "shortcuts dialog"
 msgid "Switch to Installed"
-msgstr "顯示已安裝頁面"
+msgstr "切換到\"已安裝\"頁面"
 
 #: src/exm-shortcuts-dialog.blp:14
-#, fuzzy
-#| msgctxt "shortcut window"
-#| msgid "Show Browse Page"
 msgctxt "shortcuts dialog"
 msgid "Switch to Browse"
-msgstr "顯示瀏覽頁面"
+msgstr "切換到\"瀏覽\"頁面"
 
 #: src/exm-shortcuts-dialog.blp:20
 msgctxt "shortcuts dialog"
@@ -458,7 +443,7 @@ msgstr "重設縮放比例"
 #: src/exm-shortcuts-dialog.blp:39
 msgctxt "shortcuts dialog"
 msgid "App"
-msgstr ""
+msgstr "應用程式"
 
 #: src/exm-shortcuts-dialog.blp:42
 msgctxt "shortcuts dialog"
@@ -466,11 +451,9 @@ msgid "Toggle Search"
 msgstr "切換搜尋"
 
 #: src/exm-shortcuts-dialog.blp:47
-#, fuzzy
-#| msgid "_Keyboard Shortcuts"
 msgctxt "shortcuts dialog"
 msgid "Keyboard Shortcuts"
-msgstr "鍵盤快捷鍵(_K)"
+msgstr "鍵盤快捷鍵"
 
 #: src/exm-shortcuts-dialog.blp:52
 msgctxt "shortcuts dialog"
