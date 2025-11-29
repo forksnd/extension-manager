@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-28 09:43+0000\n"
-"PO-Revision-Date: 2025-09-29 11:02+0000\n"
+"PO-Revision-Date: 2025-11-30 15:00+0000\n"
 "Last-Translator: p-sage <p-sage@users.noreply.hosted.weblate.org>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/extension-manager/"
 "app/fr/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.15-dev\n"
 
 #: data/com.mattjakeman.ExtensionManager.desktop.in.in:2
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:6
@@ -592,7 +592,7 @@ msgstr "_Raccourcis clavier"
 
 #: src/exm-window.blp:116
 msgid "_About Extension Manager"
-msgstr "À _propos du Gestionnaire d’extensions"
+msgstr "À _propos de Gestionnaire d’extensions"
 
 #: src/exm-window.blp:121
 msgid "Uninstall Extension?"
