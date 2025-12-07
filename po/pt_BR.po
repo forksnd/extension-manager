@@ -6,13 +6,14 @@
 # burns <ahoradocafezinho@gmail.com>, 2025.
 # Óscar Fernández Díaz <42654671+oscfdezdz@users.noreply.github.com>, 2025.
 # Mateus Liberale Gomes <sergiogomes209403@gmail.com>, 2025.
+# Marcos Pereira <pereira.mvini@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-28 09:43+0000\n"
-"PO-Revision-Date: 2025-11-06 14:51+0000\n"
-"Last-Translator: Mateus Liberale Gomes <sergiogomes209403@gmail.com>\n"
+"PO-Revision-Date: 2025-12-08 14:00+0000\n"
+"Last-Translator: Marcos Pereira <pereira.mvini@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "extension-manager/app/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -39,16 +40,14 @@ msgid "extension;manager;shell;"
 msgstr "extension;manager;shell;extensões;gerenciador;extensão;"
 
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:7
-#, fuzzy
-#| msgid "User-Installed Extensions"
 msgid "Install GNOME Extensions"
-msgstr "Extensões instaladas pelo usuário"
+msgstr "Instalar Extensões do Gnome"
 
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:13
-#, fuzzy
-#| msgid "Browse, install, and manage GNOME Shell Extensions."
 msgid "Browse and install GNOME Shell extensions to customise your desktop."
-msgstr "Navegue, instale e gerencie as Extensões do GNOME Shell."
+msgstr ""
+"Navegue e instale Extensões do GNOME Shell para personalizar a sua área de "
+"trabalho."
 
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:14
 msgid "Features:"
