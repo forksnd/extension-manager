@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the extension-manager package.
 # Cirilla <cirilla@tuta.io>, 2025.
-# Flynn <cirilla@tuta.io>, 2025.
+# Flynn <cirilla@tuta.io>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-28 09:43+0000\n"
-"PO-Revision-Date: 2025-12-22 22:00+0000\n"
+"PO-Revision-Date: 2026-01-05 20:01+0000\n"
 "Last-Translator: Flynn <cirilla@tuta.io>\n"
 "Language-Team: Cornish <https://hosted.weblate.org/projects/extension-"
 "manager/app/kw/>\n"
@@ -61,7 +61,7 @@ msgstr "Peuri extensions.gnome.org a-bervedh an app"
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:17
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:22
 msgid "Manage the extensions you already have installed"
-msgstr "Dyghtya an ystynnansow dre hwi leys kyns lemmyn"
+msgstr "Dyghtya an ystynnansow dre ty leys kyns lemmyn"
 
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:30
 msgid "See all the details of your extensions"
@@ -257,7 +257,7 @@ msgid ""
 "weight=\"bold\">contact the package distributor (%s) first</span> before "
 "filing an issue. Be sure to attach the following information:"
 msgstr ""
-"Hwi devnydhyow unn versyon parti nessa rag Dyghtyer Ystynnans. <span "
+"Ty devnydhyow unn versyon parti nessa rag Dyghtyer Ystynnans. <span "
 "weight=\"bold\">Kestav an lesrennyas (%s) kynsa </span> mar pleg a-dherag "
 "restrenna unn derivas. Tackya an kudhlow a sew:"
 
@@ -515,13 +515,13 @@ msgstr ""
 #, c-format
 msgid "If you switch to GNOME %s now, all of your extensions should work"
 msgstr ""
-"Mar hwi skwychella dhe GNOME %s lemmyn, oll agas ystynnansow bos gweythresek"
+"Mar ty skwychella dhe GNOME %s lemmyn, oll agas ystynnansow bos gweythresek"
 
 #: src/exm-upgrade-assistant.c:236
 #, c-format
 msgid "If you switch to GNOME %s now, %d of your extensions might not work"
 msgstr ""
-"Mar hwi skwychella dhe GNOME %s lemmyn, %d a agas ystynnansow re na bos "
+"Mar ty skwychella dhe GNOME %s lemmyn, %d a agas ystynnansow re na bos "
 "gweythresek"
 
 #. Translators: Icon's tooltip when an extension is compatible
@@ -548,7 +548,7 @@ msgid ""
 "You are currently running <b>GNOME %s</b>. Select a version of GNOME below "
 "and check whether your extensions will continue to be available."
 msgstr ""
-"Hwi yw eksekutya <b> GNOME %s</b>. Dewis unn versyon a GNOME a-woles dhe ha "
+"Ty yw eksekutya <b> GNOME %s</b>. Dewis unn versyon a GNOME a-woles dhe ha "
 "checkya mar agas ystynnansow durya bos kavadow."
 
 #. Translators: Tooltip of the search icon in the header bar
@@ -601,8 +601,8 @@ msgid ""
 "The extension's features and functionality will no longer be accessible. Are "
 "you sure you want to uninstall?"
 msgstr ""
-"An nasyow ha gweythresyow ystynnans yw na fella kavadow. Os ta sur hwi "
-"mynnes dislea y?"
+"An nasyow ha gweythresyow ystynnans yw na fella kavadow. Os ta sur ty mynnes "
+"dislea y?"
 
 #: src/exm-window.blp:127
 msgid "_No"
