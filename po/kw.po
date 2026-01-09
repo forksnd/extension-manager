@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-28 09:43+0000\n"
-"PO-Revision-Date: 2026-01-05 20:01+0000\n"
+"PO-Revision-Date: 2026-01-10 13:01+0000\n"
 "Last-Translator: Flynn <cirilla@tuta.io>\n"
 "Language-Team: Cornish <https://hosted.weblate.org/projects/extension-"
 "manager/app/kw/>\n"
@@ -150,7 +150,7 @@ msgstr "Breusyansow ha kampol"
 #: src/exm-comment-dialog.blp:25 src/exm-detail-view.c:622
 #: src/exm-install-button.c:147
 msgid "Loading"
-msgstr "Kargow"
+msgstr "Ow Karga"
 
 #: src/exm-comment-tile.blp:30 src/exm-detail-view.blp:128
 msgid "Author"
@@ -158,7 +158,7 @@ msgstr "Awtour"
 
 #: src/exm-detail-view.blp:41
 msgid "Loading Details"
-msgstr "Kargow Manylyon"
+msgstr "Ow Karga Manylyon"
 
 #: src/exm-detail-view.blp:60 src/exm-window.c:353
 msgid "An Error Occurred"
@@ -257,7 +257,7 @@ msgid ""
 "weight=\"bold\">contact the package distributor (%s) first</span> before "
 "filing an issue. Be sure to attach the following information:"
 msgstr ""
-"Ty devnydhyow unn versyon parti nessa rag Dyghtyer Ystynnans. <span "
+"Ty ow devnydhya unn versyon parti nessa rag Dyghtyer Ystynnans. <span "
 "weight=\"bold\">Kestav an lesrennyas (%s) kynsa </span> mar pleg a-dherag "
 "restrenna unn derivas. Tackya an kudhlow a sew:"
 
@@ -269,7 +269,7 @@ msgstr "Ygeri settyansow ystynnans"
 #. Translators: Icon's tooltip when an extension has an error
 #: src/exm-extension-row.blp:46
 msgid "An error occurred while loading this extension"
-msgstr "Unn error hwarvys dres karga an ystynnans ma"
+msgstr "Unn error hwarvys dres ow karga an ystynnans ma"
 
 #. Translators: Icon's tooltip when an extension is incompatible
 #: src/exm-extension-row.blp:63 src/exm-install-button.c:142
@@ -339,7 +339,7 @@ msgstr "Lea…"
 
 #: src/exm-install-button.c:130
 msgid "Installing"
-msgstr "Leow"
+msgstr "Ow Lea"
 
 #: src/exm-install-button.c:134
 msgctxt "State"
@@ -509,7 +509,7 @@ msgid ""
 "marked as supporting <b>GNOME %s</b>"
 msgstr ""
 "<b>%d yn-mes a %d</b> ystynnansow leys y'n eur ma yn an amontyell ma yw "
-"merkys avel skoodhyow <b>GNOME %s</b>"
+"merkys avel ow skoodhya <b>GNOME %s</b>"
 
 #: src/exm-upgrade-assistant.c:231
 #, c-format
@@ -548,8 +548,8 @@ msgid ""
 "You are currently running <b>GNOME %s</b>. Select a version of GNOME below "
 "and check whether your extensions will continue to be available."
 msgstr ""
-"Ty yw eksekutya <b> GNOME %s</b>. Dewis unn versyon a GNOME a-woles dhe ha "
-"checkya mar agas ystynnansow durya bos kavadow."
+"Ty yw owth eksekutya <b> GNOME %s</b>. Dewis unn versyon a GNOME a-woles dhe "
+"ha checkya mar agas ystynnansow durya bos kavadow."
 
 #. Translators: Tooltip of the search icon in the header bar
 #: src/exm-window.blp:39
