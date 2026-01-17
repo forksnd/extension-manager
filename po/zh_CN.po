@@ -5,13 +5,14 @@
 # unsigned char <ZhangYaoan2008@outlook.com>, 2024, 2025.
 # taijuin Lee <taijuin@gmail.com>, 2025.
 # Óscar Fernández Díaz <42654671+oscfdezdz@users.noreply.github.com>, 2025.
+# Charles Garris <charlesgarris3822@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-28 09:43+0000\n"
-"PO-Revision-Date: 2025-10-02 18:17+0000\n"
-"Last-Translator: unsigned char <ZhangYaoan2008@outlook.com>\n"
+"PO-Revision-Date: 2026-01-18 17:01+0000\n"
+"Last-Translator: Charles Garris <charlesgarris3822@gmail.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/extension-manager/app/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -19,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #: data/com.mattjakeman.ExtensionManager.desktop.in.in:2
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:6
@@ -74,7 +75,7 @@ msgstr "浏览、安装和管理 GNOME Shell 扩展。"
 #. Translators: Use 'Name email@domain.com' or 'Name https://website.example' (without single quotes). Do not delete existing names, write yours on a new line.
 #: src/exm-application.c:178
 msgid "translator-credits"
-msgstr "Luke Luo <njlyf2011@hotmail.com>"
+msgstr "译者鸣谢"
 
 #: src/exm-browse-page.blp:16
 msgid "Search for Extensions"
