@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-28 09:43+0000\n"
-"PO-Revision-Date: 2026-01-10 13:01+0000\n"
+"PO-Revision-Date: 2026-01-22 14:01+0000\n"
 "Last-Translator: Flynn <cirilla@tuta.io>\n"
 "Language-Team: Cornish <https://hosted.weblate.org/projects/extension-"
 "manager/app/kw/>\n"
@@ -23,7 +23,7 @@ msgstr ""
 "1000000 == 100000) ? 2 : ((n % 100 == 3 || n % 100 == 23 || n % 100 == 43 || "
 "n % 100 == 63 || n % 100 == 83) ? 3 : ((n != 1 && (n % 100 == 1 || n % 100 "
 "== 21 || n % 100 == 41 || n % 100 == 61 || n % 100 == 81)) ? 4 : 5))));\n"
-"X-Generator: Weblate 5.15.1\n"
+"X-Generator: Weblate 5.16-dev\n"
 
 #: data/com.mattjakeman.ExtensionManager.desktop.in.in:2
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:6
@@ -247,7 +247,7 @@ msgstr "Dasskrifys"
 
 #: src/exm-error-dialog.c:174
 msgid "Please open a new issue and attach the following information:"
-msgstr "Skrifa unn derivas nowydh mar pleg ha tackya an kudhlow a sew:"
+msgstr "Skrifa unn derivas nowydh mar pleg ha tackya an kedhlow a sew:"
 
 #. Translators: '%s' = Name of Distributor (e.g. "Packager123")
 #: src/exm-error-dialog.c:178
@@ -259,7 +259,7 @@ msgid ""
 msgstr ""
 "Ty ow devnydhya unn versyon parti nessa rag Dyghtyer Ystynnans. <span "
 "weight=\"bold\">Kestav an lesrennyas (%s) kynsa </span> mar pleg a-dherag "
-"restrenna unn derivas. Tackya an kudhlow a sew:"
+"restrenna unn derivas. Tackya an kedhlow a sew:"
 
 #. Translators: Button's tooltip to open extension's preferences dialog
 #: src/exm-extension-row.blp:28
