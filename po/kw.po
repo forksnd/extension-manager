@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-28 09:43+0000\n"
-"PO-Revision-Date: 2026-01-22 14:01+0000\n"
+"PO-Revision-Date: 2026-01-28 11:51+0000\n"
 "Last-Translator: Flynn <cirilla@tuta.io>\n"
 "Language-Team: Cornish <https://hosted.weblate.org/projects/extension-"
 "manager/app/kw/>\n"
@@ -47,7 +47,7 @@ msgstr "Lea Ystynansow GNOME"
 
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:13
 msgid "Browse and install GNOME Shell extensions to customise your desktop."
-msgstr "Peuri ha lea Ystynnans GNOME dhe personelhe agas amontyell."
+msgstr "Peuri ha lea Ystynnans GNOME rag personelhe dha amontyell."
 
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:14
 msgid "Features:"
@@ -65,11 +65,11 @@ msgstr "Dyghtya an ystynnansow dre ty leys kyns lemmyn"
 
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:30
 msgid "See all the details of your extensions"
-msgstr "Gweles oll manylyon rag agas ystynnansow"
+msgstr "Gweles oll manylyon dha ystynnansow"
 
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:34
 msgid "Check your extensions compatibility with the next version of GNOME"
-msgstr "Checkya mar agas ystynnansow oberi gans an versyon nessa GNOME"
+msgstr "Checkya mar dha ystynnansow oberi gans an versyon nessa GNOME"
 
 #: src/exm-application.c:175
 msgid "Browse, install, and manage GNOME Shell Extensions."
@@ -274,12 +274,12 @@ msgstr "Unn error hwarvys dres ow karga an ystynnans ma"
 #. Translators: Icon's tooltip when an extension is incompatible
 #: src/exm-extension-row.blp:63 src/exm-install-button.c:142
 msgid "This extension is incompatible with your current version of GNOME"
-msgstr "An ystynnans ma yw ankesplegadow rag agas versyon GNOME a'n jydh"
+msgstr "An ystynnans ma yw ankesplegadow gans dha versyon GNOME a-lemmyn"
 
 #. Translators: Icon's tooltip when an extension update is available
 #: src/exm-extension-row.blp:80
 msgid "A newer version of this extension is available"
-msgstr "Unn versyon nowydh a an ystynnans ma yw kavadow"
+msgstr "Unn versyon nowydh a'n ystynnans ma yw kavadow"
 
 #: src/exm-extension-row.blp:98 src/exm-info-bar.blp:54
 msgid "Version"
@@ -515,24 +515,24 @@ msgstr ""
 #, c-format
 msgid "If you switch to GNOME %s now, all of your extensions should work"
 msgstr ""
-"Mar ty skwychella dhe GNOME %s lemmyn, oll agas ystynnansow bos gweythresek"
+"Mar ty skwychella dhe GNOME %s lemmyn, oll dha ystynnansow bos gweythresek"
 
 #: src/exm-upgrade-assistant.c:236
 #, c-format
 msgid "If you switch to GNOME %s now, %d of your extensions might not work"
 msgstr ""
-"Mar ty skwychella dhe GNOME %s lemmyn, %d a agas ystynnansow re na bos "
-"gweythresek"
+"Mar ty skwychella dhe GNOME %s lemmyn, %d a dha ystynnansow ny bos "
+"gweythresek martesen"
 
 #. Translators: Icon's tooltip when an extension is compatible
 #: src/exm-upgrade-assistant.c:566
 msgid "A compatible version of the extension exists"
-msgstr "Unn versyon kesplegadow a an ystyanns bys"
+msgstr "Unn versyon kesplegadow a'n ystyanns bys"
 
 #. Translators: Icon's tooltip when an extension is not compatible
 #: src/exm-upgrade-assistant.c:573
 msgid "No compatible version of the extension exists"
-msgstr "Versyon kesplegadow vyth a an ystynnans bys"
+msgstr "Versyon kesplegadow vyth a'n ystynnans bys"
 
 #. Translators: Icon's tooltip when an extension compatibility is unknown
 #: src/exm-upgrade-assistant.c:580
@@ -549,7 +549,7 @@ msgid ""
 "and check whether your extensions will continue to be available."
 msgstr ""
 "Ty yw owth eksekutya <b> GNOME %s</b>. Dewis unn versyon a GNOME a-woles dhe "
-"ha checkya mar agas ystynnansow durya bos kavadow."
+"ha checkya mar dha ystynnansow durya bos kavadow."
 
 #. Translators: Tooltip of the search icon in the header bar
 #: src/exm-window.blp:39
@@ -645,4 +645,4 @@ msgstr ""
 
 #: src/web/exm-request-handler.c:100
 msgid "Check your network status and try again"
-msgstr "Checkya agas studh kesrosweyth ha assaya aral"
+msgstr "Checkya dha studh kesrosweyth hag assaya arta"
