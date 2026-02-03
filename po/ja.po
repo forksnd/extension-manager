@@ -2,14 +2,14 @@
 # Copyright (C) 2022 extension-manager'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the extension-manager package.
 # 小山田 純 <oyamadajun@outlook.jp>, 2022.
-# Ryo Nakano <ryonakaknock3@gmail.com>, 2024, 2025.
+# Ryo Nakano <ryonakaknock3@gmail.com>, 2024, 2025, 2026.
 # Óscar Fernández Díaz <42654671+oscfdezdz@users.noreply.github.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-28 09:43+0000\n"
-"PO-Revision-Date: 2025-09-12 13:20+0000\n"
+"PO-Revision-Date: 2026-02-03 12:06+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/extension-"
 "manager/app/ja/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.16-dev\n"
 
 #: data/com.mattjakeman.ExtensionManager.desktop.in.in:2
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:6
@@ -97,7 +97,7 @@ msgstr "降順"
 #: src/exm-browse-page.blp:54
 msgctxt "Sort search results"
 msgid "None"
-msgstr ""
+msgstr "並べ替えなし"
 
 #: src/exm-browse-page.blp:55
 msgid "Popularity"
@@ -118,7 +118,7 @@ msgstr "作成日順"
 
 #: src/exm-browse-page.blp:65
 msgid "Sort search results"
-msgstr "検索結果の並べ替えが、できるようになりました"
+msgstr "検索結果を並べ替える"
 
 #: src/exm-browse-page.blp:111
 msgid "_Load More Results"
