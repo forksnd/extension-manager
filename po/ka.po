@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-28 09:43+0000\n"
-"PO-Revision-Date: 2026-02-02 19:02+0000\n"
+"PO-Revision-Date: 2026-02-06 12:01+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://hosted.weblate.org/projects/extension-"
 "manager/app/ka/>\n"
@@ -153,7 +153,7 @@ msgstr "დეტალების ჩატვირთვა"
 
 #: src/exm-detail-view.blp:60 src/exm-window.c:353
 msgid "An Error Occurred"
-msgstr "შეცდომა"
+msgstr "აღმოჩენილია შეცდომა"
 
 #: src/exm-detail-view.blp:61
 msgid "No extension details available"
