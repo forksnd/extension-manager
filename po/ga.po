@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the extension-manager package.
-# Aindriú Mac Giolla Eoin <aindriu80@gmail.com>, 2024, 2025.
+# Aindriú Mac Giolla Eoin <aindriu80@gmail.com>, 2024, 2025, 2026.
 # Óscar Fernández Díaz <42654671+oscfdezdz@users.noreply.github.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-28 09:43+0000\n"
-"PO-Revision-Date: 2025-09-29 11:02+0000\n"
+"PO-Revision-Date: 2026-02-20 11:09+0000\n"
 "Last-Translator: Aindriú Mac Giolla Eoin <aindriu80@gmail.com>\n"
 "Language-Team: Irish <https://hosted.weblate.org/projects/extension-manager/"
 "app/ga/>\n"
@@ -16,9 +16,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : (n>2 && n<7) ? 2 :("
-"n>6 && n<11) ? 3 : 4;\n"
-"X-Generator: Weblate 5.14-dev\n"
+"Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : (n>2 && n<7) ? 2 :(n>"
+"6 && n<11) ? 3 : 4;\n"
+"X-Generator: Weblate 5.16.1-dev\n"
 
 #: data/com.mattjakeman.ExtensionManager.desktop.in.in:2
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:6
@@ -255,10 +255,10 @@ msgid ""
 "weight=\"bold\">contact the package distributor (%s) first</span> before "
 "filing an issue. Be sure to attach the following information:"
 msgstr ""
-"Tá tú ag baint úsáide as Bainisteoir Tógála Tríú Páirtí Síneadh. Le do thoil "
-"<span weight=\"BOLD\"> Déan teagmháil leis an dáileoir pacáiste (%s) first </"
-"span> sula ndéanann tú saincheist a chomhdú. Bí cinnte an fhaisnéis seo a "
-"leanas a cheangal:"
+"Tá leagan tríú páirtí de Extension Manager in úsáid agat. <span "
+"weight=\"bold\">téigh i dteagmháil leis an dáileoir pacáiste (%s) ar dtús</"
+"span> sula ndéanann tú fadhb a chomhdú. Bí cinnte an fhaisnéis seo a leanas "
+"a cheangal:"
 
 #. Translators: Button's tooltip to open extension's preferences dialog
 #: src/exm-extension-row.blp:28
