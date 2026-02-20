@@ -6,13 +6,15 @@
 # Saggitarius <gdeforge@gmx.com>, 2025.
 # jonnysemon <jonnysemon@users.noreply.hosted.weblate.org>, 2025.
 # Óscar Fernández Díaz <42654671+oscfdezdz@users.noreply.github.com>, 2025.
+# Muhammed Al-Basha <mu7basha@users.noreply.hosted.weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-28 09:43+0000\n"
-"PO-Revision-Date: 2025-09-29 11:01+0000\n"
-"Last-Translator: jonnysemon <jonnysemon@users.noreply.hosted.weblate.org>\n"
+"PO-Revision-Date: 2026-02-21 12:09+0000\n"
+"Last-Translator: Muhammed Al-Basha "
+"<mu7basha@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/extension-manager/"
 "app/ar/>\n"
 "Language: ar\n"
@@ -21,7 +23,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.16.1-dev\n"
 
 #: data/com.mattjakeman.ExtensionManager.desktop.in.in:2
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:6
@@ -255,9 +257,9 @@ msgid ""
 "weight=\"bold\">contact the package distributor (%s) first</span> before "
 "filing an issue. Be sure to attach the following information:"
 msgstr ""
-"أنت تستخدم إصدارًا تابعًا لجهة خارجية من مدير الامتدادات. رجاء "
-"<spanweight=\"bold\">اتصل بموزع الحزمة (%s) أولاً</span> قبل تقديم أي مشكلة. "
-"تأكد من إرفاق المعلومات التالية:"
+"أنت تستخدم إصدارًا تابعًا لجهة خارجية من مدير الامتدادات. رجاء <span "
+"weight=\"bold\">اتصل بموزع الحزمة (%s) أولاً</span> قبل تقديم أي مشكلة. تأكد "
+"من إرفاق المعلومات التالية:"
 
 #. Translators: Button's tooltip to open extension's preferences dialog
 #: src/exm-extension-row.blp:28
