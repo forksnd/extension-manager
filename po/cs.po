@@ -7,13 +7,14 @@
 # lorduskordus <lorduskordus@gmail.com>, 2025.
 # Fjuro <fjuro@alius.cz>, 2025.
 # Óscar Fernández Díaz <42654671+oscfdezdz@users.noreply.github.com>, 2025.
+# Pavel Borecki <pavel.borecki@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-28 09:43+0000\n"
-"PO-Revision-Date: 2025-09-29 11:02+0000\n"
-"Last-Translator: Fjuro <fjuro@alius.cz>\n"
+"PO-Revision-Date: 2026-03-15 21:09+0000\n"
+"Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/extension-manager/"
 "app/cs/>\n"
 "Language: cs\n"
@@ -21,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.17-dev\n"
 
 #: data/com.mattjakeman.ExtensionManager.desktop.in.in:2
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:6
@@ -31,7 +32,7 @@ msgstr "Správce rozšíření"
 
 #: data/com.mattjakeman.ExtensionManager.desktop.in.in:11
 msgid "Manage GNOME Shell Extensions"
-msgstr "Správa rozšíření GNOME Shellu"
+msgstr "Správa rozšíření pro GNOME Shell"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #. Make sure to leave the original strings and add your translations afterwards, so that users can search both in English and your language.
@@ -41,13 +42,13 @@ msgstr "rozšíření;správce;shell;"
 
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:7
 msgid "Install GNOME Extensions"
-msgstr "Instalujte rozšíření GNOME"
+msgstr "Instalujte rozšíření pro GNOME"
 
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:13
 msgid "Browse and install GNOME Shell extensions to customise your desktop."
 msgstr ""
-"Procházejte a instalujte rozšíření GNOME Shellu pro přizpůsobení vašeho "
-"prostředí."
+"Procházejte a instalujte rozšíření pro GNOME Shell a přizpůsobujte si tak "
+"své prostředí."
 
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:14
 msgid "Features:"
@@ -56,16 +57,16 @@ msgstr "Funkce:"
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:16
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:26
 msgid "Browse extensions.gnome.org right inside the app"
-msgstr "Procházejte web extensions.gnome.org přímo v aplikaci"
+msgstr "Procházejte katalog extensions.gnome.org přímo v aplikaci"
 
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:17
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:22
 msgid "Manage the extensions you already have installed"
-msgstr "Spravujte rozšíření, která již máte nainstalovaná"
+msgstr "Spravujte rozšíření, která už máte nainstalovaná"
 
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:30
 msgid "See all the details of your extensions"
-msgstr "Zobrazit všechny podrobnosti o vašich rozšířeních"
+msgstr "Zobrazit všechny podrobnosti o vámi nainstalovaných rozšířeních"
 
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:34
 msgid "Check your extensions compatibility with the next version of GNOME"
@@ -74,7 +75,7 @@ msgstr ""
 
 #: src/exm-application.c:175
 msgid "Browse, install, and manage GNOME Shell Extensions."
-msgstr "Procházejte, instalujte a spravujte rozšíření GNOME Shellu."
+msgstr "Procházejte, instalujte a spravujte rozšíření pro GNOME Shell."
 
 #. Translators: Use 'Name email@domain.com' or 'Name https://website.example' (without single quotes). Do not delete existing names, write yours on a new line.
 #: src/exm-application.c:178
@@ -92,8 +93,8 @@ msgstr "Hledat rozšíření"
 msgid ""
 "Enter a keyword to search 'extensions.gnome.org' for GNOME Shell Extensions"
 msgstr ""
-"Zadejte klíčové slovo k vyhledávání rozšíření GNOME Shellu na „extensions."
-"gnome.org“"
+"Zadejte klíčové slovo podle kterého vyhledat rozšíření pro GNOME Shell na „"
+"extensions.gnome.org“"
 
 #: src/exm-browse-page.blp:45 src/exm-browse-page.c:362
 msgid "Descending Order"
@@ -102,7 +103,7 @@ msgstr "Sestupné pořadí"
 #: src/exm-browse-page.blp:54
 msgctxt "Sort search results"
 msgid "None"
-msgstr "Žádný"
+msgstr "Žádné"
 
 #: src/exm-browse-page.blp:55
 msgid "Popularity"
@@ -111,7 +112,7 @@ msgstr "Popularita"
 #: src/exm-browse-page.blp:56
 msgctxt "Sort search results"
 msgid "Downloads"
-msgstr "Počet Stažení"
+msgstr "Počet stažení"
 
 #: src/exm-browse-page.blp:57
 msgid "Updated"
@@ -123,15 +124,15 @@ msgstr "Vytvořeno"
 
 #: src/exm-browse-page.blp:65
 msgid "Sort search results"
-msgstr "Filtrování výsledků vyhledávání"
+msgstr "Řazení výsledků vyhledávání"
 
 #: src/exm-browse-page.blp:111
 msgid "_Load More Results"
-msgstr "_Načíst Více Výsledků"
+msgstr "_Načíst více výsledků"
 
 #: src/exm-browse-page.blp:145 src/exm-installed-page.blp:58
 msgid "No Results Found"
-msgstr "Nebyly nalezeny žádné výsledky"
+msgstr "Nenalezeny žádné výsledky"
 
 #: src/exm-browse-page.blp:152
 msgid "Try a different search"
@@ -170,11 +171,11 @@ msgstr "Došlo k chybě"
 
 #: src/exm-detail-view.blp:61
 msgid "No extension details available"
-msgstr "Nejsou dostupné žádné podrobnosti o rozšíření"
+msgstr "Nejsou k dispozici žádné podrobnosti o rozšíření"
 
 #: src/exm-detail-view.blp:114
 msgid "Name"
-msgstr "Jméno"
+msgstr "Název"
 
 #: src/exm-detail-view.blp:155
 msgid "Enlarge Image"
@@ -194,7 +195,7 @@ msgstr "Domovská stránka"
 
 #: src/exm-detail-view.blp:220
 msgid "Donate"
-msgstr "Darovat"
+msgstr "Podpořit vývoj darem"
 
 #: src/exm-detail-view.blp:229
 msgid "View on Extensions"
@@ -261,9 +262,10 @@ msgid ""
 "weight=\"bold\">contact the package distributor (%s) first</span> before "
 "filing an issue. Be sure to attach the following information:"
 msgstr ""
-"Používáte verzi Správce rozšíření od třetí strany. Před vytvořením nového "
-"problému prosím <span weight=\"bold\">nejdříve kontaktujte správce balíčku "
-"(%s)</span>. Nezapomeňte přidat následující informace:"
+"Používáte sestavení Správce rozšíření, pocházející od třetí strany. Než "
+"vytvoříte hlášení problému pro vývojáře aplikace, prosíme <span "
+"weight=\"bold\">nejdříve se obraťte na správce balíčku (%s)</span>. "
+"Nezapomeňte přidat následující informace:"
 
 #. Translators: Button's tooltip to open extension's preferences dialog
 #: src/exm-extension-row.blp:28
@@ -278,12 +280,13 @@ msgstr "Při načítání tohoto rozšíření došlo k chybě"
 #. Translators: Icon's tooltip when an extension is incompatible
 #: src/exm-extension-row.blp:63 src/exm-install-button.c:142
 msgid "This extension is incompatible with your current version of GNOME"
-msgstr "Toto rozšíření je nekompatibilní s vaší verzí prostředí GNOME"
+msgstr ""
+"Toto rozšíření není kompatibilní s vámi provozovanou verzí prostředí GNOME"
 
 #. Translators: Icon's tooltip when an extension update is available
 #: src/exm-extension-row.blp:80
 msgid "A newer version of this extension is available"
-msgstr "Je dostupná novější verze tohoto rozšíření"
+msgstr "Je k dispozici novější verze tohoto rozšíření"
 
 #: src/exm-extension-row.blp:98 src/exm-info-bar.blp:54
 msgid "Version"
@@ -339,7 +342,7 @@ msgstr "Počet stažení"
 
 #: src/exm-install-button.c:125
 msgid "Install…"
-msgstr "Instalovat…"
+msgstr "Nainstalovat…"
 
 #: src/exm-install-button.c:130
 msgid "Installing"
@@ -403,9 +406,9 @@ msgstr[2] "%d rozšíření bude aktualizováno při příštím přihlášení"
 #, c-format
 msgid "%i Star"
 msgid_plural "%i Stars"
-msgstr[0] "%i hvězda"
-msgstr[1] "%i hvězdy"
-msgstr[2] "%i hvězd"
+msgstr[0] "%i hvězdička"
+msgstr[1] "%i hvězdičky"
+msgstr[2] "%i hvězdiček"
 
 #. Translators: Button's tooltip to zoom out screenshots
 #: src/exm-screenshot-view.blp:37
@@ -450,7 +453,7 @@ msgstr "Oddálit"
 #: src/exm-shortcuts-dialog.blp:33
 msgctxt "shortcuts dialog"
 msgid "Reset Zoom"
-msgstr "Obnovit přiblížení"
+msgstr "Vrátit na výchozí velikost"
 
 #: src/exm-shortcuts-dialog.blp:39
 msgctxt "shortcuts dialog"
@@ -475,7 +478,7 @@ msgstr "Zavřít okno"
 #: src/exm-shortcuts-dialog.blp:57
 msgctxt "shortcuts dialog"
 msgid "Quit"
-msgstr "Odejít"
+msgstr "Ukončit"
 
 #: src/exm-upgrade-assistant.blp:11
 msgid "Upgrade Assistant"
@@ -537,7 +540,7 @@ msgid ""
 "cannot be determined."
 msgstr ""
 "Toto rozšíření není hostováno na webu extensions.gnome.org. Jeho "
-"kompatibilitu nelze zaručit."
+"kompatibilitu nelze zjistit."
 
 #: src/exm-upgrade-assistant.c:671
 #, c-format
@@ -575,7 +578,7 @@ msgstr "_Procházet"
 #. as others in the same menu
 #: src/exm-window.blp:110
 msgid "Sort _Enabled First"
-msgstr "_Nejprve řadit povolené"
+msgstr "Řadit zapnutá jako _první"
 
 #: src/exm-window.blp:114
 msgid "_Upgrade Assistant"
@@ -598,7 +601,7 @@ msgid ""
 "The extension's features and functionality will no longer be accessible. Are "
 "you sure you want to uninstall?"
 msgstr ""
-"Funkce tohoto rozšíření již nebudou nadále dostupné. Chcete jej opravdu "
+"Funkce tohoto rozšíření už nebudou nadále k dispozici. Opravdu ho chcete "
 "odinstalovat?"
 
 #: src/exm-window.blp:127
@@ -643,7 +646,7 @@ msgstr ""
 
 #: src/web/exm-request-handler.c:100
 msgid "Check your network status and try again"
-msgstr "Zkontrolujte svůj stav sítě a zkuste to znovu"
+msgstr "Zkontrolujte stav své sítě a zkuste to znovu"
 
 #~ msgctxt "shortcut window"
 #~ msgid "General"
