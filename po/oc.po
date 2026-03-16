@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-28 09:43+0000\n"
-"PO-Revision-Date: 2025-09-06 21:37+0000\n"
+"PO-Revision-Date: 2025-12-19 22:00+0000\n"
 "Last-Translator: Quentin PAGÈS <quentinantonin@free.fr>\n"
 "Language-Team: Occitan <https://hosted.weblate.org/projects/extension-"
 "manager/app/oc/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.14-dev\n"
+"X-Generator: Weblate 5.15.1\n"
 
 #: data/com.mattjakeman.ExtensionManager.desktop.in.in:2
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:6
@@ -95,7 +95,7 @@ msgstr "Òrdre descendent"
 #: src/exm-browse-page.blp:54
 msgctxt "Sort search results"
 msgid "None"
-msgstr ""
+msgstr "Pas cap"
 
 #: src/exm-browse-page.blp:55
 msgid "Popularity"

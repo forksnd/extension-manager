@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the extension-manager package.
-# Jiri Grönroos <jiri.gronroos@iki.fi>, 2024, 2025.
+# Jiri Grönroos <jiri.gronroos@iki.fi>, 2024, 2025, 2026.
 # Ricky Tigg <ricky.tigg@gmail.com>, 2024, 2025.
 # Óscar Fernández Díaz <oscfdezdz@tuta.io>, 2025.
 # Óscar Fernández Díaz <42654671+oscfdezdz@users.noreply.github.com>, 2025.
@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-28 09:43+0000\n"
-"PO-Revision-Date: 2025-08-24 10:02+0000\n"
+"PO-Revision-Date: 2026-01-30 18:01+0000\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos@iki.fi>\n"
 "Language-Team: Finnish <https://hosted.weblate.org/projects/extension-"
 "manager/app/fi/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.13\n"
+"X-Generator: Weblate 5.16-dev\n"
 
 #: data/com.mattjakeman.ExtensionManager.desktop.in.in:2
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:6
@@ -94,7 +94,7 @@ msgstr "Laskeva järjestys"
 #: src/exm-browse-page.blp:54
 msgctxt "Sort search results"
 msgid "None"
-msgstr ""
+msgstr "Ei mitään"
 
 #: src/exm-browse-page.blp:55
 msgid "Popularity"
