@@ -786,7 +786,15 @@ exm_detail_view_load_for_uuid (ExmDetailView *self,
     g_object_notify_by_pspec (G_OBJECT (self), properties [PROP_DATA]);
     g_object_unref (data);
 
-    gtk_stack_set_visible_child_name (self->stack, "page_spinner");
+    if (local_info != NULL)
+    {
+        gtk_stack_set_visible_child_name (self->stack, "page_detail");
+        update_tools_stack (self);
+    }
+    else
+    {
+        gtk_stack_set_visible_child_name (self->stack, "page_spinner");
+    }
 
     exm_detail_view_update (self);
 
