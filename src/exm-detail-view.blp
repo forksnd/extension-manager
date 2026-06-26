@@ -103,6 +103,7 @@ template $ExmDetailView: Adw.NavigationPage {
                         ]
 
                         ellipsize: end;
+                        label: bind template.data as <$ExmUnifiedData>.name;
                         lines: 2;
                         selectable: true;
                         wrap: true;
@@ -119,6 +120,7 @@ template $ExmDetailView: Adw.NavigationPage {
                           "dimmed",
                         ]
 
+                        label: bind template.data as <$ExmUnifiedData>.creator;
                         xalign: 0;
                         ellipsize: end;
                         selectable: true;
@@ -178,6 +180,7 @@ template $ExmDetailView: Adw.NavigationPage {
                       "multiline",
                     ]
 
+                    label: bind template.data as <$ExmUnifiedData>.description;
                     xalign: 0;
                     wrap: true;
                     wrap-mode: word_char;

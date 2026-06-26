@@ -30,6 +30,7 @@
 #include "exm-screenshot-view.h"
 #include "exm-types.h"
 #include "exm-versions-dialog.h"
+#include "exm-unified-data.h"
 #include "local/exm-manager.h"
 #include "web/exm-comment-provider.h"
 #include "web/exm-data-provider.h"
@@ -44,6 +45,8 @@
 struct _ExmDetailView
 {
     AdwNavigationPage parent_instance;
+
+    ExmUnifiedData *data;
 
     ExmManager *manager;
     ExmDataProvider *provider;
@@ -100,6 +103,7 @@ enum {
     PROP_MANAGER,
     PROP_SHELL_VERSION,
     PROP_SCREENSHOT,
+    PROP_DATA,
     N_PROPS
 };
 
@@ -109,6 +113,16 @@ ExmDetailView *
 exm_detail_view_new (void)
 {
     return g_object_new (EXM_TYPE_DETAIL_VIEW, NULL);
+}
+
+static void
+exm_detail_view_dispose (GObject *object)
+{
+    ExmDetailView *self = EXM_DETAIL_VIEW (object);
+
+    g_clear_object (&self->data);
+
+    G_OBJECT_CLASS (exm_detail_view_parent_class)->dispose (object);
 }
 
 static void
@@ -129,6 +143,9 @@ exm_detail_view_get_property (GObject    *object,
         break;
     case PROP_SCREENSHOT:
         g_value_set_object (value, self->screenshot);
+        break;
+    case PROP_DATA:
+        g_value_set_object (value, self->data);
         break;
     default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -156,6 +173,9 @@ exm_detail_view_set_property (GObject      *object,
         break;
     case PROP_SCREENSHOT:
         self->screenshot = g_value_get_object (value);
+        break;
+    case PROP_DATA:
+        g_set_object (&self->data, g_value_get_object (value));
         break;
     default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -321,7 +341,6 @@ install_remote (GtkButton     *button,
 
     g_object_set (self->ext_install, "state", EXM_INSTALL_BUTTON_STATE_INSTALLING, NULL);
 
-    // Move focus to previous widget to avoid losing it after the button becomes insensitive
     gtk_widget_grab_focus (GTK_WIDGET (self->ext_author));
 
     gtk_widget_activate_action (GTK_WIDGET (button),
@@ -597,14 +616,17 @@ on_data_loaded (GObject      *source,
 
     if (error)
     {
-        if (error->domain == g_quark_try_string ("request-error-quark") && error->code == 404)
+        if (!exm_manager_is_installed_uuid (self->manager, self->uuid))
         {
-            gtk_stack_set_visible_child_name (self->stack, "page_empty");
-        }
-        else
-        {
-            adw_status_page_set_description (self->error_status, error->message);
-            gtk_stack_set_visible_child_name (self->stack, "page_error");
+            if (error->domain == g_quark_try_string ("request-error-quark") && error->code == 404)
+            {
+                gtk_stack_set_visible_child_name (self->stack, "page_empty");
+            }
+            else
+            {
+                adw_status_page_set_description (self->error_status, error->message);
+                gtk_stack_set_visible_child_name (self->stack, "page_error");
+            }
         }
 
         g_clear_error (&error);
@@ -615,14 +637,12 @@ on_data_loaded (GObject      *source,
     if (EXM_IS_SEARCH_RESULT (data))
     {
         guint id, downloads;
-        gchar *uuid, *name, *creator, *description, *screenshot_uri, *icon_uri, *url, *link;
+        gchar *uuid, *name, *screenshot_uri, *icon_uri, *url, *link;
         gchar **donation_urls;
         g_object_get (data,
                       "id", &id,
                       "uuid", &uuid,
                       "name", &name,
-                      "creator", &creator,
-                      "description", &description,
                       "downloads", &downloads,
                       "screenshot", &screenshot_uri,
                       "icon", &icon_uri,
@@ -630,6 +650,8 @@ on_data_loaded (GObject      *source,
                       "donation_urls", &donation_urls,
                       "link", &link,
                       NULL);
+
+        exm_unified_data_set_web_data (self->data, data);
 
         adw_window_title_set_title (self->title, name);
         adw_window_title_set_subtitle (self->title, uuid);
@@ -639,9 +661,6 @@ on_data_loaded (GObject      *source,
         gtk_widget_set_tooltip_text (GTK_WIDGET (self->ext_icon),
                                      // Translators: '%s' = extension name
                                      g_strdup_printf (_("%s Icon"), name));
-        gtk_label_set_label (self->ext_title, name);
-        gtk_label_set_label (self->ext_author, creator);
-        gtk_label_set_label (self->ext_description, description);
         {
             g_autofree gchar *downloads_str = g_strdup_printf ("%'d", downloads);
             gtk_label_set_label (self->downloads_label, downloads_str);
@@ -683,19 +702,24 @@ on_data_loaded (GObject      *source,
 
         exm_versions_provider_query_async (self->versions_provider, uuid, self->resolver_cancel, on_version_loaded, self);
 
-        self->uri_homepage = g_uri_resolve_relative (url,
-                                                     "",
-                                                     G_URI_FLAGS_NONE,
-                                                     NULL);
-
         update_donation_rows (self, donation_urls);
+
+        g_clear_pointer (&self->uri_homepage, g_free);
+        if (url && url[0] != '\0')
+        {
+            self->uri_homepage = g_strdup (url);
+            adw_action_row_set_subtitle (self->link_homepage, self->uri_homepage);
+            gtk_widget_set_visible (GTK_WIDGET (self->link_homepage), TRUE);
+        }
+        else
+        {
+            gtk_widget_set_visible (GTK_WIDGET (self->link_homepage), FALSE);
+        }
 
         self->uri_extensions = g_uri_resolve_relative ("https://extensions.gnome.org/",
                                                        link,
                                                        G_URI_FLAGS_NONE,
                                                        NULL);
-
-        adw_action_row_set_subtitle (self->link_homepage, self->uri_homepage);
         adw_action_row_set_subtitle (self->link_extensions, self->uri_extensions);
 
         g_clear_object (&self->ext_versions_dialog);
@@ -738,12 +762,24 @@ void
 exm_detail_view_load_for_uuid (ExmDetailView *self,
                                gchar         *uuid)
 {
+    ExmUnifiedData *data;
+    ExmExtension   *local_info;
+
     self->uuid = uuid;
 
-    adw_window_title_set_title (self->title, NULL);
     adw_window_title_set_subtitle (self->title, NULL);
     gtk_label_set_label (self->version_label, _("Loading"));
     update_session_modes_row (self, NULL);
+
+    data = exm_unified_data_new ();
+
+    local_info = exm_manager_get_by_uuid (self->manager, uuid);
+    if (local_info != NULL)
+        exm_unified_data_set_local_data (data, local_info);
+
+    g_set_object (&self->data, data);
+    g_object_notify_by_pspec (G_OBJECT (self), properties [PROP_DATA]);
+    g_object_unref (data);
 
     gtk_stack_set_visible_child_name (self->stack, "page_spinner");
 
@@ -817,6 +853,132 @@ open_link (ExmDetailView *self,
     gtk_uri_launcher_launch (uri, GTK_WINDOW (toplevel), NULL, NULL, NULL);
 }
 
+static gboolean
+transform_to_state (GBinding     *binding G_GNUC_UNUSED,
+                    const GValue *from_value,
+                    GValue       *to_value,
+                    gpointer      user_data G_GNUC_UNUSED)
+{
+    g_value_set_boolean (to_value, g_value_get_enum (from_value) == EXM_EXTENSION_STATE_ACTIVE);
+    return TRUE;
+}
+
+static void
+page_open_prefs (GSimpleAction *action G_GNUC_UNUSED,
+                 GVariant      *param G_GNUC_UNUSED,
+                 ExmDetailView *self)
+{
+    if (!self->uuid || !self->manager)
+        return;
+
+    ExmExtension *extension = exm_manager_get_by_uuid (self->manager, self->uuid);
+    if (extension)
+        exm_manager_open_prefs (self->manager, extension);
+}
+
+static void
+page_remove (GSimpleAction *action G_GNUC_UNUSED,
+             GVariant      *param G_GNUC_UNUSED,
+             ExmDetailView *self)
+{
+    if (!self->uuid || !self->manager)
+        return;
+
+    ExmExtension *extension = exm_manager_get_by_uuid (self->manager, self->uuid);
+    if (extension)
+        exm_manager_remove_extension (self->manager, extension);
+}
+
+static gboolean
+on_toggle_changed (GtkSwitch     *toggle,
+                   gboolean       state,
+                   ExmDetailView *self)
+{
+    if (!self->uuid || !self->manager)
+        return FALSE;
+
+    ExmExtension *extension = exm_manager_get_by_uuid (self->manager, self->uuid);
+    if (!extension)
+        return FALSE;
+
+    gboolean enabled;
+    g_object_get (extension, "enabled", &enabled, NULL);
+
+    if (state == enabled)
+        return TRUE;
+
+    if (gtk_switch_get_state (toggle) != enabled)
+        g_object_set (extension, "enabled", !enabled, NULL);
+
+    if (state)
+        exm_manager_enable_extension (self->manager, extension);
+    else
+        exm_manager_disable_extension (self->manager, extension);
+
+    return TRUE;
+}
+
+static void
+update_tools_stack (ExmDetailView *self)
+{
+    gboolean is_installed;
+
+    if (!self->uuid || !self->manager)
+        return;
+
+    is_installed = exm_manager_is_installed_uuid (self->manager, self->uuid);
+
+    gtk_stack_set_visible_child_name (self->tools_stack,
+                                      is_installed ? "installed-tools-page"
+                                                   : "uninstalled-tools-page");
+
+    if (is_installed)
+    {
+        GAction *action;
+        ExmExtension *extension;
+
+        extension = exm_manager_get_by_uuid (self->manager, self->uuid);
+
+        if (extension)
+        {
+            gboolean has_prefs, is_user, enabled;
+            ExmExtensionState state;
+            g_object_get (extension,
+                          "has-prefs", &has_prefs,
+                          "is-user", &is_user,
+                          "enabled", &enabled,
+                          "state", &state,
+                          NULL);
+
+            action = g_action_map_lookup_action (G_ACTION_MAP (self->action_group), "open-prefs");
+            g_simple_action_set_enabled (G_SIMPLE_ACTION (action), has_prefs);
+
+            action = g_action_map_lookup_action (G_ACTION_MAP (self->action_group), "remove");
+            g_simple_action_set_enabled (G_SIMPLE_ACTION (action), is_user);
+
+            g_object_bind_property (extension, "enabled",
+                                    self->ext_toggle, "active",
+                                    G_BINDING_SYNC_CREATE);
+
+            g_object_bind_property_full (extension,
+                                         "state",
+                                         self->ext_toggle,
+                                         "state",
+                                         G_BINDING_SYNC_CREATE,
+                                         transform_to_state,
+                                         NULL,
+                                         NULL,
+                                         NULL);
+
+            // Keep compatibility with GNOME Shell versions prior to 46
+            if (gtk_switch_get_state (self->ext_toggle) != enabled &&
+                (state == EXM_EXTENSION_STATE_ACTIVE || state == EXM_EXTENSION_STATE_ACTIVATING))
+                g_object_set (extension, "enabled", !enabled, NULL);
+        }
+    }
+}
+
+
 static void
 on_bind_manager (ExmDetailView *self)
 {
@@ -877,6 +1039,7 @@ exm_detail_view_class_init (ExmDetailViewClass *klass)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
+    object_class->dispose      = exm_detail_view_dispose;
     object_class->get_property = exm_detail_view_get_property;
     object_class->set_property = exm_detail_view_set_property;
 
@@ -899,6 +1062,13 @@ exm_detail_view_class_init (ExmDetailViewClass *klass)
                                "Screenshot",
                                "Screenshot",
                                GDK_TYPE_PAINTABLE,
+                               G_PARAM_READWRITE);
+
+    properties [PROP_DATA]
+        = g_param_spec_object ("data",
+                               "Data",
+                               "Unified extension data",
+                               EXM_TYPE_UNIFIED_DATA,
                                G_PARAM_READWRITE);
 
     g_object_class_install_properties (object_class, N_PROPS, properties);
