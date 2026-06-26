@@ -9,7 +9,9 @@ template $ExmDetailView: Adw.NavigationPage {
   Adw.ToolbarView {
     [top]
     Adw.HeaderBar header_bar {
-      title-widget: Adw.WindowTitle title {};
+      title-widget: Adw.WindowTitle title {
+        title: bind template.data as <$ExmUnifiedData>.name;
+      };
     }
 
     content: Adw.BreakpointBin {

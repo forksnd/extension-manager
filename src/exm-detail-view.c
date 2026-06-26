@@ -64,6 +64,7 @@ struct _ExmDetailView
     GtkStack *stack;
     GtkLabel *error_label;
     AdwStatusPage *error_status;
+    GtkStack *tools_stack;
     GtkButton *ext_install;
     GtkLabel *ext_description;
     GtkImage *ext_icon;
@@ -82,6 +83,8 @@ struct _ExmDetailView
     GtkStack *comment_stack;
     AdwWrapBox *comment_box;
     GtkButton *show_more_btn;
+
+    GSimpleActionGroup *action_group;
 
     AdwActionRow *link_homepage;
     gchar *uri_homepage;
@@ -121,6 +124,7 @@ exm_detail_view_dispose (GObject *object)
     ExmDetailView *self = EXM_DETAIL_VIEW (object);
 
     g_clear_object (&self->data);
+    g_clear_object (&self->action_group);
 
     G_OBJECT_CLASS (exm_detail_view_parent_class)->dispose (object);
 }
@@ -653,7 +657,6 @@ on_data_loaded (GObject      *source,
 
         exm_unified_data_set_web_data (self->data, data);
 
-        adw_window_title_set_title (self->title, name);
         adw_window_title_set_subtitle (self->title, uuid);
         adw_navigation_page_set_title (ADW_NAVIGATION_PAGE (self), name);
 
@@ -748,6 +751,8 @@ on_data_loaded (GObject      *source,
 
         queue_resolve_comments (self, id, self->resolver_cancel);
 
+        update_tools_stack (self);
+
         // Reset focus and scroll position
         gtk_widget_grab_focus (GTK_WIDGET (self->ext_icon));
         gtk_adjustment_set_value (gtk_scrolled_window_get_vadjustment (self->scroll_area), 0);
@@ -801,6 +806,7 @@ exm_detail_view_update (ExmDetailView *self)
     else
         g_object_set (self->ext_install, "state", EXM_INSTALL_BUTTON_STATE_LOADING, NULL);
 
+    update_tools_stack (self);
 }
 
 static void
@@ -978,7 +984,6 @@ update_tools_stack (ExmDetailView *self)
     }
 }
 
-
 static void
 on_bind_manager (ExmDetailView *self)
 {
@@ -1086,6 +1091,7 @@ exm_detail_view_class_init (ExmDetailViewClass *klass)
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, ext_title);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, ext_author);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, ext_description);
+    gtk_widget_class_bind_template_child (widget_class, ExmDetailView, tools_stack);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, ext_install);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, ext_screenshot);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, ext_screenshot_container);
@@ -1106,6 +1112,7 @@ exm_detail_view_class_init (ExmDetailViewClass *klass)
     gtk_widget_class_bind_template_callback (widget_class, breakpoint_apply_cb);
     gtk_widget_class_bind_template_callback (widget_class, breakpoint_unapply_cb);
     gtk_widget_class_bind_template_callback (widget_class, install_remote);
+    gtk_widget_class_bind_template_callback (widget_class, on_toggle_changed);
 
     gtk_widget_class_install_action (widget_class, "detail.show-versions", NULL, show_versions);
     gtk_widget_class_install_action (widget_class, "detail.open-extensions", NULL, (GtkWidgetActionActivateFunc) open_link);
@@ -1118,6 +1125,9 @@ static void
 exm_detail_view_init (ExmDetailView *self)
 {
     GtkAdjustment *adj;
+
+    GSimpleAction *open_prefs_action;
+    GSimpleAction *remove_action;
 
     g_type_ensure (EXM_TYPE_INSTALL_BUTTON);
     g_type_ensure (EXM_TYPE_SCREENSHOT);
@@ -1134,4 +1144,17 @@ exm_detail_view_init (ExmDetailView *self)
     g_signal_connect_swapped (adj, "value-changed", G_CALLBACK (update_headerbar_cb), self);
 
     update_headerbar_cb (self);
+
+    self->action_group = g_simple_action_group_new ();
+
+    open_prefs_action = g_simple_action_new ("open-prefs", NULL);
+    g_signal_connect (open_prefs_action, "activate", G_CALLBACK (page_open_prefs), self);
+
+    remove_action = g_simple_action_new ("remove", NULL);
+    g_signal_connect (remove_action, "activate", G_CALLBACK (page_remove), self);
+
+    g_action_map_add_action (G_ACTION_MAP (self->action_group), G_ACTION (open_prefs_action));
+    g_action_map_add_action (G_ACTION_MAP (self->action_group), G_ACTION (remove_action));
+
+    gtk_widget_insert_action_group (GTK_WIDGET (self), "page", G_ACTION_GROUP (self->action_group));
 }
