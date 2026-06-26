@@ -31,6 +31,7 @@ src/exm-search-row.c
 src/exm-shortcuts-dialog.blp
 src/exm-upgrade-assistant.blp
 src/exm-upgrade-assistant.c
+src/exm-unified-data.c
 src/exm-upgrade-result.c
 src/exm-utils.c
 src/exm-window.blp
