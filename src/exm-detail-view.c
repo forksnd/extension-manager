@@ -1,7 +1,7 @@
 /*
  * exm-detail-view.c
  *
- * Copyright 2022-2026 Matthew Jakeman <mjakeman26@outlook.co.nz>
+ * Copyright 2022 Matthew Jakeman <mjakeman26@outlook.co.nz>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -61,6 +61,7 @@ struct _ExmDetailView
     gchar *uuid;
 
     AdwHeaderBar *header_bar;
+    GtkRevealer *title_revealer;
     AdwWindowTitle *title;
     GtkStack *stack;
     GtkLabel *error_label;
@@ -109,6 +110,7 @@ struct _ExmDetailView
     guint id;
     guint comments_signal_id;
     guint install_signal_id;
+    ExmInstallButtonState version_state;
 };
 
 G_DEFINE_FINAL_TYPE (ExmDetailView, exm_detail_view, ADW_TYPE_NAVIGATION_PAGE)
@@ -536,6 +538,7 @@ on_version_loaded (GObject      *source,
 
         g_clear_error (&error);
         g_free (next);
+        self->version_state = EXM_INSTALL_BUTTON_STATE_UNSUPPORTED;
         return;
     }
 
@@ -611,6 +614,7 @@ on_version_loaded (GObject      *source,
         self->versions_next_url = next;
         next = NULL;
 
+        self->version_state = EXM_INSTALL_BUTTON_STATE_DEFAULT;
         g_free (version_name);
         g_object_unref (compatible_version);
     }
@@ -634,6 +638,7 @@ on_version_loaded (GObject      *source,
         gtk_label_set_label (self->version_label, _("Unsupported"));
         update_session_modes_row (self, NULL);
 
+        self->version_state = EXM_INSTALL_BUTTON_STATE_UNSUPPORTED;
         g_clear_pointer (&self->versions_next_url, g_free);
     }
 
@@ -893,6 +898,7 @@ exm_detail_view_load_for_uuid (ExmDetailView *self,
 
     g_free (self->uuid);
     self->uuid = uuid;
+    self->version_state = EXM_INSTALL_BUTTON_STATE_LOADING;
 
     gtk_widget_set_visible (GTK_WIDGET (self->update_icon), FALSE);
     gtk_widget_set_visible (GTK_WIDGET (self->out_of_date_icon), FALSE);
@@ -955,12 +961,10 @@ exm_detail_view_update (ExmDetailView *self)
     if (!self->uuid)
         return;
 
-    // Check if the newly installed extension is the
-    // one being displayed in this detail view
     if (exm_manager_is_installed_uuid (self->manager, self->uuid))
         g_object_set (self->ext_install, "state", EXM_INSTALL_BUTTON_STATE_INSTALLED, NULL);
     else
-        g_object_set (self->ext_install, "state", EXM_INSTALL_BUTTON_STATE_LOADING, NULL);
+        g_object_set (self->ext_install, "state", self->version_state, NULL);
 
     update_tools_stack (self);
 }
@@ -1170,7 +1174,7 @@ update_headerbar_cb (ExmDetailView *self)
 
     adj = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (self->scroll_area));
 
-    adw_header_bar_set_show_title (ADW_HEADER_BAR (self->header_bar),
+    gtk_revealer_set_reveal_child (self->title_revealer,
                                    gtk_adjustment_get_value (adj) > 0);
 }
 
@@ -1218,6 +1222,7 @@ exm_detail_view_class_init (ExmDetailViewClass *klass)
     gtk_widget_class_set_template_from_resource (widget_class, g_strdup_printf ("%s/exm-detail-view.ui", RESOURCE_PATH));
 
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, header_bar);
+    gtk_widget_class_bind_template_child (widget_class, ExmDetailView, title_revealer);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, title);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, stack);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, error_label);

@@ -9,8 +9,17 @@ template $ExmDetailView: Adw.NavigationPage {
   Adw.ToolbarView {
     [top]
     Adw.HeaderBar header_bar {
-      title-widget: Adw.WindowTitle title {
-        title: bind template.data as <$ExmUnifiedData>.name;
+      overflow: hidden;
+
+      title-widget: Gtk.Revealer title_revealer {
+        transition-type: slide_up;
+        transition-duration: 500;
+        overflow: visible;
+
+        child: Adw.WindowTitle title {
+          title: bind template.data as <$ExmUnifiedData>.name;
+          subtitle: bind template.data as <$ExmUnifiedData>.uuid;
+        };
       };
     }
 
