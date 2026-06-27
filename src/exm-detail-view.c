@@ -442,24 +442,49 @@ update_donation_rows (ExmDetailView  *self,
 static gchar *
 format_session_modes (gchar **session_modes)
 {
-    return (session_modes && g_strcmp0 (session_modes[0], "unlock-dialog") == 0)
-           ? g_strdup (_("Unlock Dialog"))
-           : g_strdup ("");
+    static const struct { const char *key; const char *label; } known[] = {
+        { "unlock-dialog", N_("Unlock Dialog") },
+        { "gdm",           N_("GDM")           },
+    };
+
+    GPtrArray *parts = g_ptr_array_new ();
+
+    for (gint i = 0; session_modes[i] != NULL; i++)
+    {
+        for (gsize j = 0; j < G_N_ELEMENTS (known); j++)
+        {
+            if (g_strcmp0 (session_modes[i], known[j].key) == 0)
+            {
+                g_ptr_array_add (parts, (gpointer) _(known[j].label));
+                break;
+            }
+        }
+    }
+
+    gchar *result = NULL;
+    if (parts->len > 0)
+    {
+        g_ptr_array_add (parts, NULL);
+        result = g_strjoinv (", ", (gchar **) parts->pdata);
+    }
+
+    g_ptr_array_free (parts, FALSE);
+    return result ? result : g_strdup ("");
 }
 
 static void
 update_session_modes_row (ExmDetailView *self,
                           gchar        **session_modes)
 {
-    gboolean visible = session_modes != NULL && session_modes[0] != NULL;
+    g_autofree gchar *label = (session_modes && session_modes[0])
+                              ? format_session_modes (session_modes)
+                              : NULL;
+    gboolean visible = label && label[0];
 
     gtk_widget_set_visible (GTK_WIDGET (self->session_modes_row), visible);
 
     if (visible)
-    {
-        g_autofree gchar *label = format_session_modes (session_modes);
         gtk_label_set_label (self->session_modes_label, label);
-    }
 }
 
 static void on_version_loaded (GObject *source, GAsyncResult *result, gpointer user_data);
