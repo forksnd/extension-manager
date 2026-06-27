@@ -133,9 +133,59 @@ template $ExmDetailView: Adw.NavigationPage {
                       }
                     }
 
-                    $ExmInstallButton ext_install {
-                      can-shrink: true;
-                      clicked => $install_remote();
+                    Gtk.Stack tools_stack {
+                      Gtk.StackPage {
+                        name: "uninstalled-tools-page";
+
+                        child: $ExmInstallButton ext_install {
+                          can-shrink: true;
+                          clicked => $install_remote();
+                        };
+                      }
+
+                      Gtk.StackPage {
+                        name: "installed-tools-page";
+
+                        child: Gtk.Box {
+                          spacing: 16;
+
+                          Gtk.Box {
+                            spacing: 6;
+
+                            Gtk.Button remove_btn {
+                              styles [
+                                "circular",
+                                "destructive-action",
+                              ]
+
+                              icon-name: "user-trash-symbolic";
+                              valign: center;
+                              // Translators: Button tooltip to remove an installed extension
+                              tooltip-text: _("Remove Extension");
+                              action-name: "page.remove";
+                            }
+
+                            Gtk.Button prefs_btn {
+                              styles [
+                                "circular",
+                              ]
+
+                              icon-name: "settings-symbolic";
+                              valign: center;
+                              // Translators: Button tooltip to open extension preferences
+                              tooltip-text: _("Open extension preferences");
+                              action-name: "page.open-prefs";
+                            }
+                          }
+
+                          Gtk.Switch ext_toggle {
+                            valign: center;
+                            // Translators: Switch tooltip to enable or disable the extension
+                            tooltip-text: _("Toggle Extension");
+                            state-set => $on_toggle_changed();
+                          }
+                        };
+                      }
                     }
                   }
                 }

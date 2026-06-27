@@ -67,6 +67,9 @@ struct _ExmDetailView
     AdwStatusPage *error_status;
     GtkStack *tools_stack;
     GtkButton *ext_install;
+    GtkButton *remove_btn;
+    GtkButton *prefs_btn;
+    GtkSwitch *ext_toggle;
     GtkLabel *ext_description;
     GtkImage *ext_icon;
     GtkLabel *ext_title;
@@ -928,7 +931,6 @@ update_tools_stack (ExmDetailView *self)
 
     if (is_installed)
     {
-        GAction *action;
         ExmExtension *extension;
 
         extension = exm_manager_get_by_uuid (self->manager, self->uuid);
@@ -943,11 +945,9 @@ update_tools_stack (ExmDetailView *self)
                           "state", &state,
                           NULL);
 
-            action = g_action_map_lookup_action (G_ACTION_MAP (self->action_group), "open-prefs");
-            g_simple_action_set_enabled (G_SIMPLE_ACTION (action), has_prefs);
+            gtk_widget_set_visible (GTK_WIDGET (self->prefs_btn), has_prefs);
 
-            action = g_action_map_lookup_action (G_ACTION_MAP (self->action_group), "remove");
-            g_simple_action_set_enabled (G_SIMPLE_ACTION (action), is_user);
+            gtk_widget_set_visible (GTK_WIDGET (self->remove_btn), is_user);
 
             exm_extension_bind_toggle (extension, self->ext_toggle);
         }
@@ -1063,6 +1063,9 @@ exm_detail_view_class_init (ExmDetailViewClass *klass)
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, ext_description);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, tools_stack);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, ext_install);
+    gtk_widget_class_bind_template_child (widget_class, ExmDetailView, remove_btn);
+    gtk_widget_class_bind_template_child (widget_class, ExmDetailView, prefs_btn);
+    gtk_widget_class_bind_template_child (widget_class, ExmDetailView, ext_toggle);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, ext_screenshot);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, ext_screenshot_container);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, ext_screenshot_popout_button);
