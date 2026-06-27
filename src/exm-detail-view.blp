@@ -245,7 +245,7 @@ template $ExmDetailView: Adw.NavigationPage {
                 }
 
                 Adw.PreferencesGroup {
-                  Adw.ActionRow {
+                  Adw.ActionRow downloads_row {
                     [prefix]
                     Gtk.Image {
                       icon-name: "folder-download-symbolic";
@@ -261,7 +261,7 @@ template $ExmDetailView: Adw.NavigationPage {
                     }
                   }
 
-                  Adw.ActionRow {
+                  Adw.ActionRow version_row {
                     [prefix]
                     Gtk.Image {
                       icon-name: "system-software-install-symbolic";
@@ -275,6 +275,30 @@ template $ExmDetailView: Adw.NavigationPage {
                     Gtk.Box {
                       spacing: 6;
 
+                      Gtk.Image update_icon {
+                        styles [
+                          "update",
+                        ]
+
+                        icon-name: "software-update-available-symbolic";
+                        valign: center;
+                        visible: false;
+                        // Translators: Icon's tooltip when an extension update is available
+                        tooltip-text: _("A newer version of this extension is available");
+                      }
+
+                      Gtk.Image out_of_date_icon {
+                        styles [
+                          "error",
+                        ]
+
+                        icon-name: "clock-alt-symbolic";
+                        valign: center;
+                        visible: false;
+                        // Translators: Icon's tooltip when an extension is incompatible
+                        tooltip-text: _("This extension is incompatible with your current version of GNOME");
+                      }
+
                       Gtk.Label version_label {
                         // TODO: Drop when version-label is available
                         styles [
@@ -282,7 +306,7 @@ template $ExmDetailView: Adw.NavigationPage {
                         ]
                       }
 
-                      Gtk.Image {
+                      Gtk.Image version_row_go_next {
                         icon-name: "go-next-symbolic";
                       }
                     }
@@ -300,9 +324,22 @@ template $ExmDetailView: Adw.NavigationPage {
                     [suffix]
                     Gtk.Label session_modes_label {}
                   }
+
+                  Adw.ActionRow error_row {
+                    styles [
+                      "monospace",
+                      "multiline",
+                      "property",
+                    ]
+
+                    // Translators: Row title showing the extension's error message
+                    title: _("Error");
+                    subtitle-selectable: true;
+                    visible: false;
+                  }
                 }
 
-                Adw.PreferencesGroup {
+                Adw.PreferencesGroup links_group {
                   title: _("Links");
 
                   Adw.ActionRow link_homepage {
@@ -362,7 +399,7 @@ template $ExmDetailView: Adw.NavigationPage {
                   }
                 }
 
-                Gtk.Box {
+                Gtk.Box comments_section {
                   orientation: vertical;
 
                   Gtk.Label {

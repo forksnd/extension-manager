@@ -77,10 +77,18 @@ struct _ExmDetailView
     ExmScreenshot *ext_screenshot;
     GtkOverlay *ext_screenshot_container;
     GtkButton *ext_screenshot_popout_button;
+    AdwActionRow *downloads_row;
     GtkLabel *downloads_label;
+    AdwActionRow *version_row;
+    GtkImage *version_row_go_next;
+    GtkImage *update_icon;
+    GtkImage *out_of_date_icon;
     GtkLabel *version_label;
     AdwActionRow *session_modes_row;
     GtkLabel *session_modes_label;
+    AdwActionRow *error_row;
+    AdwPreferencesGroup *links_group;
+    GtkWidget *comments_section;
     ExmVersionsDialog *ext_versions_dialog;
     gchar             *versions_next_url;
     GtkScrolledWindow *scroll_area;
@@ -612,6 +620,63 @@ on_version_loaded (GObject      *source,
 
 
 static void
+populate_local_only (ExmDetailView *self)
+{
+    ExmExtension *ext = exm_manager_get_by_uuid (self->manager, self->uuid);
+
+    gtk_image_set_from_icon_name (self->ext_icon, "puzzle-piece-symbolic");
+
+    if (ext)
+    {
+        gchar *version_name = NULL, *version = NULL, *url = NULL;
+        g_object_get (ext,
+                      "version-name", &version_name,
+                      "version",      &version,
+                      "url",          &url,
+                      NULL);
+
+        const gchar *v = (version_name && version_name[0]) ? version_name
+                       : (version      && version[0])      ? version
+                       : _("Unknown");
+        gtk_label_set_label (self->version_label, v);
+
+        /* Session modes come from the remote version check; hide for local-only */
+        update_session_modes_row (self, NULL);
+
+        g_clear_pointer (&self->uri_homepage, g_free);
+        if (url && url[0] != '\0')
+        {
+            self->uri_homepage = g_strdup (url);
+            adw_action_row_set_subtitle (self->link_homepage, self->uri_homepage);
+            gtk_widget_set_visible (GTK_WIDGET (self->link_homepage), TRUE);
+        }
+        else
+        {
+            gtk_widget_set_visible (GTK_WIDGET (self->link_homepage), FALSE);
+        }
+
+        g_free (version_name);
+        g_free (version);
+        g_free (url);
+    }
+
+    gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (self->version_row), FALSE);
+    gtk_widget_set_visible (GTK_WIDGET (self->version_row_go_next), FALSE);
+    gtk_widget_set_visible (GTK_WIDGET (self->downloads_row), FALSE);
+    gtk_widget_set_visible (GTK_WIDGET (self->ext_screenshot_container), FALSE);
+    gtk_widget_set_visible (GTK_WIDGET (self->link_donation), FALSE);
+    gtk_widget_set_visible (GTK_WIDGET (self->links_donations), FALSE);
+    gtk_widget_set_visible (GTK_WIDGET (self->link_extensions), FALSE);
+    gtk_widget_set_visible (GTK_WIDGET (self->comments_section), FALSE);
+
+    gboolean has_link = gtk_widget_get_visible (GTK_WIDGET (self->link_homepage));
+    gtk_widget_set_visible (GTK_WIDGET (self->links_group), has_link);
+
+    update_tools_stack (self);
+    exm_detail_view_update (self);
+}
+
+static void
 on_data_loaded (GObject      *source,
                 GAsyncResult *result,
                 gpointer      user_data)
@@ -636,6 +701,10 @@ on_data_loaded (GObject      *source,
                 adw_status_page_set_description (self->error_status, error->message);
                 gtk_stack_set_visible_child_name (self->stack, "page_error");
             }
+        }
+        else
+        {
+            populate_local_only (self);
         }
 
         g_clear_error (&error);
@@ -777,6 +846,9 @@ exm_detail_view_load_for_uuid (ExmDetailView *self,
 
     self->uuid = uuid;
 
+    gtk_widget_set_visible (GTK_WIDGET (self->update_icon), FALSE);
+    gtk_widget_set_visible (GTK_WIDGET (self->out_of_date_icon), FALSE);
+    gtk_widget_set_visible (GTK_WIDGET (self->error_row), FALSE);
     adw_window_title_set_subtitle (self->title, NULL);
     gtk_label_set_label (self->version_label, _("Loading"));
     update_session_modes_row (self, NULL);
@@ -802,6 +874,29 @@ exm_detail_view_load_for_uuid (ExmDetailView *self,
     }
 
     exm_detail_view_update (self);
+
+    if (self->resolver_cancel)
+    {
+        g_cancellable_cancel (self->resolver_cancel);
+        g_clear_object (&self->resolver_cancel);
+    }
+
+    gtk_image_set_from_icon_name (self->ext_icon, "puzzle-piece-symbolic");
+    gtk_label_set_label (self->downloads_label, "");
+    exm_screenshot_set_paintable (self->ext_screenshot, NULL);
+    exm_screenshot_reset (self->ext_screenshot);
+    gtk_widget_set_visible (GTK_WIDGET (self->ext_screenshot_popout_button), FALSE);
+    delete_comment_tiles (self);
+    gtk_stack_set_visible_child_name (self->comment_stack, "page_spinner");
+    adw_action_row_set_subtitle (self->link_homepage, "");
+    adw_action_row_set_subtitle (self->link_extensions, "");
+
+    gtk_widget_set_visible (GTK_WIDGET (self->downloads_row), TRUE);
+    gtk_widget_set_visible (GTK_WIDGET (self->comments_section), TRUE);
+    gtk_widget_set_visible (GTK_WIDGET (self->links_group), TRUE);
+    gtk_widget_set_visible (GTK_WIDGET (self->link_extensions), TRUE);
+    gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (self->version_row), TRUE);
+    gtk_widget_set_visible (GTK_WIDGET (self->version_row_go_next), TRUE);
 
     exm_data_provider_get_async (self->provider, uuid, NULL, on_data_loaded, self);
 }
@@ -937,20 +1032,42 @@ update_tools_stack (ExmDetailView *self)
 
         if (extension)
         {
-            gboolean has_prefs, is_user;
+            gboolean has_prefs, is_user, has_update;
             ExmExtensionState state;
+            char *error_msg = NULL;
             g_object_get (extension,
-                          "has-prefs", &has_prefs,
-                          "is-user", &is_user,
-                          "state", &state,
+                          "has-prefs",  &has_prefs,
+                          "is-user",    &is_user,
+                          "state",      &state,
+                          "has-update", &has_update,
+                          "error",      &error_msg,
                           NULL);
 
             gtk_widget_set_visible (GTK_WIDGET (self->prefs_btn), has_prefs);
 
             gtk_widget_set_visible (GTK_WIDGET (self->remove_btn), is_user);
 
+            gtk_widget_set_visible (GTK_WIDGET (self->update_icon), has_update);
+
+            gtk_widget_set_visible (GTK_WIDGET (self->out_of_date_icon),
+                                    state == EXM_EXTENSION_STATE_OUT_OF_DATE);
+
+            {
+                gboolean has_error = (error_msg != NULL) && (error_msg[0] != '\0');
+                if (has_error)
+                    adw_action_row_set_subtitle (self->error_row, error_msg);
+                gtk_widget_set_visible (GTK_WIDGET (self->error_row), has_error);
+            }
+            g_free (error_msg);
+
             exm_extension_bind_toggle (extension, self->ext_toggle);
         }
+    }
+    else
+    {
+        gtk_widget_set_visible (GTK_WIDGET (self->update_icon), FALSE);
+        gtk_widget_set_visible (GTK_WIDGET (self->out_of_date_icon), FALSE);
+        gtk_widget_set_visible (GTK_WIDGET (self->error_row), FALSE);
     }
 }
 
@@ -1069,10 +1186,18 @@ exm_detail_view_class_init (ExmDetailViewClass *klass)
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, ext_screenshot);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, ext_screenshot_container);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, ext_screenshot_popout_button);
+    gtk_widget_class_bind_template_child (widget_class, ExmDetailView, downloads_row);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, downloads_label);
+    gtk_widget_class_bind_template_child (widget_class, ExmDetailView, version_row);
+    gtk_widget_class_bind_template_child (widget_class, ExmDetailView, version_row_go_next);
+    gtk_widget_class_bind_template_child (widget_class, ExmDetailView, update_icon);
+    gtk_widget_class_bind_template_child (widget_class, ExmDetailView, out_of_date_icon);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, version_label);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, session_modes_row);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, session_modes_label);
+    gtk_widget_class_bind_template_child (widget_class, ExmDetailView, error_row);
+    gtk_widget_class_bind_template_child (widget_class, ExmDetailView, links_group);
+    gtk_widget_class_bind_template_child (widget_class, ExmDetailView, comments_section);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, link_homepage);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, link_donation);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, links_donations);
