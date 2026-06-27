@@ -810,6 +810,19 @@ on_data_loaded (GObject      *source,
             g_free (current_shell);
         }
 
+        {
+            ExmExtension *local_ext = exm_manager_get_by_uuid (self->manager, self->uuid);
+            if (local_ext)
+            {
+                gchar *installed_ver = NULL;
+                g_object_get (local_ext, "version", &installed_ver, NULL);
+                if (installed_ver && installed_ver[0])
+                    exm_versions_dialog_set_installed_version (self->ext_versions_dialog,
+                                                               atoi (installed_ver));
+                g_free (installed_ver);
+            }
+        }
+
         g_signal_connect_swapped (self->ext_versions_dialog, "load-more",
                                    G_CALLBACK (on_load_more_versions), self);
 

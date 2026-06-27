@@ -1,7 +1,7 @@
 /*
  * exm-versions-dialog.c
  *
- * Copyright 2022-2025 Matthew Jakeman <mjakeman26@outlook.co.nz>
+ * Copyright 2022 Matthew Jakeman <mjakeman26@outlook.co.nz>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,6 +35,7 @@ struct _ExmVersionsDialog
     GtkListBox   *more_list;
     AdwButtonRow *more_btn;
     gint          current_key;
+    gint          installed_version;
 };
 
 G_DEFINE_FINAL_TYPE (ExmVersionsDialog, exm_versions_dialog, ADW_TYPE_DIALOG)
@@ -229,12 +230,29 @@ exm_versions_dialog_add_release (ExmVersionsDialog *self,
 
     g_hash_table_unref (seen);
 
+    if (self->installed_version > 0 && version == self->installed_version)
+    {
+        GtkWidget *icon = gtk_image_new_from_icon_name ("supported-symbolic");
+        gtk_widget_set_valign (icon, GTK_ALIGN_CENTER);
+        gtk_widget_add_css_class (icon, "accent");
+        // Translators: Tooltip on the installed-version indicator in the versions dialog
+        gtk_widget_set_tooltip_text (icon, _("Installed Version"));
+        adw_action_row_add_prefix (row, icon);
+    }
+
     adw_action_row_add_suffix (row, GTK_WIDGET (wrap_box));
 
     g_object_set_data (G_OBJECT (row), "version", GINT_TO_POINTER (version));
 
     gtk_list_box_append (self->version_list, GTK_WIDGET (row));
     gtk_stack_set_visible_child_name (self->stack, "list");
+}
+
+void
+exm_versions_dialog_set_installed_version (ExmVersionsDialog *self,
+                                            gint               version)
+{
+    self->installed_version = version;
 }
 
 void
@@ -246,13 +264,7 @@ exm_versions_dialog_set_compatible_release (ExmVersionsDialog *self,
     for (gint i = 0; (row = gtk_list_box_get_row_at_index (self->version_list, i)) != NULL; i++)
     {
         if (GPOINTER_TO_INT (g_object_get_data (G_OBJECT (row), "version")) == version)
-        {
-            GtkWidget *icon = gtk_image_new_from_icon_name ("object-select-symbolic");
-            gtk_widget_set_valign (icon, GTK_ALIGN_CENTER);
-            gtk_widget_set_tooltip_text (icon, _("Compatible with your system"));
-            adw_action_row_add_suffix (ADW_ACTION_ROW (row), icon);
             break;
-        }
     }
 }
 
