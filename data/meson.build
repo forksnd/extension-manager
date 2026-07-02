@@ -65,4 +65,24 @@ if compile_schemas.found()
   )
 endif
 
+search_provider_conf = configuration_data()
+search_provider_conf.set('app_id', app_id)
+search_provider_conf.set('app_id_path', '/' + app_id.replace('.', '/'))
+configure_file(
+  input: 'com.mattjakeman.ExtensionManager.search-provider.ini.in',
+  output: '@0@.search-provider.ini'.format(app_id),
+  configuration: search_provider_conf,
+  install_dir: join_paths(get_option('datadir'), 'gnome-shell', 'search-providers')
+)
+
+dbus_service_conf = configuration_data()
+dbus_service_conf.set('app_id', app_id)
+dbus_service_conf.set('bindir', join_paths(get_option('prefix'), get_option('bindir')))
+configure_file(
+  input: 'com.mattjakeman.ExtensionManager.service.in',
+  output: '@0@.service'.format(app_id),
+  configuration: dbus_service_conf,
+  install_dir: join_paths(get_option('datadir'), 'dbus-1', 'services')
+)
+
 subdir('icons')

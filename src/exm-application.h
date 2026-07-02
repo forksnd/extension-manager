@@ -23,6 +23,8 @@
 
 #include <adwaita.h>
 
+#include "local/exm-manager.h"
+
 G_BEGIN_DECLS
 
 #define EXM_TYPE_APPLICATION (exm_application_get_type())
@@ -31,5 +33,7 @@ G_DECLARE_FINAL_TYPE (ExmApplication, exm_application, EXM, APPLICATION, AdwAppl
 
 ExmApplication *exm_application_new (gchar             *application_id,
                                      GApplicationFlags  flags);
+
+ExmManager     *exm_application_get_manager (ExmApplication *self);
 
 G_END_DECLS
