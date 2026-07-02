@@ -1,7 +1,7 @@
 /*
  * exm-zoom-picture.c
  *
- * Copyright 2022-2025 Matthew Jakeman <mjakeman26@outlook.co.nz>
+ * Copyright 2022-2026 Matthew Jakeman <mjakeman26@outlook.co.nz>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,6 +26,8 @@ struct _ExmZoomPicture
 	GtkWidget parent_instance;
 
 	GdkPaintable *paintable;
+	gulong invalidate_contents_id;
+	gulong invalidate_size_id;
 	GtkGesture *zoom;
 	GtkGesture *drag;
 
@@ -104,15 +106,39 @@ exm_zoom_picture_set_property (GObject      *object,
     }
 }
 
+static void
+on_paintable_invalidate_contents (GdkPaintable   *paintable G_GNUC_UNUSED,
+                                  ExmZoomPicture *self)
+{
+	gtk_widget_queue_draw (GTK_WIDGET (self));
+}
+
+static void
+on_paintable_invalidate_size (GdkPaintable   *paintable G_GNUC_UNUSED,
+                              ExmZoomPicture *self)
+{
+	gtk_widget_queue_resize (GTK_WIDGET (self));
+}
+
 void
 exm_zoom_picture_set_paintable (ExmZoomPicture *self,
                                 GdkPaintable   *paintable)
 {
 	if (self->paintable)
-		g_object_unref (paintable);
+	{
+		g_signal_handler_disconnect (self->paintable, self->invalidate_contents_id);
+		g_signal_handler_disconnect (self->paintable, self->invalidate_size_id);
+		g_clear_object (&self->paintable);
+	}
 
 	if (paintable)
+	{
 		self->paintable = g_object_ref (paintable);
+		self->invalidate_contents_id = g_signal_connect (paintable, "invalidate-contents",
+		                                                  G_CALLBACK (on_paintable_invalidate_contents), self);
+		self->invalidate_size_id = g_signal_connect (paintable, "invalidate-size",
+		                                             G_CALLBACK (on_paintable_invalidate_size), self);
+	}
 
 	gtk_widget_queue_draw (GTK_WIDGET (self));
 }
@@ -231,10 +257,21 @@ exm_zoom_picture_snapshot (GtkWidget   *widget,
 }
 
 static void
+exm_zoom_picture_dispose (GObject *object)
+{
+	ExmZoomPicture *self = (ExmZoomPicture *)object;
+
+	exm_zoom_picture_set_paintable (self, NULL);
+
+	G_OBJECT_CLASS (exm_zoom_picture_parent_class)->dispose (object);
+}
+
+static void
 exm_zoom_picture_class_init (ExmZoomPictureClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
+	object_class->dispose = exm_zoom_picture_dispose;
 	object_class->get_property = exm_zoom_picture_get_property;
 	object_class->set_property = exm_zoom_picture_set_property;
 

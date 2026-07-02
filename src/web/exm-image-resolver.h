@@ -1,7 +1,7 @@
 /*
  * exm-image-resolver.h
  *
- * Copyright 2022-2025 Matthew Jakeman <mjakeman26@outlook.co.nz>
+ * Copyright 2022-2026 Matthew Jakeman <mjakeman26@outlook.co.nz>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,8 +37,8 @@ void exm_image_resolver_resolve_async (ExmImageResolver    *self,
                                        GCancellable        *cancellable,
                                        GAsyncReadyCallback  callback,
                                        gpointer             user_data);
-GdkTexture *exm_image_resolver_resolve_finish (ExmImageResolver  *self,
-                                               GAsyncResult      *result,
-                                               GError           **error);
+GdkPaintable *exm_image_resolver_resolve_finish (ExmImageResolver  *self,
+                                                 GAsyncResult      *result,
+                                                 GError           **error);
 
 G_END_DECLS
