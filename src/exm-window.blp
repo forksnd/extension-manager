@@ -16,88 +16,139 @@ template $ExmWindow: Adw.ApplicationWindow {
   }
 
   Adw.ToastOverlay toast_overlay {
-    child: Adw.NavigationView navigation_view {
-      Adw.NavigationPage main_view {
-        can-pop: false;
-        title: bind template.title;
-        tag: "main";
+    child: Gtk.Stack main_stack {
+      transition-type: crossfade;
 
-        child: Adw.ToolbarView {
-          [top]
-          Adw.HeaderBar header_bar {
-            show-back-button: false;
+      Gtk.StackPage {
+        name: "app";
 
-            title-widget: Adw.ViewSwitcher title {
-              policy: wide;
-              stack: view_stack;
-            };
+        child: Adw.NavigationView navigation_view {
+          Adw.NavigationPage main_view {
+            can-pop: false;
+            title: bind template.title;
+            tag: "main";
 
-            [start]
-            Gtk.ToggleButton search_button {
-              icon-name: "edit-find-symbolic";
-              // Translators: Tooltip of the search icon in the header bar
-              tooltip-text: _("Search Installed Extensions");
-              receives-default: true;
-            }
+            child: Adw.ToolbarView {
+              [top]
+              Adw.HeaderBar header_bar {
+                show-back-button: false;
 
-            [end]
-            Gtk.MenuButton {
-              icon-name: "open-menu-symbolic";
-              menu-model: primary_menu;
-              primary: true;
-              tooltip-text: _("Main Menu");
-            }
-          }
+                title-widget: Adw.ViewSwitcher title {
+                  policy: wide;
+                  stack: view_stack;
+                };
 
-          [top]
-          Gtk.SearchBar search_bar {
-            key-capture-widget: template;
-            search-mode-enabled: bind search_button.active bidirectional;
+                [start]
+                Gtk.ToggleButton search_button {
+                  icon-name: "edit-find-symbolic";
+                  // Translators: Tooltip of the search icon in the header bar
+                  tooltip-text: _("Search Installed Extensions");
+                  receives-default: true;
+                }
 
-            child: Gtk.SearchEntry search_entry {
-              placeholder-text: _("Search for installed extensions");
-              max-width-chars: 35;
-            };
-          }
+                [end]
+                Gtk.MenuButton {
+                  icon-name: "open-menu-symbolic";
+                  menu-model: primary_menu;
+                  primary: true;
+                  tooltip-text: _("Main Menu");
+                }
+              }
 
-          content: Adw.ViewStack view_stack {
-            enable-transitions: true;
-            notify::visible-child => $on_visible_page_changed();
+              [top]
+              Gtk.SearchBar search_bar {
+                key-capture-widget: template;
+                search-mode-enabled: bind search_button.active bidirectional;
 
-            Adw.ViewStackPage installed_stack {
-              name: "installed";
-              title: C_("Navigation", "_Installed");
-              icon-name: "puzzle-piece-symbolic";
-              use-underline: true;
+                child: Gtk.SearchEntry search_entry {
+                  placeholder-text: _("Search for installed extensions");
+                  max-width-chars: 35;
+                };
+              }
 
-              child: $ExmInstalledPage installed_page {
-                search-mode-enabled: bind search_bar.search-mode-enabled;
-                search-query: bind search_entry.text;
+              content: Adw.ViewStack view_stack {
+                enable-transitions: true;
+                notify::visible-child => $on_visible_page_changed();
+
+                Adw.ViewStackPage installed_stack {
+                  name: "installed";
+                  title: C_("Navigation", "_Installed");
+                  icon-name: "puzzle-piece-symbolic";
+                  use-underline: true;
+
+                  child: $ExmInstalledPage installed_page {
+                    search-mode-enabled: bind search_bar.search-mode-enabled;
+                    search-query: bind search_entry.text;
+                  };
+                }
+
+                Adw.ViewStackPage {
+                  name: "browse";
+                  title: C_("Navigation", "_Browse");
+                  icon-name: "globe-symbolic";
+                  use-underline: true;
+
+                  child: $ExmBrowsePage browse_page {};
+                }
               };
-            }
 
-            Adw.ViewStackPage {
-              name: "browse";
-              title: C_("Navigation", "_Browse");
-              icon-name: "globe-symbolic";
-              use-underline: true;
+              [bottom]
+              Adw.ViewSwitcherBar switcher_bar {
+                stack: view_stack;
+              }
+            };
+          }
 
-              child: $ExmBrowsePage browse_page {};
-            }
-          };
+          $ExmDetailView detail_view {}
 
-          [bottom]
-          Adw.ViewSwitcherBar switcher_bar {
-            stack: view_stack;
+          $ExmScreenshotView screenshot_view {
+            title: bind detail_view.title;
+            screenshot: bind detail_view.screenshot;
           }
         };
       }
 
-      $ExmDetailView detail_view {}
+      Gtk.StackPage {
+        name: "noshell";
 
-      $ExmScreenshotView screenshot_view {
-        title: bind detail_view.title;
-        screenshot: bind detail_view.screenshot;
+        child: Adw.ToolbarView {
+          [top]
+          Adw.HeaderBar {
+            title-widget: Adw.WindowTitle {
+              title: bind template.title;
+            };
+          }
+
+          content: Adw.StatusPage {
+            icon-name: "puzzle-piece-symbolic";
+            title: _("GNOME Shell Unavailable");
+            description: _("Log in to a GNOME session to manage extensions");
+
+            child: Gtk.Button {
+              styles [
+                "pill",
+                "suggested-action",
+              ]
+
+              halign: center;
+              action-name: "win.discover-gnome";
+              tooltip-text: "https://www.gnome.org";
+
+              child: Gtk.Box {
+                spacing: 6;
+
+                Gtk.Label {
+                  label: _("_Discover GNOME");
+                  use-underline: true;
+                }
+
+                Gtk.Image {
+                  icon-name: "external-link-symbolic";
+                }
+              };
+            };
+          };
+        };
       }
     };
   }
@@ -119,7 +170,9 @@ menu primary_menu {
 
 Adw.AlertDialog remove_dialog {
   heading: _("Uninstall Extension?");
-  body: _("The extension's features and functionality will no longer be accessible. Are you sure you want to uninstall?");
+  body: _(
+    "The extension's features and functionality will no longer be accessible. Are you sure you want to uninstall?"
+  );
   default-response: "no";
   close-response: "no";
 
