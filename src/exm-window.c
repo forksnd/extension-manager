@@ -44,6 +44,7 @@ struct _ExmWindow
     AdwHeaderBar         *header_bar;
     ExmBrowsePage        *browse_page;
     ExmInstalledPage     *installed_page;
+    GtkStack             *main_stack;
     AdwNavigationView    *navigation_view;
     AdwNavigationPage    *main_view;
     ExmDetailView        *detail_view;
@@ -360,6 +361,18 @@ show_error (GtkWidget  *widget,
 }
 
 static void
+discover_gnome (GtkWidget  *widget,
+                const char *action_name G_GNUC_UNUSED,
+                GVariant   *param G_GNUC_UNUSED)
+{
+    GtkUriLauncher *launcher;
+
+    launcher = gtk_uri_launcher_new ("https://www.gnome.org");
+    gtk_uri_launcher_launch (launcher, GTK_WINDOW (widget), NULL, NULL, NULL);
+    g_object_unref (launcher);
+}
+
+static void
 search_online (GtkWidget  *widget,
                const char *action_name G_GNUC_UNUSED,
                GVariant   *param G_GNUC_UNUSED)
@@ -382,6 +395,17 @@ on_error (ExmManager *manager G_GNUC_UNUSED,
           ExmWindow  *self)
 {
     gtk_widget_activate_action (GTK_WIDGET (self), "win.show-error", "s", error_text);
+}
+
+static void
+sync_visible_page (ExmWindow *self)
+{
+    gboolean is_supported;
+
+    g_object_get (self->manager, "is-supported", &is_supported, NULL);
+
+    gtk_stack_set_visible_child_name (self->main_stack,
+                                      is_supported ? "app" : "noshell");
 }
 
 static void
@@ -483,6 +507,7 @@ exm_window_class_init (ExmWindowClass *klass)
     gtk_widget_class_bind_template_child (widget_class, ExmWindow, header_bar);
     gtk_widget_class_bind_template_child (widget_class, ExmWindow, installed_page);
     gtk_widget_class_bind_template_child (widget_class, ExmWindow, browse_page);
+    gtk_widget_class_bind_template_child (widget_class, ExmWindow, main_stack);
     gtk_widget_class_bind_template_child (widget_class, ExmWindow, navigation_view);
     gtk_widget_class_bind_template_child (widget_class, ExmWindow, main_view);
     gtk_widget_class_bind_template_child (widget_class, ExmWindow, detail_view);
@@ -512,6 +537,7 @@ exm_window_class_init (ExmWindowClass *klass)
     gtk_widget_class_install_action (widget_class, "win.show-error", "s", show_error);
     gtk_widget_class_install_action (widget_class, "win.show-error-dialog", "s", show_error_dialog);
     gtk_widget_class_install_action (widget_class, "win.search-online", NULL, search_online);
+    gtk_widget_class_install_action (widget_class, "win.discover-gnome", NULL, discover_gnome);
     gtk_widget_class_install_action (widget_class, "screenshot.zoom-in", NULL, screenshot_zoom);
     gtk_widget_class_install_action (widget_class, "screenshot.zoom-out", NULL, screenshot_zoom);
     gtk_widget_class_install_action (widget_class, "screenshot.zoom-reset", NULL, screenshot_zoom);
@@ -540,6 +566,9 @@ exm_window_init (ExmWindow *self)
 
     self->manager = exm_manager_new ();
     g_signal_connect (self->manager, "error-occurred", G_CALLBACK (on_error), self);
+    g_signal_connect_swapped (self->manager, "notify::is-supported",
+                              G_CALLBACK (sync_visible_page), self);
+    sync_visible_page (self);
 
     g_object_set (self->installed_page, "manager", self->manager, NULL);
     g_object_set (self->browse_page, "manager", self->manager, NULL);

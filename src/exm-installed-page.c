@@ -450,7 +450,11 @@ on_bind_manager (ExmInstalledPage *self)
     // Check if updates are available
     // NOTE: We need to do this *after* connecting the signal
     // handler above, otherwise we will not be notified.
-    exm_manager_check_for_updates (self->manager);
+    gboolean is_supported;
+    g_object_get (self->manager, "is-supported", &is_supported, NULL);
+
+    if (is_supported)
+        exm_manager_check_for_updates (self->manager);
 }
 
 static void

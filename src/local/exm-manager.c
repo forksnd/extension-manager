@@ -35,6 +35,7 @@ struct _ExmManager
 
     const gchar *shell_version;
     gboolean extensions_enabled;
+    gboolean is_supported;
 
     guint update_callback_id;
 };
@@ -46,6 +47,7 @@ enum {
     PROP_EXTENSIONS,
     PROP_EXTENSIONS_ENABLED,
     PROP_SHELL_VERSION,
+    PROP_IS_SUPPORTED,
     N_PROPS
 };
 
@@ -85,6 +87,9 @@ exm_manager_get_property (GObject    *object,
         break;
     case PROP_EXTENSIONS_ENABLED:
         g_value_set_boolean (value, self->extensions_enabled);
+        break;
+    case PROP_IS_SUPPORTED:
+        g_value_set_boolean (value, self->is_supported);
         break;
     default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -495,6 +500,13 @@ exm_manager_class_init (ExmManagerClass *klass)
                                 FALSE,
                                 G_PARAM_READWRITE);
 
+    properties [PROP_IS_SUPPORTED]
+        = g_param_spec_boolean ("is-supported",
+                                "Is Supported",
+                                "Whether GNOME Shell is running and owns the extensions D-Bus name",
+                                FALSE,
+                                G_PARAM_READABLE);
+
     g_object_class_install_properties (object_class, N_PROPS, properties);
 
     signals [SIGNAL_UPDATES_AVAILABLE]
@@ -822,6 +834,23 @@ on_state_changed (ShellExtensions *object G_GNUC_UNUSED,
 }
 
 static void
+update_is_supported (ExmManager *self)
+{
+    gchar *owner;
+    gboolean supported;
+
+    owner = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (self->proxy));
+    supported = (owner != NULL);
+    g_free (owner);
+
+    if (supported == self->is_supported)
+        return;
+
+    self->is_supported = supported;
+    g_object_notify_by_pspec (G_OBJECT (self), properties [PROP_IS_SUPPORTED]);
+}
+
+static void
 exm_manager_init (ExmManager *self)
 {
     GError *error = NULL;
@@ -840,6 +869,10 @@ exm_manager_init (ExmManager *self)
 
     self->update_callback_id = 0;
 
+    g_signal_connect_swapped (self->proxy, "notify::g-name-owner",
+                              G_CALLBACK (update_is_supported), self);
+    update_is_supported (self);
+
     g_object_bind_property (self->proxy, "shell-version",
                             self, "shell-version",
                             G_BINDING_SYNC_CREATE);
@@ -848,7 +881,8 @@ exm_manager_init (ExmManager *self)
                             self, "extensions-enabled",
                             G_BINDING_BIDIRECTIONAL|G_BINDING_SYNC_CREATE);
 
-    update_extension_list (self);
+    if (self->is_supported)
+        update_extension_list (self);
 
     g_signal_connect (self->proxy,
                       "extension-state-changed",
