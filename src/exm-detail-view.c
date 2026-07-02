@@ -1,7 +1,7 @@
 /*
  * exm-detail-view.c
  *
- * Copyright 2022-2025 Matthew Jakeman <mjakeman26@outlook.co.nz>
+ * Copyright 2022-2026 Matthew Jakeman <mjakeman26@outlook.co.nz>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -168,8 +168,8 @@ on_icon_loaded (GObject       *source,
                 ExmDetailView *self)
 {
     GError *error = NULL;
-    GdkTexture *texture = exm_image_resolver_resolve_finish (EXM_IMAGE_RESOLVER (source),
-                                                             res, &error);
+    GdkPaintable *paintable = exm_image_resolver_resolve_finish (EXM_IMAGE_RESOLVER (source),
+                                                                  res, &error);
 
     if (error)
     {
@@ -178,8 +178,8 @@ on_icon_loaded (GObject       *source,
         return;
     }
 
-    gtk_image_set_from_paintable (self->ext_icon, GDK_PAINTABLE (texture));
-    g_object_unref (texture);
+    gtk_image_set_from_paintable (self->ext_icon, paintable);
+    g_object_unref (paintable);
     g_object_unref (self);
 }
 
@@ -189,8 +189,8 @@ on_image_loaded (GObject       *source,
                  ExmDetailView *self)
 {
     GError *error = NULL;
-    GdkTexture *texture = exm_image_resolver_resolve_finish (EXM_IMAGE_RESOLVER (source),
-                                                             res, &error);
+    GdkPaintable *paintable = exm_image_resolver_resolve_finish (EXM_IMAGE_RESOLVER (source),
+                                                                  res, &error);
 
     if (error)
     {
@@ -199,10 +199,10 @@ on_image_loaded (GObject       *source,
         return;
     }
 
-    g_object_set (self, "screenshot", GDK_PAINTABLE (texture), NULL);
-    exm_screenshot_set_paintable (self->ext_screenshot, GDK_PAINTABLE (texture));
+    g_object_set (self, "screenshot", paintable, NULL);
+    exm_screenshot_set_paintable (self->ext_screenshot, paintable);
     exm_screenshot_display (self->ext_screenshot);
-    g_object_unref (texture);
+    g_object_unref (paintable);
     g_object_unref (self);
 
     gtk_widget_set_visible (GTK_WIDGET (self->ext_screenshot_popout_button), TRUE);

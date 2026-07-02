@@ -7,6 +7,7 @@ exm_sources = [
   'exm-detail-view.c',
   'exm-screenshot.c',
   'exm-zoom-picture.c',
+  'exm-animated-paintable.c',
   'exm-comment-tile.c',
   'exm-comment-dialog.c',
   'exm-rating.c',
@@ -42,6 +43,8 @@ exm_deps = [
   dependency('json-glib-1.0'),
   dependency('libsoup-3.0'),
   dependency('libxml-2.0'),
+  dependency('glycin-2'),
+  dependency('glycin-gtk4-2'),
 ]
 
 if libbacktrace_dep.found()

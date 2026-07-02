@@ -1,7 +1,7 @@
 /*
  * exm-image-resolver.c
  *
- * Copyright 2022-2025 Matthew Jakeman <mjakeman26@outlook.co.nz>
+ * Copyright 2022-2026 Matthew Jakeman <mjakeman26@outlook.co.nz>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +21,11 @@
 
 #include "exm-image-resolver.h"
 
+#include "exm-animated-paintable.h"
+
 #include <libsoup/soup.h>
+#include <glycin.h>
+#include <glycin-gtk4.h>
 
 struct _ExmImageResolver
 {
@@ -50,14 +54,87 @@ exm_image_resolver_finalize (GObject *object)
     G_OBJECT_CLASS (exm_image_resolver_parent_class)->finalize (object);
 }
 
+typedef struct
+{
+    GTask *task;
+    GlyImage *image;
+} FrameLoadCtx;
+
+static void
+frame_load_ctx_free (FrameLoadCtx *ctx)
+{
+    g_clear_object (&ctx->image);
+    g_free (ctx);
+}
+
+static void
+on_first_frame_loaded (GObject      *source,
+                       GAsyncResult *res,
+                       gpointer      user_data)
+{
+    FrameLoadCtx *ctx = user_data;
+    GTask *task = ctx->task;
+    GError *error = NULL;
+    GlyFrame *frame = gly_image_next_frame_finish (GLY_IMAGE (source), res, &error);
+
+    if (error)
+    {
+        g_task_return_error (task, error);
+        frame_load_ctx_free (ctx);
+        g_object_unref (task);
+        return;
+    }
+
+    GdkTexture *texture = gly_gtk_frame_get_texture (frame);
+    gint64 delay_us = gly_frame_get_delay (frame);
+    g_object_unref (frame);
+
+    if (delay_us > 0)
+    {
+        GdkPaintable *paintable = GDK_PAINTABLE (exm_animated_paintable_new (ctx->image, texture, delay_us));
+        ctx->image = NULL;
+        g_task_return_pointer (task, paintable, g_object_unref);
+    }
+    else
+    {
+        g_task_return_pointer (task, texture, g_object_unref);
+    }
+
+    frame_load_ctx_free (ctx);
+    g_object_unref (task);
+}
+
+static void
+on_loader_loaded (GObject      *source,
+                  GAsyncResult *res,
+                  gpointer      user_data)
+{
+    GTask *task = G_TASK (user_data);
+    GError *error = NULL;
+    GlyImage *image = gly_loader_load_finish (GLY_LOADER (source), res, &error);
+    FrameLoadCtx *ctx;
+
+    if (error)
+    {
+        g_task_return_error (task, error);
+        g_object_unref (task);
+        return;
+    }
+
+    ctx = g_new0 (FrameLoadCtx, 1);
+    ctx->task = task;
+    ctx->image = image;
+
+    gly_image_next_frame_async (image, g_task_get_cancellable (task), on_first_frame_loaded, ctx);
+}
+
 static void
 image_loaded_callback (GObject      *source,
                        GAsyncResult *res,
                        GTask        *task)
 {
     GBytes *bytes;
-    GdkTexture *texture;
-
+    GlyLoader *loader;
     GError *error = NULL;
 
     bytes = soup_session_send_and_read_finish (SOUP_SESSION (source), res, &error);
@@ -65,21 +142,15 @@ image_loaded_callback (GObject      *source,
     if (error)
     {
         g_task_return_error (task, error);
-    }
-    else
-    {
-        texture = gdk_texture_new_from_bytes (bytes, &error);
-
-        if (error)
-        {
-            g_task_return_error (task, error);
-        }
-
-        g_task_return_pointer (task, texture, g_object_unref);
-        g_bytes_unref (bytes);
+        g_object_unref (task);
+        return;
     }
 
-    g_object_unref (task);
+    loader = gly_loader_new_for_bytes (bytes);
+    g_bytes_unref (bytes);
+
+    gly_loader_load_async (loader, g_task_get_cancellable (task), on_loader_loaded, task);
+    g_object_unref (loader);
 }
 
 void
@@ -125,7 +196,7 @@ exm_image_resolver_resolve_async (ExmImageResolver    *self,
     g_object_unref (msg);
 }
 
-GdkTexture *
+GdkPaintable *
 exm_image_resolver_resolve_finish (ExmImageResolver  *self,
                                    GAsyncResult      *result,
                                    GError           **error)
