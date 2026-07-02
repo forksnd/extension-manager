@@ -103,6 +103,7 @@ Extension Manager needs a recent version of the GNOME SDK in order to build. See
 ### Dependencies
 Extension Manager depends on the following libraries:
  - gettext
+ - glycin (and glycin-gtk4)
  - gtk4
  - libadwaita
  - libjson-glib
@@ -112,7 +113,7 @@ Extension Manager depends on the following libraries:
 
 On Debian-based distributions, the required dependencies can be installed with the following command:
 ```shell
-sudo apt install blueprint-compiler gettext libadwaita-1-dev libgtk-4-dev libjson-glib-dev libsoup-3.0-dev libxml2-dev meson
+sudo apt install blueprint-compiler gettext libadwaita-1-dev libglycin-2-dev libglycin-gtk4-2-dev libgtk-4-dev libjson-glib-dev libsoup-3.0-dev libxml2-dev meson
 ```
 
 ### Building From Source
