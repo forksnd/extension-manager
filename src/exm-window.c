@@ -96,6 +96,26 @@ exm_window_get_property (GObject    *object,
 }
 
 static void
+exm_window_set_property (GObject      *object,
+                         guint         prop_id,
+                         const GValue *value,
+                         GParamSpec   *pspec)
+{
+    ExmWindow *self = EXM_WINDOW (object);
+
+    switch (prop_id)
+    {
+    case PROP_MANAGER:
+        // Borrowed reference: the manager is owned by ExmApplication and
+        // outlives every window.
+        self->manager = g_value_get_object (value);
+        break;
+    default:
+        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+    }
+}
+
+static void
 extension_open_prefs (GtkWidget  *widget,
                       const char *action_name G_GNUC_UNUSED,
                       GVariant   *param)
@@ -388,6 +408,24 @@ search_online (GtkWidget  *widget,
     gtk_toggle_button_set_active (self->search_button, FALSE);
 }
 
+static void
+search_installed (GtkWidget  *widget,
+                  const char *action_name G_GNUC_UNUSED,
+                  GVariant   *param)
+{
+    ExmWindow *self;
+    const char *search_text;
+
+    self = EXM_WINDOW (widget);
+
+    adw_navigation_view_pop_to_page (self->navigation_view, self->main_view);
+    adw_view_stack_set_visible_child_name (self->view_stack, "installed");
+
+    search_text = g_variant_get_string (param, NULL);
+    gtk_editable_set_text (GTK_EDITABLE (gtk_search_bar_get_child (self->search_bar)), search_text);
+    gtk_toggle_button_set_active (self->search_button, TRUE);
+}
+
 
 static void
 on_error (ExmManager *manager G_GNUC_UNUSED,
@@ -478,18 +516,48 @@ screenshot_zoom (GtkWidget  *widget,
 }
 
 static void
+exm_window_constructed (GObject *object)
+{
+    ExmWindow *self = EXM_WINDOW (object);
+
+    G_OBJECT_CLASS (exm_window_parent_class)->constructed (object);
+
+    g_signal_connect (self->manager, "error-occurred", G_CALLBACK (on_error), self);
+    g_signal_connect_swapped (self->manager, "notify::is-supported",
+                              G_CALLBACK (sync_visible_page), self);
+    sync_visible_page (self);
+
+    g_object_set (self->installed_page, "manager", self->manager, NULL);
+    g_object_set (self->browse_page, "manager", self->manager, NULL);
+    g_object_set (self->detail_view, "manager", self->manager, NULL);
+
+    g_object_bind_property (self->manager,
+                            "shell-version",
+                            self->detail_view,
+                            "shell-version",
+                            G_BINDING_SYNC_CREATE);
+
+    g_signal_connect (self->manager,
+                      "updates-available",
+                      G_CALLBACK (on_updates_available),
+                      self);
+}
+
+static void
 exm_window_class_init (ExmWindowClass *klass)
 {
     GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
     object_class->get_property = exm_window_get_property;
+    object_class->set_property = exm_window_set_property;
+    object_class->constructed = exm_window_constructed;
 
     properties [PROP_MANAGER]
         = g_param_spec_object ("manager",
                                "Manager",
                                "Manager",
                                EXM_TYPE_MANAGER,
-                               G_PARAM_READABLE);
+                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY);
 
     g_object_class_install_properties (object_class, N_PROPS, properties);
 
@@ -537,6 +605,7 @@ exm_window_class_init (ExmWindowClass *klass)
     gtk_widget_class_install_action (widget_class, "win.show-error", "s", show_error);
     gtk_widget_class_install_action (widget_class, "win.show-error-dialog", "s", show_error_dialog);
     gtk_widget_class_install_action (widget_class, "win.search-online", NULL, search_online);
+    gtk_widget_class_install_action (widget_class, "win.search-installed", "s", search_installed);
     gtk_widget_class_install_action (widget_class, "win.discover-gnome", NULL, discover_gnome);
     gtk_widget_class_install_action (widget_class, "screenshot.zoom-in", NULL, screenshot_zoom);
     gtk_widget_class_install_action (widget_class, "screenshot.zoom-out", NULL, screenshot_zoom);
@@ -563,25 +632,4 @@ exm_window_init (ExmWindow *self)
 
     if (strstr (APP_ID, ".Devel") != NULL)
         gtk_widget_add_css_class (GTK_WIDGET (self), "devel");
-
-    self->manager = exm_manager_new ();
-    g_signal_connect (self->manager, "error-occurred", G_CALLBACK (on_error), self);
-    g_signal_connect_swapped (self->manager, "notify::is-supported",
-                              G_CALLBACK (sync_visible_page), self);
-    sync_visible_page (self);
-
-    g_object_set (self->installed_page, "manager", self->manager, NULL);
-    g_object_set (self->browse_page, "manager", self->manager, NULL);
-    g_object_set (self->detail_view, "manager", self->manager, NULL);
-
-    g_object_bind_property (self->manager,
-                            "shell-version",
-                            self->detail_view,
-                            "shell-version",
-                            G_BINDING_SYNC_CREATE);
-
-    g_signal_connect (self->manager,
-                      "updates-available",
-                      G_CALLBACK (on_updates_available),
-                      self);
 }

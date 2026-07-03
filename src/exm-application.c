@@ -22,6 +22,7 @@
 #include "exm-config.h"
 
 #include "exm-application.h"
+#include "exm-gnome-shell-search-provider.h"
 #include "exm-window.h"
 
 #include "exm-utils.h"
@@ -31,6 +32,9 @@
 struct _ExmApplication
 {
     AdwApplication parent_instance;
+
+    ExmManager *manager;
+    ExmGnomeShellSearchProvider *search_provider;
 };
 
 G_DEFINE_TYPE (ExmApplication, exm_application, ADW_TYPE_APPLICATION)
@@ -45,6 +49,14 @@ exm_application_new (gchar             *application_id,
                          NULL);
 }
 
+ExmManager *
+exm_application_get_manager (ExmApplication *self)
+{
+    g_return_val_if_fail (EXM_IS_APPLICATION (self), NULL);
+
+    return self->manager;
+}
+
 static ExmWindow *
 get_current_window (GApplication *app)
 {
@@ -56,6 +68,7 @@ get_current_window (GApplication *app)
     if (window == NULL)
         window = g_object_new (EXM_TYPE_WINDOW,
                                "application", app,
+                               "manager", exm_application_get_manager (EXM_APPLICATION (app)),
                                NULL);
 
     settings = g_settings_new (APP_ID);
@@ -138,10 +151,54 @@ exm_application_open (GApplication  *app,
 }
 
 
+static gboolean
+exm_application_dbus_register (GApplication     *application,
+                               GDBusConnection  *connection,
+                               const gchar      *object_path,
+                               GError          **error)
+{
+    ExmApplication *self = EXM_APPLICATION (application);
+    g_autofree gchar *search_provider_path = NULL;
+
+    if (!G_APPLICATION_CLASS (exm_application_parent_class)->dbus_register (application, connection, object_path, error))
+        return FALSE;
+
+    search_provider_path = g_strdup_printf ("%s/SearchProvider", object_path);
+
+    return exm_gnome_shell_search_provider_export (self->search_provider, connection,
+                                                    search_provider_path, error);
+}
+
+static void
+exm_application_dbus_unregister (GApplication    *application,
+                                 GDBusConnection *connection,
+                                 const gchar     *object_path)
+{
+    ExmApplication *self = EXM_APPLICATION (application);
+
+    exm_gnome_shell_search_provider_unexport (self->search_provider);
+
+    G_APPLICATION_CLASS (exm_application_parent_class)->dbus_unregister (application, connection, object_path);
+}
+
+static void
+exm_application_dispose (GObject *object)
+{
+    ExmApplication *self = EXM_APPLICATION (object);
+
+    g_clear_object (&self->search_provider);
+    g_clear_object (&self->manager);
+
+    G_OBJECT_CLASS (exm_application_parent_class)->dispose (object);
+}
+
 static void
 exm_application_class_init (ExmApplicationClass *klass)
 {
+    GObjectClass *object_class = G_OBJECT_CLASS (klass);
     GApplicationClass *app_class = G_APPLICATION_CLASS (klass);
+
+    object_class->dispose = exm_application_dispose;
 
     /*
     * We connect to the activate callback to create a window when the application
@@ -151,6 +208,8 @@ exm_application_class_init (ExmApplicationClass *klass)
     */
     app_class->activate = exm_application_activate;
     app_class->open = exm_application_open;
+    app_class->dbus_register = exm_application_dbus_register;
+    app_class->dbus_unregister = exm_application_dbus_unregister;
 }
 
 static void
@@ -220,6 +279,9 @@ static void
 exm_application_init (ExmApplication *self)
 {
     GSettings *settings = g_settings_new (APP_ID);
+
+    self->manager = exm_manager_new ();
+    self->search_provider = exm_gnome_shell_search_provider_new (self->manager);
 
     GSimpleAction *quit_action = g_simple_action_new ("quit", NULL);
     g_signal_connect_swapped (quit_action, "activate", G_CALLBACK (g_application_quit), self);

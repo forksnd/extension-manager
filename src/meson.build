@@ -2,6 +2,7 @@ exm_sources = [
   'main.c',
   'exm-window.c',
   'exm-application.c',
+  'exm-gnome-shell-search-provider.c',
 
   # Detail View
   'exm-detail-view.c',
@@ -52,6 +53,12 @@ if libbacktrace_dep.found()
 endif
 
 gnome = import('gnome')
+
+exm_sources += gnome.gdbus_codegen('exm-shell-search-provider-generated',
+  'org.gnome.Shell.SearchProvider2.xml',
+  interface_prefix: 'org.gnome.',
+  namespace: 'Exm',
+)
 
 subdir('local')
 subdir('web')
