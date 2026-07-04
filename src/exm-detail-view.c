@@ -137,6 +137,7 @@ exm_detail_view_dispose (GObject *object)
 
     g_clear_object (&self->data);
     g_clear_object (&self->action_group);
+    g_clear_pointer (&self->uuid, g_free);
 
     G_OBJECT_CLASS (exm_detail_view_parent_class)->dispose (object);
 }
@@ -882,6 +883,15 @@ exm_detail_view_load_for_uuid (ExmDetailView *self,
     ExmUnifiedData *data;
     ExmExtension   *local_info;
 
+    if (g_strcmp0 (self->uuid, uuid) == 0 &&
+        self->data != NULL &&
+        exm_unified_data_get_web_data (self->data) != NULL)
+    {
+        g_free (uuid);
+        return;
+    }
+
+    g_free (self->uuid);
     self->uuid = uuid;
 
     gtk_widget_set_visible (GTK_WIDGET (self->update_icon), FALSE);
