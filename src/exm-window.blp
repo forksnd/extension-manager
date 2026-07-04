@@ -171,21 +171,10 @@ template $ExmWindow: Adw.ApplicationWindow {
               ]
 
               halign: center;
+              label: _("_Discover GNOME");
+              use-underline: true;
               action-name: "win.discover-gnome";
               tooltip-text: "https://www.gnome.org";
-
-              child: Gtk.Box {
-                spacing: 6;
-
-                Gtk.Label {
-                  label: _("_Discover GNOME");
-                  use-underline: true;
-                }
-
-                Gtk.Image {
-                  icon-name: "external-link-symbolic";
-                }
-              };
             };
           };
         };
