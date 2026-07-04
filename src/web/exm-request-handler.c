@@ -28,9 +28,41 @@
 typedef struct
 {
     SoupSession *session;
+
+    GHashTable *cache;
 } ExmRequestHandlerPrivate;
 
 G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE (ExmRequestHandler, exm_request_handler, G_TYPE_OBJECT)
+
+typedef struct
+{
+    GBytes *bytes;
+    gint64  expiry_us;
+} CacheEntry;
+
+static void
+cache_entry_free (CacheEntry *entry)
+{
+    g_bytes_unref (entry->bytes);
+    g_free (entry);
+}
+
+static void
+purge_expired_cache_entries (GHashTable *cache)
+{
+    GHashTableIter iter;
+    gpointer key, value;
+    gint64 now = g_get_monotonic_time ();
+
+    g_hash_table_iter_init (&iter, cache);
+    while (g_hash_table_iter_next (&iter, &key, &value))
+    {
+        CacheEntry *entry = value;
+
+        if (entry->expiry_us <= now)
+            g_hash_table_iter_remove (&iter);
+    }
+}
 
 /**
  * exm_request_handler_new:
@@ -52,6 +84,7 @@ exm_request_handler_finalize (GObject *object)
     ExmRequestHandlerPrivate *priv = exm_request_handler_get_instance_private (self);
 
     g_object_unref (priv->session);
+    g_hash_table_unref (priv->cache);
 
     G_OBJECT_CLASS (exm_request_handler_parent_class)->finalize (object);
 }
@@ -70,6 +103,7 @@ typedef struct
     ExmRequestHandler *self;
     GTask *task;
     SoupMessage *msg;
+    gchar *url;
 } RequestData;
 
 static void
@@ -101,8 +135,21 @@ request_callback (GObject      *source,
     }
     else
     {
-        // Get derived class to handle response
         ExmRequestHandlerClass *klass = EXM_REQUEST_HANDLER_CLASS (G_OBJECT_GET_CLASS (data->self));
+
+        if (klass->cache_ttl_seconds > 0)
+        {
+            ExmRequestHandlerPrivate *priv = exm_request_handler_get_instance_private (data->self);
+            CacheEntry *entry = g_new0 (CacheEntry, 1);
+
+            entry->bytes = g_bytes_ref (bytes);
+            entry->expiry_us = g_get_monotonic_time () +
+                                ((gint64) klass->cache_ttl_seconds * G_USEC_PER_SEC);
+
+            g_hash_table_insert (priv->cache, g_strdup (data->url), entry);
+        }
+
+        // Get derived class to handle response
         model = klass->handle_response (bytes, &error);
 
         if (model == NULL)
@@ -116,6 +163,7 @@ request_callback (GObject      *source,
     g_object_unref (data->self);
     g_object_unref (data->task);
     g_object_unref (data->msg);
+    g_free (data->url);
     g_free (data);
 }
 
@@ -127,13 +175,38 @@ exm_request_handler_request_async (ExmRequestHandler   *self,
                                    gpointer             user_data)
 {
     ExmRequestHandlerPrivate *priv;
+    ExmRequestHandlerClass *klass;
 
     GTask *task;
     SoupMessage *msg;
 
     priv = exm_request_handler_get_instance_private (self);
+    klass = EXM_REQUEST_HANDLER_CLASS (G_OBJECT_GET_CLASS (self));
 
     task = g_task_new (self, cancellable, callback, user_data);
+
+    if (klass->cache_ttl_seconds > 0)
+    {
+        CacheEntry *entry;
+
+        purge_expired_cache_entries (priv->cache);
+        entry = g_hash_table_lookup (priv->cache, url_endpoint);
+
+        if (entry != NULL)
+        {
+            GError *error = NULL;
+            gpointer result = klass->handle_response (entry->bytes, &error);
+
+            if (result == NULL)
+                g_task_return_error (task, error);
+            else
+                g_task_return_pointer (task, result, g_object_unref);
+
+            g_object_unref (task);
+            return;
+        }
+    }
+
     msg = soup_message_new (SOUP_METHOD_GET, url_endpoint);
 
     if (!msg)
@@ -147,6 +220,7 @@ exm_request_handler_request_async (ExmRequestHandler   *self,
     data->self = g_object_ref (self);
     data->task = g_object_ref (task);
     data->msg = g_object_ref (msg);
+    data->url = g_strdup (url_endpoint);
 
     soup_session_send_and_read_async (priv->session, msg,
                                       G_PRIORITY_DEFAULT,
@@ -184,4 +258,6 @@ exm_request_handler_init (ExmRequestHandler *self)
 {
     ExmRequestHandlerPrivate *priv = exm_request_handler_get_instance_private (self);
     priv->session = soup_session_new_with_options ("timeout", 30, NULL);
+    priv->cache = g_hash_table_new_full (g_str_hash, g_str_equal,
+                                         g_free, (GDestroyNotify) cache_entry_free);
 }

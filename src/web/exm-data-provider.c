@@ -77,7 +77,7 @@ exm_data_provider_get_async (ExmDataProvider     *self,
 {
     // Query https://extensions.gnome.org/api/v1/extensions/{%s}/
 
-    const gchar *url;
+    g_autofree gchar *url = NULL;
 
     url = g_strdup_printf ("https://extensions.gnome.org/api/v1/extensions/%s/", uuid);
 
@@ -108,6 +108,8 @@ exm_data_provider_class_init (ExmDataProviderClass *klass)
     ExmRequestHandlerClass *request_handler_class = EXM_REQUEST_HANDLER_CLASS (klass);
 
     request_handler_class->handle_response = (ResponseHandler) parse_extension;
+
+    request_handler_class->cache_ttl_seconds = 3600;
 }
 
 static void
