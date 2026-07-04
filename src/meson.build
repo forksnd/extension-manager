@@ -20,6 +20,7 @@ exm_sources = [
   # Installed Page
   'exm-installed-page.c',
   'exm-extension-row.c',
+  'exm-extension-toggle.c',
 
   # Browse Page
   'exm-browse-page.c',

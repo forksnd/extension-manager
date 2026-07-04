@@ -25,6 +25,7 @@
 #include "exm-comment-tile.h"
 #include "exm-config.h"
 #include "exm-enums.h"
+#include "exm-extension-toggle.h"
 #include "exm-install-button.h"
 #include "exm-screenshot.h"
 #include "exm-screenshot-view.h"
@@ -156,7 +157,8 @@ exm_detail_view_get_property (GObject    *object,
     }
 }
 
-static void on_bind_manager (ExmDetailView *self);
+static void on_bind_manager    (ExmDetailView *self);
+static void update_tools_stack (ExmDetailView *self);
 
 static void
 exm_detail_view_set_property (GObject      *object,
@@ -867,16 +869,6 @@ open_link (ExmDetailView *self,
     gtk_uri_launcher_launch (uri, GTK_WINDOW (toplevel), NULL, NULL, NULL);
 }
 
-static gboolean
-transform_to_state (GBinding     *binding G_GNUC_UNUSED,
-                    const GValue *from_value,
-                    GValue       *to_value,
-                    gpointer      user_data G_GNUC_UNUSED)
-{
-    g_value_set_boolean (to_value, g_value_get_enum (from_value) == EXM_EXTENSION_STATE_ACTIVE);
-    return TRUE;
-}
-
 static void
 page_open_prefs (GSimpleAction *action G_GNUC_UNUSED,
                  GVariant      *param G_GNUC_UNUSED,
@@ -908,28 +900,16 @@ on_toggle_changed (GtkSwitch     *toggle,
                    gboolean       state,
                    ExmDetailView *self)
 {
+    ExmExtension *extension;
+
     if (!self->uuid || !self->manager)
         return FALSE;
 
-    ExmExtension *extension = exm_manager_get_by_uuid (self->manager, self->uuid);
+    extension = exm_manager_get_by_uuid (self->manager, self->uuid);
     if (!extension)
         return FALSE;
 
-    gboolean enabled;
-    g_object_get (extension, "enabled", &enabled, NULL);
-
-    if (state == enabled)
-        return TRUE;
-
-    if (gtk_switch_get_state (toggle) != enabled)
-        g_object_set (extension, "enabled", !enabled, NULL);
-
-    if (state)
-        exm_manager_enable_extension (self->manager, extension);
-    else
-        exm_manager_disable_extension (self->manager, extension);
-
-    return TRUE;
+    return exm_extension_apply_toggle (self->manager, extension, toggle, state);
 }
 
 static void
@@ -955,12 +935,11 @@ update_tools_stack (ExmDetailView *self)
 
         if (extension)
         {
-            gboolean has_prefs, is_user, enabled;
+            gboolean has_prefs, is_user;
             ExmExtensionState state;
             g_object_get (extension,
                           "has-prefs", &has_prefs,
                           "is-user", &is_user,
-                          "enabled", &enabled,
                           "state", &state,
                           NULL);
 
@@ -970,24 +949,7 @@ update_tools_stack (ExmDetailView *self)
             action = g_action_map_lookup_action (G_ACTION_MAP (self->action_group), "remove");
             g_simple_action_set_enabled (G_SIMPLE_ACTION (action), is_user);
 
-            g_object_bind_property (extension, "enabled",
-                                    self->ext_toggle, "active",
-                                    G_BINDING_SYNC_CREATE);
-
-            g_object_bind_property_full (extension,
-                                         "state",
-                                         self->ext_toggle,
-                                         "state",
-                                         G_BINDING_SYNC_CREATE,
-                                         transform_to_state,
-                                         NULL,
-                                         NULL,
-                                         NULL);
-
-            // Keep compatibility with GNOME Shell versions prior to 46
-            if (gtk_switch_get_state (self->ext_toggle) != enabled &&
-                (state == EXM_EXTENSION_STATE_ACTIVE || state == EXM_EXTENSION_STATE_ACTIVATING))
-                g_object_set (extension, "enabled", !enabled, NULL);
+            exm_extension_bind_toggle (extension, self->ext_toggle);
         }
     }
 }

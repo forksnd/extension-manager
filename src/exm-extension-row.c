@@ -24,12 +24,13 @@
 #include "exm-config.h"
 #include "exm-enums.h"
 #include "exm-types.h"
+#include "exm-extension-toggle.h"
 
 #include <glib/gi18n.h>
 
 struct _ExmExtensionRow
 {
-    AdwExpanderRow parent_instance;
+    AdwActionRow parent_instance;
 
     GSimpleActionGroup *action_group;
 
@@ -38,23 +39,15 @@ struct _ExmExtensionRow
 
     ExmManager *manager;
 
-    GtkButton *remove_btn;
     GtkButton *prefs_btn;
-    GtkButton *details_btn;
     GtkSwitch *ext_toggle;
-
-    AdwActionRow *description_row;
-    AdwActionRow *version_row;
-    AdwActionRow *session_modes_row;
-    GtkLabel *info_label;
-    AdwActionRow *error_row;
 
     GtkImage *update_icon;
     GtkImage *error_icon;
     GtkImage *out_of_date_icon;
 };
 
-G_DEFINE_FINAL_TYPE (ExmExtensionRow, exm_extension_row, ADW_TYPE_EXPANDER_ROW)
+G_DEFINE_FINAL_TYPE (ExmExtensionRow, exm_extension_row, ADW_TYPE_ACTION_ROW)
 
 enum {
     PROP_0,
@@ -134,17 +127,6 @@ exm_extension_row_set_property (GObject      *object,
     }
 }
 
-static gboolean
-transform_to_state (GBinding     *binding G_GNUC_UNUSED,
-                    const GValue *from_value,
-                    GValue       *to_value,
-                    gpointer      user_data G_GNUC_UNUSED)
-{
-    g_value_set_boolean (to_value, g_value_get_enum (from_value) == EXM_EXTENSION_STATE_ACTIVE);
-
-    return TRUE;
-}
-
 static void
 unbind_extension (ExmExtensionRow *self)
 {
@@ -156,70 +138,9 @@ unbind_extension (ExmExtensionRow *self)
 }
 
 static void
-add_session_modes (GPtrArray       *session_modes,
-                   ExmExtensionRow *self)
-{
-    if (!session_modes || session_modes->len == 0)
-        return;
-
-    GPtrArray *subtitles = g_ptr_array_new_with_free_func (g_free);
-    gboolean has_unlock_dialog = FALSE;
-    gboolean has_gdm = FALSE;
-
-    for (guint i = 0; i < session_modes->len; i++)
-    {
-        gchar *mode = g_ptr_array_index (session_modes, i);
-
-        if (g_strcmp0 (mode, "unlock-dialog") == 0)
-        {
-            g_ptr_array_add (subtitles, g_strdup (_("Unlock Dialog")));
-            has_unlock_dialog = TRUE;
-        }
-        else if (g_strcmp0 (mode, "gdm") == 0)
-        {
-            // Translators: GNOME Display Manager
-            g_ptr_array_add (subtitles, g_strdup (_("GDM")));
-            has_gdm = TRUE;
-        }
-    }
-
-    if (has_unlock_dialog && has_gdm)
-    {
-        // Translators: Label when an extension runs on both, login and lock screens
-        gtk_label_set_label (self->info_label, _("This extension will run while the screen is locked and no user is logged in"));
-    }
-    else if (has_unlock_dialog)
-    {
-        // Translators: Label when an extension runs on the lock screen
-        gtk_label_set_label (self->info_label, _("This extension will run while the screen is locked"));
-    }
-    else if (has_gdm)
-    {
-        // Translators: Label when an extension runs on the login screen
-        gtk_label_set_label (self->info_label, _("This extension will run while no user is logged in"));
-    }
-
-    if (subtitles->len > 0)
-    {
-        g_ptr_array_add (subtitles, NULL);
-        gchar *subtitle = g_strjoinv (" / ", (gchar **)subtitles->pdata);
-        adw_action_row_set_subtitle (self->session_modes_row, subtitle);
-        gtk_widget_set_visible (GTK_WIDGET (self->session_modes_row), TRUE);
-        g_free (subtitle);
-    }
-
-    g_ptr_array_free (subtitles, TRUE);
-}
-
-static void
 bind_extension (ExmExtensionRow *self,
                 ExmExtension    *extension)
 {
-    // TODO: This big block of property assignments is currently copy/pasted
-    // from ExmExtension. We can replace this with GtkExpression lookups
-    // once blueprint-compiler supports expressions.
-    // (See https://gitlab.gnome.org/jwestman/blueprint-compiler/-/issues/5)
-
     g_return_if_fail (EXM_IS_EXTENSION_ROW (self));
 
     // First, remove traces of the old extension
@@ -231,105 +152,59 @@ bind_extension (ExmExtensionRow *self,
     if (self->extension == NULL)
         return;
 
-    gchar *name, *uuid, *description, *version, *version_name, *error;
-    gboolean enabled, has_prefs, is_user;
-    ExmExtensionState state;
-    GPtrArray *session_modes;
+    gchar *uuid;
+    gboolean has_prefs;
     g_object_get (self->extension,
-                  "name", &name,
                   "uuid", &uuid,
-                  "description", &description,
-                  "state", &state,
-                  "enabled", &enabled,
-                  "version", &version,
-                  "version-name", &version_name,
-                  "error", &error,
                   "has-prefs", &has_prefs,
-                  "is-user", &is_user,
-                  "session-modes", &session_modes,
                   NULL);
 
     self->uuid = g_strdup (uuid);
 
-    g_object_set (self, "title", g_markup_escape_text (name, -1), NULL);
-
-    // Trim description label's leading and trailing whitespace
-    char *description_trimmed = g_strchomp (g_strstrip (description));
-    adw_action_row_set_subtitle (self->description_row, description_trimmed);
-    g_free (description_trimmed);
-
-    // Only show if error exists and is not empty
-    gboolean has_error = (error != NULL) && (strlen (error) != 0);
-    gtk_widget_set_visible (GTK_WIDGET (self->error_row), has_error);
-
-    gtk_widget_set_visible (GTK_WIDGET (self->error_icon), state == EXM_EXTENSION_STATE_ERROR);
-    gtk_widget_set_visible (GTK_WIDGET (self->out_of_date_icon), state == EXM_EXTENSION_STATE_OUT_OF_DATE);
-
-    gtk_widget_set_visible (GTK_WIDGET (self->version_row), version != NULL);
-    adw_action_row_set_subtitle (self->version_row, version_name ? version_name
-                                                                 : version);
-
-    gtk_actionable_set_action_target (GTK_ACTIONABLE (self->details_btn), "s", uuid);
-
-    add_session_modes (session_modes, self);
-
-    GAction *action;
-
-    action = g_action_map_lookup_action (G_ACTION_MAP (self->action_group), "open-prefs");
+    GAction *action = g_action_map_lookup_action (G_ACTION_MAP (self->action_group), "open-prefs");
     g_simple_action_set_enabled (G_SIMPLE_ACTION (action), has_prefs);
 
-    action = g_action_map_lookup_action (G_ACTION_MAP (self->action_group), "remove");
-    g_simple_action_set_enabled (G_SIMPLE_ACTION (action), is_user);
-
-    g_object_bind_property_full (self->extension,
-                                 "state",
-                                 self->ext_toggle,
-                                 "state",
-                                 G_BINDING_SYNC_CREATE,
-                                 transform_to_state,
-                                 NULL,
-                                 NULL,
-                                 NULL);
-
-    // Keep compatibility with GNOME Shell versions prior to 46
-    if (gtk_switch_get_state (self->ext_toggle) != enabled &&
-        (state == EXM_EXTENSION_STATE_ACTIVE || state == EXM_EXTENSION_STATE_ACTIVATING))
-        g_object_set (self->extension, "enabled", !enabled, NULL);
+    exm_extension_bind_toggle (self->extension, self->ext_toggle);
 }
 
 static gboolean
-on_state_changed (GtkSwitch        *toggle,
-                  gboolean          state,
-                  ExmExtensionRow  *self)
+on_state_changed (GtkSwitch       *toggle,
+                  gboolean         state,
+                  ExmExtensionRow *self)
 {
     g_return_val_if_fail (EXM_IS_EXTENSION_ROW (self), FALSE);
 
-    g_assert (self->ext_toggle == toggle);
+    if (!self->manager || !self->extension)
+        return FALSE;
 
-    gboolean enabled;
-
-    g_object_get (self->extension, "enabled", &enabled, NULL);
-
-    // Prevents changing extensions' state when global switch is toggled
-    if (state == enabled)
-        return TRUE;
-
-    // Keep compatibility with GNOME Shell versions prior to 46
-    if (gtk_switch_get_state (toggle) != enabled)
-        g_object_set (self->extension, "enabled", !enabled, NULL);
-
-    if (state)
-        exm_manager_enable_extension (self->manager, self->extension);
-    else
-        exm_manager_disable_extension (self->manager, self->extension);
-
-    return TRUE;
+    return exm_extension_apply_toggle (self->manager, self->extension, toggle, state);
 }
 
 void
 exm_search_row_focus_toggle (ExmExtensionRow *self)
 {
     gtk_widget_grab_focus (GTK_WIDGET (self->ext_toggle));
+}
+
+static void
+on_row_activated (ExmExtensionRow *self)
+{
+    if (self->uuid)
+        gtk_widget_activate_action (GTK_WIDGET (self), "win.show-detail", "s", self->uuid);
+}
+
+static gboolean
+on_state_is_error (ExmExtensionRow  *self G_GNUC_UNUSED,
+                   ExmExtensionState state)
+{
+    return state == EXM_EXTENSION_STATE_ERROR;
+}
+
+static gboolean
+on_state_is_out_of_date (ExmExtensionRow  *self G_GNUC_UNUSED,
+                         ExmExtensionState state)
+{
+    return state == EXM_EXTENSION_STATE_OUT_OF_DATE;
 }
 
 static void
@@ -361,21 +236,16 @@ exm_extension_row_class_init (ExmExtensionRowClass *klass)
 
     gtk_widget_class_set_template_from_resource (widget_class, g_strdup_printf ("%s/exm-extension-row.ui", RESOURCE_PATH));
 
-    gtk_widget_class_bind_template_child (widget_class, ExmExtensionRow, description_row);
-    gtk_widget_class_bind_template_child (widget_class, ExmExtensionRow, version_row);
-    gtk_widget_class_bind_template_child (widget_class, ExmExtensionRow, session_modes_row);
-    gtk_widget_class_bind_template_child (widget_class, ExmExtensionRow, info_label);
-    gtk_widget_class_bind_template_child (widget_class, ExmExtensionRow, error_row);
-
     gtk_widget_class_bind_template_child (widget_class, ExmExtensionRow, prefs_btn);
-    gtk_widget_class_bind_template_child (widget_class, ExmExtensionRow, remove_btn);
-    gtk_widget_class_bind_template_child (widget_class, ExmExtensionRow, details_btn);
     gtk_widget_class_bind_template_child (widget_class, ExmExtensionRow, ext_toggle);
     gtk_widget_class_bind_template_child (widget_class, ExmExtensionRow, update_icon);
     gtk_widget_class_bind_template_child (widget_class, ExmExtensionRow, error_icon);
     gtk_widget_class_bind_template_child (widget_class, ExmExtensionRow, out_of_date_icon);
 
     gtk_widget_class_bind_template_callback (widget_class, on_state_changed);
+    gtk_widget_class_bind_template_callback (widget_class, on_row_activated);
+    gtk_widget_class_bind_template_callback (widget_class, on_state_is_error);
+    gtk_widget_class_bind_template_callback (widget_class, on_state_is_out_of_date);
 }
 
 static void
@@ -391,24 +261,13 @@ open_prefs (GSimpleAction   *action G_GNUC_UNUSED,
 }
 
 static void
-uninstall (GSimpleAction   *action G_GNUC_UNUSED,
-           GVariant        *new_value G_GNUC_UNUSED,
-           ExmExtensionRow *self)
-{
-    g_return_if_fail (self->extension);
-
-    gtk_widget_activate_action (GTK_WIDGET (self),
-                                "ext.remove",
-                                "s", self->uuid);
-}
-
-static void
 exm_extension_row_init (ExmExtensionRow *self)
 {
     GSimpleAction *open_prefs_action;
-    GSimpleAction *remove_action;
 
     gtk_widget_init_template (GTK_WIDGET (self));
+
+    gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (self), TRUE);
 
     // Define Actions
     self->action_group = g_simple_action_group_new ();
@@ -416,11 +275,7 @@ exm_extension_row_init (ExmExtensionRow *self)
     open_prefs_action = g_simple_action_new ("open-prefs", NULL);
     g_signal_connect (open_prefs_action, "activate", G_CALLBACK (open_prefs), self);
 
-    remove_action = g_simple_action_new ("remove", NULL);
-    g_signal_connect (remove_action, "activate", G_CALLBACK (uninstall), self);
-
     g_action_map_add_action (G_ACTION_MAP (self->action_group), G_ACTION (open_prefs_action));
-    g_action_map_add_action (G_ACTION_MAP (self->action_group), G_ACTION (remove_action));
 
     gtk_widget_insert_action_group (GTK_WIDGET (self), "row", G_ACTION_GROUP (self->action_group));
 }
