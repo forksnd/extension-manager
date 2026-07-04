@@ -1,7 +1,7 @@
 /*
  * exm-window.c
  *
- * Copyright 2022-2025 Matthew Jakeman <mjakeman26@outlook.co.nz>
+ * Copyright 2022 Matthew Jakeman <mjakeman26@outlook.co.nz>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -57,6 +57,7 @@ struct _ExmWindow
     AdwToastOverlay      *toast_overlay;
     AdwAlertDialog       *remove_dialog;
     AdwAlertDialog       *unsupported_dialog;
+    AdwAlertDialog       *select_remove_dialog;
 };
 
 G_DEFINE_TYPE (ExmWindow, exm_window, ADW_TYPE_APPLICATION_WINDOW)
@@ -454,12 +455,97 @@ on_updates_available (ExmManager *manager G_GNUC_UNUSED,
     adw_view_stack_page_set_badge_number (self->installed_stack, (guint) n_updates);
 }
 
+static gchar *
+selection_mode_page_name (GObject  *object G_GNUC_UNUSED,
+                          gboolean  selection_mode)
+{
+    return g_strdup (selection_mode ? "selection" : "switcher");
+}
+
+static gchar *
+selection_title_text (GObject *object G_GNUC_UNUSED,
+                      guint    n_selected)
+{
+    if (n_selected == 0)
+        return g_strdup (_("Select Extensions"));
+
+    // Translators: "%u" = number of selected extensions; shown as the header bar title
+    return g_strdup_printf (ngettext ("%u Selected", "%u Selected", n_selected), n_selected);
+}
+
+static gboolean
+has_selection (GObject *object G_GNUC_UNUSED,
+               guint    n_selected)
+{
+    return n_selected > 0;
+}
+
+static void
+on_cancel_selection_clicked (GtkButton *btn G_GNUC_UNUSED,
+                             ExmWindow *self)
+{
+    g_object_set (self->installed_page, "selection-mode", FALSE, NULL);
+}
+
+typedef struct {
+    ExmWindow *window;
+} SelectRemoveData;
+
+static void
+on_uninstall_confirm_response (AdwAlertDialog  *dialog G_GNUC_UNUSED,
+                               GAsyncResult    *result,
+                               SelectRemoveData *data)
+{
+    const char *response = adw_alert_dialog_choose_finish (data->window->select_remove_dialog,
+                                                           result);
+    if (g_strcmp0 (response, "yes") == 0)
+    {
+        exm_installed_page_uninstall_selected (data->window->installed_page);
+        g_object_set (data->window->installed_page, "selection-mode", FALSE, NULL);
+    }
+    g_free (data);
+}
+
+static void
+on_uninstall_selected_clicked (GtkButton *btn G_GNUC_UNUSED,
+                               ExmWindow *self)
+{
+    guint n;
+    char *body;
+    SelectRemoveData *data;
+
+    g_object_get (self->installed_page, "n-selected", &n, NULL);
+
+    body = g_strdup_printf (
+        ngettext ("The extension's features and functionality will no longer "
+                  "be accessible. Are you sure you want to uninstall %u extension?",
+                  "Their features and functionality will no longer be "
+                  "accessible. Are you sure you want to uninstall %u extensions?", n), n);
+    adw_alert_dialog_set_body (self->select_remove_dialog, body);
+    g_free (body);
+
+    data = g_new0 (SelectRemoveData, 1);
+    data->window = self;
+
+    adw_alert_dialog_choose (self->select_remove_dialog, GTK_WIDGET (self), NULL,
+                             (GAsyncReadyCallback) on_uninstall_confirm_response, data);
+}
+
 static void
 on_visible_page_changed (AdwViewStack *view_stack,
                          GtkWidget    *widget G_GNUC_UNUSED,
                          ExmWindow    *self)
 {
     gboolean is_installed_page = EXM_IS_INSTALLED_PAGE (adw_view_stack_get_visible_child (view_stack));
+    gboolean selection_mode;
+
+    g_object_get (self->installed_page, "selection-mode", &selection_mode, NULL);
+
+    if (!is_installed_page && selection_mode)
+    {
+        g_object_set (self->installed_page, "selection-mode", FALSE, NULL);
+        selection_mode = FALSE;
+    }
 
     adw_view_stack_page_set_needs_attention (self->installed_stack,
                                              !is_installed_page &&
@@ -588,8 +674,14 @@ exm_window_class_init (ExmWindowClass *klass)
     gtk_widget_class_bind_template_child (widget_class, ExmWindow, toast_overlay);
     gtk_widget_class_bind_template_child (widget_class, ExmWindow, remove_dialog);
     gtk_widget_class_bind_template_child (widget_class, ExmWindow, unsupported_dialog);
+    gtk_widget_class_bind_template_child (widget_class, ExmWindow, select_remove_dialog);
 
     gtk_widget_class_bind_template_callback (widget_class, on_visible_page_changed);
+    gtk_widget_class_bind_template_callback (widget_class, on_cancel_selection_clicked);
+    gtk_widget_class_bind_template_callback (widget_class, on_uninstall_selected_clicked);
+    gtk_widget_class_bind_template_callback (widget_class, selection_mode_page_name);
+    gtk_widget_class_bind_template_callback (widget_class, selection_title_text);
+    gtk_widget_class_bind_template_callback (widget_class, has_selection);
 
     // TODO: Refactor ExmWindow into a separate ExmController and supply the
     // necessary actions/methods/etc in there. A reference to this new object can

@@ -1,7 +1,7 @@
 /*
  * exm-extension-row.h
  *
- * Copyright 2022-2025 Matthew Jakeman <mjakeman26@outlook.co.nz>
+ * Copyright 2022 Matthew Jakeman <mjakeman26@outlook.co.nz>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -36,5 +36,6 @@ ExmExtensionRow *exm_extension_row_new       (ExmExtension *extension,
                                               ExmManager   *manager);
 
 void             exm_search_row_focus_toggle (ExmExtensionRow *self);
+gboolean         exm_extension_row_is_selected (ExmExtensionRow *self);
 
 G_END_DECLS

@@ -1,7 +1,7 @@
 /*
  * exm-extension-row.c
  *
- * Copyright 2022-2025 Matthew Jakeman <mjakeman26@outlook.co.nz>
+ * Copyright 2022 Matthew Jakeman <mjakeman26@outlook.co.nz>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,12 +39,16 @@ struct _ExmExtensionRow
 
     ExmManager *manager;
 
+    GtkCheckButton *select_check;
     GtkButton *prefs_btn;
     GtkSwitch *ext_toggle;
+    GtkImage *nav_icon;
 
     GtkImage *update_icon;
     GtkImage *error_icon;
     GtkImage *out_of_date_icon;
+
+    gboolean selection_mode;
 };
 
 G_DEFINE_FINAL_TYPE (ExmExtensionRow, exm_extension_row, ADW_TYPE_ACTION_ROW)
@@ -53,6 +57,7 @@ enum {
     PROP_0,
     PROP_EXTENSION,
     PROP_MANAGER,
+    PROP_SELECTION_MODE,
     N_PROPS
 };
 
@@ -82,6 +87,8 @@ exm_extension_row_dispose (GObject *object)
 
     unbind_extension (self);
 
+    g_clear_object (&self->select_check);
+
     G_OBJECT_CLASS (exm_extension_row_parent_class)->dispose (object);
 }
 
@@ -101,9 +108,23 @@ exm_extension_row_get_property (GObject    *object,
     case PROP_MANAGER:
         g_value_set_object (value, self->manager);
         break;
+    case PROP_SELECTION_MODE:
+        g_value_set_boolean (value, self->selection_mode);
+        break;
     default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     }
+}
+
+static gboolean
+row_is_selectable (ExmExtensionRow *self)
+{
+    gboolean is_user = FALSE;
+
+    if (self->extension)
+        g_object_get (self->extension, "is-user", &is_user, NULL);
+
+    return is_user;
 }
 
 static void
@@ -121,6 +142,45 @@ exm_extension_row_set_property (GObject      *object,
         break;
     case PROP_MANAGER:
         self->manager = g_value_get_object (value);
+        break;
+    case PROP_SELECTION_MODE:
+        {
+            gboolean page_selection_mode = g_value_get_boolean (value);
+            gboolean is_selectable = row_is_selectable (self);
+            gboolean new_mode = page_selection_mode && is_selectable;
+            GtkWidget *prefix_box;
+
+            self->selection_mode = new_mode;
+
+            gtk_widget_set_visible (GTK_WIDGET (self), !page_selection_mode || is_selectable);
+
+            if (gtk_widget_get_parent (GTK_WIDGET (self->select_check)) == NULL)
+            {
+                if (new_mode)
+                    adw_action_row_add_prefix (ADW_ACTION_ROW (self),
+                                               GTK_WIDGET (self->select_check));
+            }
+            else
+            {
+                prefix_box = gtk_widget_get_parent (GTK_WIDGET (self->select_check));
+                if (!new_mode)
+                    gtk_check_button_set_active (self->select_check, FALSE);
+                gtk_widget_set_visible (GTK_WIDGET (self->select_check), new_mode);
+                gtk_widget_set_visible (prefix_box, new_mode);
+            }
+
+            if (self->prefs_btn)
+            {
+                gboolean show_prefs = FALSE;
+                if (!new_mode && self->extension)
+                    g_object_get (self->extension, "has-prefs", &show_prefs, NULL);
+                gtk_widget_set_visible (GTK_WIDGET (self->prefs_btn), show_prefs);
+            }
+            if (self->ext_toggle)
+                gtk_widget_set_visible (GTK_WIDGET (self->ext_toggle), !new_mode);
+            if (self->nav_icon)
+                gtk_widget_set_visible (GTK_WIDGET (self->nav_icon), !new_mode);
+        }
         break;
     default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -187,8 +247,23 @@ exm_search_row_focus_toggle (ExmExtensionRow *self)
 }
 
 static void
+on_select_toggled (GtkCheckButton  *check G_GNUC_UNUSED,
+                   ExmExtensionRow *self)
+{
+    if (!self->selection_mode)
+        return;
+    gtk_widget_activate_action (GTK_WIDGET (self), "page.selection-changed", NULL);
+}
+
+static void
 on_row_activated (ExmExtensionRow *self)
 {
+    if (self->selection_mode)
+    {
+        gtk_check_button_set_active (self->select_check,
+                                     !gtk_check_button_get_active (self->select_check));
+        return;
+    }
     if (self->uuid)
         gtk_widget_activate_action (GTK_WIDGET (self), "win.show-detail", "s", self->uuid);
 }
@@ -230,6 +305,13 @@ exm_extension_row_class_init (ExmExtensionRowClass *klass)
                                EXM_TYPE_MANAGER,
                                G_PARAM_READWRITE);
 
+    properties [PROP_SELECTION_MODE]
+        = g_param_spec_boolean ("selection-mode",
+                                "Selection Mode",
+                                "Whether the row is in multi-select mode",
+                                FALSE,
+                                G_PARAM_READWRITE);
+
     g_object_class_install_properties (object_class, N_PROPS, properties);
 
     GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
@@ -238,6 +320,7 @@ exm_extension_row_class_init (ExmExtensionRowClass *klass)
 
     gtk_widget_class_bind_template_child (widget_class, ExmExtensionRow, prefs_btn);
     gtk_widget_class_bind_template_child (widget_class, ExmExtensionRow, ext_toggle);
+    gtk_widget_class_bind_template_child (widget_class, ExmExtensionRow, nav_icon);
     gtk_widget_class_bind_template_child (widget_class, ExmExtensionRow, update_icon);
     gtk_widget_class_bind_template_child (widget_class, ExmExtensionRow, error_icon);
     gtk_widget_class_bind_template_child (widget_class, ExmExtensionRow, out_of_date_icon);
@@ -269,6 +352,13 @@ exm_extension_row_init (ExmExtensionRow *self)
 
     gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (self), TRUE);
 
+    self->select_check = GTK_CHECK_BUTTON (gtk_check_button_new ());
+    gtk_widget_set_valign (GTK_WIDGET (self->select_check), GTK_ALIGN_CENTER);
+    gtk_widget_add_css_class (GTK_WIDGET (self->select_check), "selection-mode");
+    g_object_ref_sink (self->select_check);
+    g_signal_connect (self->select_check, "toggled",
+                      G_CALLBACK (on_select_toggled), self);
+
     // Define Actions
     self->action_group = g_simple_action_group_new ();
 
@@ -278,4 +368,11 @@ exm_extension_row_init (ExmExtensionRow *self)
     g_action_map_add_action (G_ACTION_MAP (self->action_group), G_ACTION (open_prefs_action));
 
     gtk_widget_insert_action_group (GTK_WIDGET (self), "row", G_ACTION_GROUP (self->action_group));
+}
+
+gboolean
+exm_extension_row_is_selected (ExmExtensionRow *self)
+{
+    g_return_val_if_fail (EXM_IS_EXTENSION_ROW (self), FALSE);
+    return gtk_check_button_get_active (self->select_check);
 }

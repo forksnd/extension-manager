@@ -33,6 +33,18 @@ template $ExmInstalledPage: Gtk.Widget {
         Adw.PreferencesGroup user_prefs_group {
           notify::visible => $on_visible_stack_changed();
           title: _("User-Installed Extensions");
+
+          header-suffix: Gtk.ToggleButton select_btn {
+            styles [
+              "flat",
+            ]
+
+            valign: center;
+            icon-name: "check-round-outline-symbolic";
+            active: bind template.selection-mode bidirectional;
+            // Translators: Tooltip of the Select button in the user-installed extensions group
+            tooltip-text: _("Select Extensions");
+          };
         }
 
         Adw.PreferencesGroup system_prefs_group {
