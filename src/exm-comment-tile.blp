@@ -58,6 +58,7 @@ template $ExmCommentTile: Gtk.Widget {
         "dimmed",
       ]
 
+      label: bind $format_comment_date(template.comment as <$ExmComment>.date) as <string>;
       xalign: 0;
     }
   }
