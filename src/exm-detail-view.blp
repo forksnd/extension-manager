@@ -267,6 +267,8 @@ template $ExmDetailView: Adw.NavigationPage {
                       styles [
                         "numeric",
                       ]
+
+                      label: bind $format_downloads(template.data as <$ExmUnifiedData>.downloads) as <string>;
                     }
                   }
 
@@ -360,6 +362,8 @@ template $ExmDetailView: Adw.NavigationPage {
                     action-name: "detail.open-homepage";
                     activatable: true;
                     title: _("Homepage");
+                    subtitle: bind template.data as <$ExmUnifiedData>.homepage;
+                    visible: bind $has_homepage(template.data as <$ExmUnifiedData>.homepage) as <bool>;
 
                     [suffix]
                     Gtk.Image {
