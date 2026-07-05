@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the extension-manager package.
 # Vojtěch Perník <translations@pervoj.cz>, 2022.
 # vikdevelop https://github.com/vikdevelop
-# Fjuro <fjuro@users.noreply.hosted.weblate.org>, 2025.
+# Fjuro <fjuro@users.noreply.hosted.weblate.org>, 2025, 2026.
 # lorduskordus <lorduskordus@gmail.com>, 2025.
 # Fjuro <fjuro@alius.cz>, 2025.
 # Óscar Fernández Díaz <42654671+oscfdezdz@users.noreply.github.com>, 2025.
@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-05 15:52+0000\n"
-"PO-Revision-Date: 2026-03-15 21:09+0000\n"
-"Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
+"PO-Revision-Date: 2026-07-05 16:18+0000\n"
+"Last-Translator: Fjuro <fjuro@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/extension-manager/"
 "app/cs/>\n"
 "Language: cs\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 2026.7.1.dev0\n"
 
 #: data/com.mattjakeman.ExtensionManager.desktop.in.in:2
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:6
@@ -176,13 +176,11 @@ msgstr "Nejsou k dispozici žádné podrobnosti o rozšíření"
 #. Translators: Banner title shown when the extension has a runtime error
 #: src/exm-detail-view.blp:84
 msgid "This extension has an error"
-msgstr ""
+msgstr "Toto rozšíření má chybu"
 
 #: src/exm-detail-view.blp:85
-#, fuzzy
-#| msgid "_Details"
 msgid "_View Details"
-msgstr "_Podrobnosti"
+msgstr "_Zobrazit podrobnosti"
 
 #: src/exm-detail-view.blp:137
 msgid "Name"
@@ -190,10 +188,8 @@ msgstr "Název"
 
 #. Translators: Button tooltip to remove an installed extension
 #: src/exm-detail-view.blp:185
-#, fuzzy
-#| msgid "Use Extensions"
 msgid "Remove Extension"
-msgstr "Používat rozšíření"
+msgstr "Odstranit rozšíření"
 
 #. Translators: Button tooltip to open extension preferences
 #. Translators: Button's tooltip to open extension's preferences dialog
@@ -203,10 +199,8 @@ msgstr "Otevřít předvolby rozšíření"
 
 #. Translators: Switch tooltip to enable or disable the extension
 #: src/exm-detail-view.blp:205
-#, fuzzy
-#| msgid "Use Extensions"
 msgid "Toggle Extension"
-msgstr "Používat rozšíření"
+msgstr "Přepnout rozšíření"
 
 #: src/exm-detail-view.blp:229
 msgid "Enlarge Image"
@@ -337,26 +331,22 @@ msgstr ""
 "Nezapomeňte přidat následující informace:"
 
 #: src/exm-extension-error-dialog.blp:9
-#, fuzzy
-#| msgid "Extension Manager"
 msgid "Extension Error"
-msgstr "Správce rozšíření"
+msgstr "Chyba rozšíření"
 
 #. Translators: Button to report an extension error to its developer
 #: src/exm-extension-error-dialog.blp:77
-#, fuzzy
-#| msgid "_New Issue"
 msgid "_Report Issue"
-msgstr "_Nový problém"
+msgstr "_Nahlásit problém"
 
 #: src/exm-extension-error-dialog.c:54
 #, c-format
 msgid "“%s” Failed to Load"
-msgstr ""
+msgstr "Nepodařilo se načíst „%s“"
 
 #: src/exm-extension-error-dialog.c:55
 msgid "Extension Failed to Load"
-msgstr ""
+msgstr "Nepodařilo se načíst rozšíření"
 
 #. Translators: Button's tooltip to view an extension's error details
 #: src/exm-extension-row.blp:58
@@ -398,10 +388,8 @@ msgstr "Uživatelská rozšíření"
 
 #. Translators: Tooltip of the Select button in the user-installed extensions group
 #: src/exm-installed-page.blp:46 src/exm-window.c:506
-#, fuzzy
-#| msgid "Use Extensions"
 msgid "Select Extensions"
-msgstr "Používat rozšíření"
+msgstr "Vybrat rozšíření"
 
 #: src/exm-installed-page.blp:52 src/exm-upgrade-assistant.blp:139
 msgid "System Extensions"
@@ -582,37 +570,29 @@ msgstr ""
 "zkontrolujte, zda budou vaše rozšíření nadále k dispozici."
 
 #: src/exm-versions-dialog.blp:13
-#, fuzzy
-#| msgid "Version"
 msgid "Version History"
-msgstr "Verze"
+msgstr "Historie verzí"
 
 #: src/exm-versions-dialog.blp:25
-#, fuzzy
-#| msgid "Loading Details"
 msgid "Loading Versions"
-msgstr "Načítání podrobností"
+msgstr "Načítání verzí"
 
 #: src/exm-versions-dialog.blp:34
 msgid "No Version History"
-msgstr ""
+msgstr "Žádná historie verzí"
 
 #: src/exm-versions-dialog.blp:71
-#, fuzzy
-#| msgid "_Load More Results"
 msgid "_Load More Versions"
-msgstr "_Načíst více výsledků"
+msgstr "_Načíst další verze"
 
 #. Translators: Tooltip on the installed-version indicator in the versions dialog
 #: src/exm-versions-dialog.c:239
-#, fuzzy
-#| msgid "User-Installed Extensions"
 msgid "Installed Version"
-msgstr "Uživatelská rozšíření"
+msgstr "Nainstalovaná verze"
 
 #: src/exm-window.blp:61
 msgid "Cancel"
-msgstr ""
+msgstr "Zrušit"
 
 #. Translators: Tooltip of the search icon in the header bar
 #: src/exm-window.blp:69
@@ -638,22 +618,20 @@ msgid "_Browse"
 msgstr "_Procházet"
 
 #: src/exm-window.blp:129
-#, fuzzy
-#| msgid "Install…"
 msgid "Uninstall…"
-msgstr "Nainstalovat…"
+msgstr "Odinstalovat…"
 
 #: src/exm-window.blp:164
 msgid "GNOME Shell Unavailable"
-msgstr ""
+msgstr "GNOME Shell není dostupný"
 
 #: src/exm-window.blp:165
 msgid "Log in to a GNOME session to manage extensions"
-msgstr ""
+msgstr "Pro správu rozšíření se přihlaste do relace GNOME"
 
 #: src/exm-window.blp:174
 msgid "_Discover GNOME"
-msgstr ""
+msgstr "_Objevte GNOME"
 
 #. Translators: the character preceded by "_" should not be the same
 #. as others in the same menu
@@ -694,8 +672,6 @@ msgid "_Yes"
 msgstr "_Ano"
 
 #: src/exm-window.blp:215
-#, fuzzy
-#| msgid "Uninstall Extension?"
 msgid "Uninstall Extensions?"
 msgstr "Odinstalovat rozšíření?"
 
@@ -728,15 +704,12 @@ msgstr "_Podrobnosti"
 #, c-format
 msgid "%u Selected"
 msgid_plural "%u Selected"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Vybrána %u"
+msgstr[1] "Vybrány %u"
+msgstr[2] "Vybráno %u"
 
 #: src/exm-window.c:556
-#, fuzzy, c-format
-#| msgid ""
-#| "The extension's features and functionality will no longer be accessible. "
-#| "Are you sure you want to uninstall?"
+#, c-format
 msgid ""
 "The extension's features and functionality will no longer be accessible. Are "
 "you sure you want to uninstall %u extension?"
@@ -744,14 +717,14 @@ msgid_plural ""
 "Their features and functionality will no longer be accessible. Are you sure "
 "you want to uninstall %u extensions?"
 msgstr[0] ""
-"Funkce tohoto rozšíření už nebudou nadále k dispozici. Opravdu ho chcete "
-"odinstalovat?"
+"Funkce tohoto rozšíření již nebudou nadále k dispozici. Opravdu chcete "
+"odinstalovat %u rozšíření?"
 msgstr[1] ""
-"Funkce tohoto rozšíření už nebudou nadále k dispozici. Opravdu ho chcete "
-"odinstalovat?"
+"Jejich funkce již nebudou nadále k dispozici. Opravdu chcete odinstalovat %u "
+"rozšíření?"
 msgstr[2] ""
-"Funkce tohoto rozšíření už nebudou nadále k dispozici. Opravdu ho chcete "
-"odinstalovat?"
+"Jejich funkce již nebudou nadále k dispozici. Opravdu chcete odinstalovat %u "
+"rozšíření?"
 
 #: src/web/exm-request-handler.c:133
 msgid ""
