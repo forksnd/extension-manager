@@ -36,6 +36,8 @@ struct _ExmRequestHandlerClass
 {
     GObjectClass parent_class;
     ResponseHandler handle_response;
+
+    guint cache_ttl_seconds;
 };
 
 ExmRequestHandler *exm_request_handler_new (void);

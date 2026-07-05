@@ -33,10 +33,34 @@ template $ExmWindow: Adw.ApplicationWindow {
               Adw.HeaderBar header_bar {
                 show-back-button: false;
 
-                title-widget: Adw.ViewSwitcher title {
-                  policy: wide;
-                  stack: view_stack;
+                title-widget: Gtk.Stack {
+                  transition-type: crossfade;
+                  visible-child-name: bind $selection_mode_page_name(installed_page.selection-mode) as <string>;
+
+                  Gtk.StackPage {
+                    name: "switcher";
+
+                    child: Adw.ViewSwitcher title {
+                      policy: wide;
+                      stack: view_stack;
+                    };
+                  }
+
+                  Gtk.StackPage {
+                    name: "selection";
+
+                    child: Adw.WindowTitle {
+                      title: bind $selection_title_text(installed_page.n-selected) as <string>;
+                    };
+                  }
                 };
+
+                [start]
+                Gtk.Button cancel_selection_btn {
+                  visible: bind installed_page.selection-mode;
+                  label: _("Cancel");
+                  clicked => $on_cancel_selection_clicked();
+                }
 
                 [start]
                 Gtk.ToggleButton search_button {
@@ -93,6 +117,22 @@ template $ExmWindow: Adw.ApplicationWindow {
               };
 
               [bottom]
+              Gtk.ActionBar {
+                revealed: bind installed_page.selection-mode;
+
+                [end]
+                Gtk.Button {
+                  styles [
+                    "destructive-action",
+                  ]
+
+                  label: _("Uninstall…");
+                  sensitive: bind $has_selection(installed_page.n-selected) as <bool>;
+                  clicked => $on_uninstall_selected_clicked();
+                }
+              }
+
+              [bottom]
               Adw.ViewSwitcherBar switcher_bar {
                 stack: view_stack;
               }
@@ -131,21 +171,10 @@ template $ExmWindow: Adw.ApplicationWindow {
               ]
 
               halign: center;
+              label: _("_Discover GNOME");
+              use-underline: true;
               action-name: "win.discover-gnome";
               tooltip-text: "https://www.gnome.org";
-
-              child: Gtk.Box {
-                spacing: 6;
-
-                Gtk.Label {
-                  label: _("_Discover GNOME");
-                  use-underline: true;
-                }
-
-                Gtk.Image {
-                  icon-name: "external-link-symbolic";
-                }
-              };
             };
           };
         };
@@ -173,6 +202,17 @@ Adw.AlertDialog remove_dialog {
   body: _(
     "The extension's features and functionality will no longer be accessible. Are you sure you want to uninstall?"
   );
+  default-response: "no";
+  close-response: "no";
+
+  responses [
+    no: _("_No"),
+    yes: _("_Yes") destructive,
+  ]
+}
+
+Adw.AlertDialog select_remove_dialog {
+  heading: _("Uninstall Extensions?");
   default-response: "no";
   close-response: "no";
 

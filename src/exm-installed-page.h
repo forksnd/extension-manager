@@ -1,7 +1,7 @@
 /*
  * exm-installed-page.h
  *
- * Copyright 2022-2025 Matthew Jakeman <mjakeman26@outlook.co.nz>
+ * Copyright 2022 Matthew Jakeman <mjakeman26@outlook.co.nz>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,6 +22,7 @@
 #pragma once
 
 #include <gtk/gtk.h>
+#include <gio/gio.h>
 
 G_BEGIN_DECLS
 
@@ -29,6 +30,7 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (ExmInstalledPage, exm_installed_page, EXM, INSTALLED_PAGE, GtkWidget)
 
-ExmInstalledPage *exm_installed_page_new       (void);
+ExmInstalledPage *exm_installed_page_new                 (void);
+void              exm_installed_page_uninstall_selected  (ExmInstalledPage *self);
 
 G_END_DECLS

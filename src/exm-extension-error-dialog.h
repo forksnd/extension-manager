@@ -1,7 +1,7 @@
 /*
- * exm-extension-row.h
+ * exm-extension-error-dialog.h
  *
- * Copyright 2022 Matthew Jakeman <mjakeman26@outlook.co.nz>
+ * Copyright 2022-2025 Matthew Jakeman <mjakeman26@outlook.co.nz>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,19 +23,14 @@
 
 #include <adwaita.h>
 
-#include "local/exm-extension.h"
-#include "local/exm-manager.h"
-
 G_BEGIN_DECLS
 
-#define EXM_TYPE_EXTENSION_ROW (exm_extension_row_get_type())
+#define EXM_TYPE_EXTENSION_ERROR_DIALOG (exm_extension_error_dialog_get_type())
 
-G_DECLARE_FINAL_TYPE (ExmExtensionRow, exm_extension_row, EXM, EXTENSION_ROW, AdwActionRow)
+G_DECLARE_FINAL_TYPE (ExmExtensionErrorDialog, exm_extension_error_dialog, EXM, EXTENSION_ERROR_DIALOG, AdwDialog)
 
-ExmExtensionRow *exm_extension_row_new       (ExmExtension *extension,
-                                              ExmManager   *manager);
-
-void             exm_search_row_focus_toggle (ExmExtensionRow *self);
-gboolean         exm_extension_row_is_selected (ExmExtensionRow *self);
+ExmExtensionErrorDialog *exm_extension_error_dialog_new (const char *extension_name,
+                                                          const char *error_text,
+                                                          const char *homepage);
 
 G_END_DECLS

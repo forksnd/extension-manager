@@ -1,67 +1,13 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $ExmExtensionRow: Adw.ExpanderRow {
-  title-lines: 2;
-  subtitle-lines: 2;
+template $ExmExtensionRow: Adw.ActionRow {
+  title-lines: 1;
+  subtitle-lines: 1;
+  use-markup: false;
+  title: bind template.extension as <$ExmExtension>.name;
   subtitle: bind template.extension as <$ExmExtension>.uuid;
-
-  [suffix]
-  Gtk.Switch ext_toggle {
-    valign: center;
-    active: bind template.extension as <$ExmExtension>.enabled;
-    sensitive: bind template.extension as <$ExmExtension>.can-change;
-    state-set => $on_state_changed();
-  }
-
-  [suffix]
-  Gtk.Button prefs_btn {
-    styles [
-      "flat",
-    ]
-
-    icon-name: "settings-symbolic";
-    valign: center;
-    halign: center;
-    action-name: 'row.open-prefs';
-    // Translators: Button's tooltip to open extension's preferences dialog
-    tooltip-text: _("Open extension preferences");
-    visible: bind template.extension as <$ExmExtension>.has-prefs;
-  }
-
-  [suffix]
-  Gtk.Image error_icon {
-    styles [
-      "error",
-    ]
-
-    icon-name: "dialog-error-symbolic";
-    valign: center;
-    halign: center;
-    focusable: true;
-    margin-start: 9;
-    margin-end: 9;
-    visible: false;
-    // Translators: Icon's tooltip when an extension has an error
-    tooltip-text: _("An error occurred while loading this extension");
-  }
-
-  [suffix]
-  Gtk.Image out_of_date_icon {
-    styles [
-      "error",
-    ]
-
-    icon-name: "clock-alt-symbolic";
-    valign: center;
-    halign: center;
-    focusable: true;
-    margin-start: 9;
-    margin-end: 9;
-    visible: false;
-    // Translators: Icon's tooltip when an extension is incompatible
-    tooltip-text: _("This extension is incompatible with your current version of GNOME");
-  }
+  activated => $on_row_activated();
 
   [suffix]
   Gtk.Image update_icon {
@@ -80,97 +26,65 @@ template $ExmExtensionRow: Adw.ExpanderRow {
     tooltip-text: _("A newer version of this extension is available");
   }
 
-  Adw.ActionRow description_row {
+  [suffix]
+  Gtk.Image out_of_date_icon {
     styles [
-      "multiline",
-      "property",
+      "error",
     ]
 
-    title: _("Description");
-    use-markup: false;
+    icon-name: "clock-alt-symbolic";
+    valign: center;
+    halign: center;
+    focusable: true;
+    margin-start: 9;
+    margin-end: 9;
+    visible: bind $on_state_is_out_of_date(template.extension as <$ExmExtension>.state) as <bool>;
+    // Translators: Icon's tooltip when an extension is incompatible
+    tooltip-text: _("This extension is incompatible with your current version of GNOME");
   }
 
-  Adw.ActionRow version_row {
+  [suffix]
+  Gtk.Button error_btn {
     styles [
-      "property",
+      "flat",
+      "error",
     ]
 
-    title: _("Version");
+    icon-name: "dialog-error-symbolic";
+    valign: center;
+    action-name: "row.show-error";
+    visible: bind $on_state_is_error(template.extension as <$ExmExtension>.state) as <bool>;
+    // Translators: Button's tooltip to view an extension's error details
+    tooltip-text: _("An error occurred while loading this extension");
   }
 
-  Adw.ActionRow session_modes_row {
+  [suffix]
+  Gtk.Button prefs_btn {
     styles [
-      "property",
+      "flat",
     ]
 
-    title: _("Session Modes");
-    visible: false;
-
-    [suffix]
-    Gtk.MenuButton {
-      has-frame: false;
-      icon-name: "info-symbolic";
-      valign: center;
-
-      popover: Gtk.Popover info_popover {
-        child: Adw.Clamp {
-          maximum-size: 300;
-          tightening-threshold: 300;
-
-          child: Gtk.Label info_label {
-            selectable: bind info_popover.visible inverted;
-            wrap: true;
-          };
-        };
-      };
-    }
+    icon-name: "settings-symbolic";
+    valign: center;
+    halign: center;
+    action-name: "row.open-prefs";
+    // Translators: Button's tooltip to open extension's preferences dialog
+    tooltip-text: _("Open extension preferences");
+    visible: bind template.extension as <$ExmExtension>.has-prefs;
   }
 
-  Adw.ActionRow error_row {
-    styles [
-      "monospace",
-      "multiline",
-      "property",
-    ]
-
-    title: _("Error");
-    subtitle: bind template.extension as <$ExmExtension>.error;
-    subtitle-selectable: true;
+  [suffix]
+  Gtk.Switch ext_toggle {
+    valign: center;
+    active: bind template.extension as <$ExmExtension>.enabled;
+    sensitive: bind template.extension as <$ExmExtension>.can-change;
+    state-set => $on_state_changed();
   }
 
-  Gtk.ListBoxRow {
-    activatable: false;
-    focusable: false;
-    height-request: 46;
-
-    Gtk.Box {
-      halign: end;
-      spacing: 6;
-      margin-start: 4;
-      margin-end: 4;
-
-      Gtk.Button details_btn {
-        styles [
-          "flat",
-        ]
-
-        label: _("See Details");
-        can-shrink: true;
-        valign: center;
-        action-name: 'win.show-detail';
-      }
-
-      Gtk.Button remove_btn {
-        styles [
-          "destructive-action",
-        ]
-
-        label: _("Remove…");
-        can-shrink: true;
-        valign: center;
-        action-name: 'row.remove';
-        visible: bind template.extension as <$ExmExtension>.is-user;
-      }
-    }
+  [suffix]
+  Gtk.Image nav_icon {
+    icon-name: "go-next-symbolic";
+    valign: center;
+    halign: center;
   }
 }

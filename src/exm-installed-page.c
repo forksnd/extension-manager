@@ -1,7 +1,7 @@
 /*
  * exm-installed-page.c
  *
- * Copyright 2022-2025 Matthew Jakeman <mjakeman26@outlook.co.nz>
+ * Copyright 2022 Matthew Jakeman <mjakeman26@outlook.co.nz>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,6 +26,7 @@
 #include "exm-extension-row.h"
 #include "exm-types.h"
 #include "exm-window.h"
+#include "local/exm-extension.h"
 #include "local/exm-manager.h"
 
 #include <glib/gi18n.h>
@@ -44,11 +45,15 @@ struct _ExmInstalledPage
     AdwPreferencesGroup *system_prefs_group;
     AdwPreferencesGroup *search_prefs_group;
     GtkFilterListModel *search_list_model;
+    GListModel *system_filtered_model;
 
     gboolean sort_enabled_first;
     gboolean search_mode_enabled;
     const char *search_query;
     guint signal_id;
+
+    gboolean selection_mode;
+    guint n_selected;
 };
 
 G_DEFINE_FINAL_TYPE (ExmInstalledPage, exm_installed_page, GTK_TYPE_WIDGET)
@@ -59,6 +64,8 @@ enum {
     PROP_SORT_ENABLED_FIRST,
     PROP_SEARCH_MODE_ENABLED,
     PROP_SEARCH_QUERY,
+    PROP_SELECTION_MODE,
+    PROP_N_SELECTED,
     N_PROPS
 };
 
@@ -69,6 +76,12 @@ invalidate_model_bindings (ExmInstalledPage *self);
 
 static void
 switch_page (ExmInstalledPage *self);
+
+static void
+propagate_selection_mode (ExmInstalledPage *self);
+
+static void
+update_system_group_visibility (ExmInstalledPage *self);
 
 ExmInstalledPage *
 exm_installed_page_new (void)
@@ -84,6 +97,8 @@ exm_installed_page_finalize (GObject *object)
 
     child = gtk_widget_get_first_child (GTK_WIDGET (self));
     gtk_widget_unparent (child);
+
+    g_clear_object (&self->system_filtered_model);
 
     G_OBJECT_CLASS (exm_installed_page_parent_class)->finalize (object);
 }
@@ -103,6 +118,12 @@ exm_installed_page_get_property (GObject    *object,
         break;
     case PROP_SORT_ENABLED_FIRST:
         g_value_set_boolean (value, self->sort_enabled_first);
+        break;
+    case PROP_SELECTION_MODE:
+        g_value_set_boolean (value, self->selection_mode);
+        break;
+    case PROP_N_SELECTED:
+        g_value_set_uint (value, self->n_selected);
         break;
     default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -133,6 +154,17 @@ exm_installed_page_set_property (GObject      *object,
     case PROP_SEARCH_QUERY:
         self->search_query = g_value_dup_string (value);
         break;
+    case PROP_SELECTION_MODE:
+        self->selection_mode = g_value_get_boolean (value);
+        if (!self->selection_mode && self->n_selected != 0)
+        {
+            self->n_selected = 0;
+            g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_N_SELECTED]);
+        }
+        propagate_selection_mode (self);
+        update_system_group_visibility (self);
+        g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_SELECTION_MODE]);
+        break;
     default:
         G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     }
@@ -147,6 +179,7 @@ widget_factory (ExmExtension     *extension,
     g_return_val_if_fail (EXM_IS_INSTALLED_PAGE (self), GTK_WIDGET (NULL));
 
     row = exm_extension_row_new (extension, self->manager);
+    g_object_set (row, "selection-mode", self->selection_mode, NULL);
 
     return GTK_WIDGET (row);
 }
@@ -214,6 +247,19 @@ on_visible_stack_changed (GObject    *object G_GNUC_UNUSED,
 }
 
 static void
+update_system_group_visibility (ExmInstalledPage *self)
+{
+    guint n_items;
+
+    if (!self->system_filtered_model)
+        return;
+
+    n_items = g_list_model_get_n_items (self->system_filtered_model);
+    gtk_widget_set_visible (GTK_WIDGET (self->system_prefs_group),
+                            n_items > 0 && !self->selection_mode);
+}
+
+static void
 bind_list_box (GListModel       *model,
                ExmInstalledPage *self)
 {
@@ -273,9 +319,10 @@ bind_list_box (GListModel       *model,
     gtk_bool_filter_set_invert (is_user_filter, TRUE);
     filtered_model = gtk_filter_list_model_new (G_LIST_MODEL (sorted_model), GTK_FILTER (is_user_filter));
 
-    g_object_bind_property (filtered_model, "n-items",
-                            self->system_prefs_group, "visible",
-                            G_BINDING_SYNC_CREATE);
+    g_set_object (&self->system_filtered_model, G_LIST_MODEL (filtered_model));
+    g_signal_connect_swapped (self->system_filtered_model, "notify::n-items",
+                              G_CALLBACK (update_system_group_visibility), self);
+    update_system_group_visibility (self);
 
     adw_preferences_group_bind_model (self->system_prefs_group, G_LIST_MODEL (filtered_model),
                                       (GtkListBoxCreateWidgetFunc) widget_factory,
@@ -429,6 +476,118 @@ invalidate_model_bindings (ExmInstalledPage *self)
 }
 
 static void
+foreach_extension_row (AdwPreferencesGroup   *group,
+                       void                 (*fn)(ExmExtensionRow *, gpointer),
+                       gpointer               user_data)
+{
+    guint i = 0;
+    ExmExtensionRow *row;
+    while ((row = EXM_EXTENSION_ROW (adw_preferences_group_get_row (group, i++))) != NULL)
+        fn (row, user_data);
+}
+
+static void
+set_row_selection_mode (ExmExtensionRow *row,
+                        gpointer         user_data)
+{
+    gboolean mode = GPOINTER_TO_INT (user_data);
+    g_object_set (row, "selection-mode", mode, NULL);
+}
+
+static void
+propagate_selection_mode (ExmInstalledPage *self)
+{
+    gpointer mode = GINT_TO_POINTER (self->selection_mode);
+    foreach_extension_row (self->user_prefs_group,   set_row_selection_mode, mode);
+    foreach_extension_row (self->search_prefs_group, set_row_selection_mode, mode);
+}
+
+static guint
+count_selected_rows (ExmInstalledPage *self)
+{
+    guint count = 0;
+    guint i;
+    ExmExtensionRow *row;
+    AdwPreferencesGroup *groups[] = {
+        self->user_prefs_group,
+        self->search_prefs_group,
+    };
+
+    for (guint g = 0; g < G_N_ELEMENTS (groups); g++)
+    {
+        i = 0;
+        while ((row = EXM_EXTENSION_ROW (adw_preferences_group_get_row (groups[g], i++))) != NULL)
+            if (exm_extension_row_is_selected (row))
+                count++;
+    }
+    return count;
+}
+
+static void
+on_page_selection_changed (GSimpleAction    *action G_GNUC_UNUSED,
+                           GVariant         *param G_GNUC_UNUSED,
+                           ExmInstalledPage *self)
+{
+    guint count = count_selected_rows (self);
+    if (count != self->n_selected)
+    {
+        self->n_selected = count;
+        g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_N_SELECTED]);
+    }
+}
+
+void
+exm_installed_page_uninstall_selected (ExmInstalledPage *self)
+{
+    GHashTable *uuids_to_remove;
+    GHashTableIter iter;
+    gpointer key;
+    AdwPreferencesGroup *groups[] = {
+        self->user_prefs_group,
+        self->search_prefs_group,
+    };
+
+    g_return_if_fail (EXM_IS_INSTALLED_PAGE (self));
+
+    uuids_to_remove = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+
+    for (guint g = 0; g < G_N_ELEMENTS (groups); g++)
+    {
+        guint i = 0;
+        ExmExtensionRow *row;
+        while ((row = EXM_EXTENSION_ROW (adw_preferences_group_get_row (groups[g], i++))) != NULL)
+        {
+            ExmExtension *ext;
+            gchar *uuid;
+
+            if (!exm_extension_row_is_selected (row))
+                continue;
+
+            ext = NULL;
+            g_object_get (row, "extension", &ext, NULL);
+            if (!ext) continue;
+
+            uuid = NULL;
+            g_object_get (ext, "uuid", &uuid, NULL);
+            g_object_unref (ext);
+
+            if (uuid)
+                g_hash_table_add (uuids_to_remove, uuid);
+        }
+    }
+
+    g_hash_table_iter_init (&iter, uuids_to_remove);
+    while (g_hash_table_iter_next (&iter, &key, NULL))
+    {
+        ExmExtension *ext = exm_manager_get_by_uuid (self->manager, (const char *) key);
+        if (ext)
+            exm_manager_remove_extension (self->manager, ext);
+    }
+
+    g_hash_table_destroy (uuids_to_remove);
+}
+
+static void
 on_bind_manager (ExmInstalledPage *self)
 {
     // Bind (or rebind) models
@@ -494,6 +653,20 @@ exm_installed_page_class_init (ExmInstalledPageClass *klass)
                              NULL,
                              G_PARAM_READWRITE);
 
+    properties [PROP_SELECTION_MODE]
+        = g_param_spec_boolean ("selection-mode",
+                                "Selection Mode",
+                                "Whether bulk-selection mode is active",
+                                FALSE,
+                                G_PARAM_READWRITE|G_PARAM_EXPLICIT_NOTIFY);
+
+    properties [PROP_N_SELECTED]
+        = g_param_spec_uint ("n-selected",
+                             "N Selected",
+                             "Number of extensions currently selected",
+                             0, G_MAXUINT, 0,
+                             G_PARAM_READABLE|G_PARAM_EXPLICIT_NOTIFY);
+
     g_object_class_install_properties (object_class, N_PROPS, properties);
 
     GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
@@ -517,6 +690,8 @@ static void
 exm_installed_page_init (ExmInstalledPage *self)
 {
     GSettings *settings;
+    GSimpleActionGroup *action_group;
+    GSimpleAction *action;
 
     gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -527,4 +702,13 @@ exm_installed_page_init (ExmInstalledPage *self)
                      G_SETTINGS_BIND_GET);
 
     g_object_unref (settings);
+
+    action_group = g_simple_action_group_new ();
+    action = g_simple_action_new ("selection-changed", NULL);
+    g_signal_connect (action, "activate",
+                      G_CALLBACK (on_page_selection_changed), self);
+    g_action_map_add_action (G_ACTION_MAP (action_group), G_ACTION (action));
+    gtk_widget_insert_action_group (GTK_WIDGET (self), "page",
+                                    G_ACTION_GROUP (action_group));
+    g_object_unref (action_group);
 }

@@ -1,5 +1,5 @@
 /*
- * exm-extension-row.h
+ * exm-extension-toggle.h
  *
  * Copyright 2022 Matthew Jakeman <mjakeman26@outlook.co.nz>
  *
@@ -21,21 +21,19 @@
 
 #pragma once
 
-#include <adwaita.h>
+#include <gtk/gtk.h>
 
 #include "local/exm-extension.h"
 #include "local/exm-manager.h"
 
 G_BEGIN_DECLS
 
-#define EXM_TYPE_EXTENSION_ROW (exm_extension_row_get_type())
+void     exm_extension_bind_toggle  (ExmExtension *extension,
+                                     GtkSwitch    *toggle);
 
-G_DECLARE_FINAL_TYPE (ExmExtensionRow, exm_extension_row, EXM, EXTENSION_ROW, AdwActionRow)
-
-ExmExtensionRow *exm_extension_row_new       (ExmExtension *extension,
-                                              ExmManager   *manager);
-
-void             exm_search_row_focus_toggle (ExmExtensionRow *self);
-gboolean         exm_extension_row_is_selected (ExmExtensionRow *self);
+gboolean exm_extension_apply_toggle (ExmManager   *manager,
+                                     ExmExtension *extension,
+                                     GtkSwitch    *toggle,
+                                     gboolean      state);
 
 G_END_DECLS

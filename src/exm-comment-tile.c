@@ -34,7 +34,6 @@ struct _ExmCommentTile
     GtkLabel *author;
     GtkLabel *author_badge;
     ExmRating *rating;
-    GtkLabel *date;
 };
 
 G_DEFINE_FINAL_TYPE (ExmCommentTile, exm_comment_tile, GTK_TYPE_WIDGET)
@@ -103,30 +102,23 @@ exm_comment_tile_set_property (GObject      *object,
     }
 }
 
-static void
-exm_comment_tile_constructed (GObject *object)
+static gchar *
+format_comment_date (GObject     *object G_GNUC_UNUSED,
+                     const gchar *date)
 {
-    ExmCommentTile *self = EXM_COMMENT_TILE (object);
-
-    g_return_if_fail (EXM_IS_COMMENT (self->comment));
-
     GDateTime *datetime;
+    gchar *result;
 
-    gchar *date;
-    g_object_get (self->comment,
-                  "date", &date,
-                  NULL);
+    if (date == NULL)
+        return g_strdup ("");
 
     datetime = g_date_time_new_from_iso8601 (date, g_time_zone_new_utc ());
-    g_free (date);
+    if (datetime == NULL)
+        return g_strdup ("");
 
-    if (datetime != NULL)
-    {
-      gtk_label_set_label (self->date, g_date_time_format (datetime, "%x"));
-      g_date_time_unref (datetime);
-    }
-
-    G_OBJECT_CLASS (exm_comment_tile_parent_class)->constructed (object);
+    result = g_date_time_format (datetime, "%x");
+    g_date_time_unref (datetime);
+    return result;
 }
 
 static void
@@ -137,7 +129,6 @@ exm_comment_tile_class_init (ExmCommentTileClass *klass)
     object_class->finalize = exm_comment_tile_finalize;
     object_class->get_property = exm_comment_tile_get_property;
     object_class->set_property = exm_comment_tile_set_property;
-    object_class->constructed = exm_comment_tile_constructed;
 
     properties [PROP_COMMENT] =
         g_param_spec_object ("comment",
@@ -155,7 +146,8 @@ exm_comment_tile_class_init (ExmCommentTileClass *klass)
     gtk_widget_class_bind_template_child (widget_class, ExmCommentTile, author);
     gtk_widget_class_bind_template_child (widget_class, ExmCommentTile, author_badge);
     gtk_widget_class_bind_template_child (widget_class, ExmCommentTile, rating);
-    gtk_widget_class_bind_template_child (widget_class, ExmCommentTile, date);
+
+    gtk_widget_class_bind_template_callback (widget_class, format_comment_date);
 
     gtk_widget_class_set_css_name (widget_class, "comment-tile");
     gtk_widget_class_set_layout_manager_type (widget_class, GTK_TYPE_BIN_LAYOUT);

@@ -20,6 +20,7 @@ exm_sources = [
   # Installed Page
   'exm-installed-page.c',
   'exm-extension-row.c',
+  'exm-extension-toggle.c',
 
   # Browse Page
   'exm-browse-page.c',
@@ -27,8 +28,10 @@ exm_sources = [
 
   # Misc
   'exm-error-dialog.c',
+  'exm-extension-error-dialog.c',
   'exm-upgrade-assistant.c',
   'exm-upgrade-result.c',
+  'exm-unified-data.c',
   'exm-install-button.c',
   'exm-backtrace.c',
   'exm-utils.c'
@@ -70,6 +73,7 @@ blueprints = custom_target('blueprints',
     'exm-comment-tile.blp',
     'exm-detail-view.blp',
     'exm-error-dialog.blp',
+    'exm-extension-error-dialog.blp',
     'exm-extension-row.blp',
     'exm-installed-page.blp',
     'exm-install-button.blp',

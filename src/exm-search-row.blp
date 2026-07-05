@@ -2,7 +2,7 @@ using Gtk 4.0;
 
 template $ExmSearchRow: Gtk.ListBoxRow {
   styles [
-    "search-row"
+    "search-row",
   ]
 
   activatable: true;
@@ -10,14 +10,14 @@ template $ExmSearchRow: Gtk.ListBoxRow {
 
   child: Gtk.Box {
     styles [
-      "header"
+      "header",
     ]
 
     spacing: 12;
 
     Gtk.Box {
       styles [
-        "title"
+        "title",
       ]
 
       hexpand: true;
@@ -25,7 +25,7 @@ template $ExmSearchRow: Gtk.ListBoxRow {
 
       Gtk.Label title {
         styles [
-          "title"
+          "title",
         ]
 
         ellipsize: end;
@@ -38,7 +38,7 @@ template $ExmSearchRow: Gtk.ListBoxRow {
 
       Gtk.Label subtitle {
         styles [
-          "subtitle"
+          "subtitle",
         ]
 
         ellipsize: end;
@@ -50,10 +50,11 @@ template $ExmSearchRow: Gtk.ListBoxRow {
 
       Gtk.Label description_label {
         styles [
-          "dimmed"
+          "dimmed",
         ]
 
         ellipsize: end;
+        label: bind $first_line(template.search-result as <$ExmSearchResult>.description) as <string>;
         lines: 2;
         margin-top: 6;
         wrap: true;

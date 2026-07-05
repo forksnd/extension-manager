@@ -42,7 +42,6 @@ struct _ExmSearchRow
 
     GCancellable *cancellable;
 
-    GtkLabel *description_label;
     ExmInstallButton *install_btn;
     guint signal_id;
     gboolean install_attempt;
@@ -286,6 +285,21 @@ install_remote (GtkButton    *button G_GNUC_UNUSED,
     }
 }
 
+static gchar *
+first_line (GObject     *object G_GNUC_UNUSED,
+            const gchar *description)
+{
+    const gchar *newline_pos;
+
+    if (description == NULL)
+        return g_strdup ("");
+
+    newline_pos = g_strstr_len (description, -1, "\n");
+    return newline_pos != NULL
+        ? g_strndup (description, newline_pos - description)
+        : g_strdup (description);
+}
+
 static void
 exm_search_row_constructed (GObject *object)
 {
@@ -294,10 +308,9 @@ exm_search_row_constructed (GObject *object)
     ExmInstallButtonState install_state;
     gboolean is_installed;
 
-    gchar *uuid, *description;
+    gchar *uuid;
     g_object_get (self->search_result,
                   "uuid", &uuid,
-                  "description", &description,
                   NULL);
 
     gchar *shell_version;
@@ -316,19 +329,6 @@ exm_search_row_constructed (GObject *object)
         : EXM_INSTALL_BUTTON_STATE_DEFAULT;
 
     g_object_set (self->install_btn, "state", install_state, NULL);
-
-    const gchar *newline_pos = g_strstr_len (description, -1, "\n");
-
-    if (newline_pos != NULL)
-    {
-        gchar *truncated_text = g_strndup (description, newline_pos - description);
-        gtk_label_set_label (self->description_label, truncated_text);
-        g_free (truncated_text);
-    }
-    else
-    {
-        gtk_label_set_label (self->description_label, description);
-    }
 
     G_OBJECT_CLASS (exm_search_row_parent_class)->constructed (object);
 }
@@ -370,10 +370,10 @@ exm_search_row_class_init (ExmSearchRowClass *klass)
 
     gtk_widget_class_set_template_from_resource (widget_class, g_strdup_printf ("%s/exm-search-row.ui", RESOURCE_PATH));
 
-    gtk_widget_class_bind_template_child (widget_class, ExmSearchRow, description_label);
     gtk_widget_class_bind_template_child (widget_class, ExmSearchRow, install_btn);
 
     gtk_widget_class_bind_template_callback (widget_class, install_remote);
+    gtk_widget_class_bind_template_callback (widget_class, first_line);
 }
 
 static void
