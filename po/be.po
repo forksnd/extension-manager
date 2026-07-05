@@ -10,18 +10,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-28 09:43+0000\n"
+"POT-Creation-Date: 2026-07-05 15:52+0000\n"
 "PO-Revision-Date: 2025-11-23 07:51+0000\n"
 "Last-Translator: Sasha Glazko <lenify@tutanota.com>\n"
-"Language-Team: Belarusian <https://hosted.weblate.org/projects/"
-"extension-manager/app/be/>\n"
+"Language-Team: Belarusian <https://hosted.weblate.org/projects/extension-"
+"manager/app/be/>\n"
 "Language: be\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural="
-"(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? "
-"1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Weblate 5.15-dev\n"
 
 #: data/com.mattjakeman.ExtensionManager.desktop.in.in:2
@@ -30,13 +29,13 @@ msgstr ""
 msgid "Extension Manager"
 msgstr "Менеджэр пашырэнняў"
 
-#: data/com.mattjakeman.ExtensionManager.desktop.in.in:11
+#: data/com.mattjakeman.ExtensionManager.desktop.in.in:12
 msgid "Manage GNOME Shell Extensions"
 msgstr "Кіраванне пашырэннямі абалонкі GNOME"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #. Make sure to leave the original strings and add your translations afterwards, so that users can search both in English and your language.
-#: data/com.mattjakeman.ExtensionManager.desktop.in.in:14
+#: data/com.mattjakeman.ExtensionManager.desktop.in.in:15
 msgid "extension;manager;shell;"
 msgstr "пашырэнне; менеджэр; абалонка;"
 
@@ -72,12 +71,12 @@ msgstr "Паглядзець усе дэталі вашых пашырэнняў
 msgid "Check your extensions compatibility with the next version of GNOME"
 msgstr "Праверыць сумяшчальнасць вашых пашырэнняў з наступнай версіяй GNOME"
 
-#: src/exm-application.c:175
+#: src/exm-application.c:234
 msgid "Browse, install, and manage GNOME Shell Extensions."
 msgstr "Праглядайце, усталёўвайце і кіруйце пашырэннямі абалонкі GNOME."
 
 #. Translators: Use 'Name email@domain.com' or 'Name https://website.example' (without single quotes). Do not delete existing names, write yours on a new line.
-#: src/exm-application.c:178
+#: src/exm-application.c:237
 msgid "translator-credits"
 msgstr "Anton Veratsenikau"
 
@@ -89,10 +88,10 @@ msgstr "Пошук пашырэнняў"
 msgid ""
 "Enter a keyword to search 'extensions.gnome.org' for GNOME Shell Extensions"
 msgstr ""
-"Увядзіце ключавое слова для пошуку пашырэнняў абалонкі GNOME на 'extensions."
-"gnome.org'"
+"Увядзіце ключавое слова для пошуку пашырэнняў абалонкі GNOME на "
+"'extensions.gnome.org'"
 
-#: src/exm-browse-page.blp:45 src/exm-browse-page.c:362
+#: src/exm-browse-page.blp:45 src/exm-browse-page.c:397
 msgid "Descending Order"
 msgstr "Па зніжэнні"
 
@@ -126,7 +125,7 @@ msgstr "Сартаваць вынікі пошуку"
 msgid "_Load More Results"
 msgstr "_Загрузіць больш вынікаў"
 
-#: src/exm-browse-page.blp:145 src/exm-installed-page.blp:58
+#: src/exm-browse-page.blp:145 src/exm-installed-page.blp:70
 msgid "No Results Found"
 msgstr "Нічога не знойдзена"
 
@@ -135,92 +134,159 @@ msgid "Try a different search"
 msgstr "Паспрабуйце іншы пошук"
 
 #: src/exm-browse-page.blp:186 src/exm-comment-dialog.blp:34
-#: src/exm-detail-view.blp:50 src/exm-detail-view.blp:292
+#: src/exm-detail-view.blp:60 src/exm-detail-view.blp:470
 #: src/exm-upgrade-assistant.blp:99
 msgid "Connection Error"
 msgstr "Памылка злучэння"
 
-#: src/exm-browse-page.c:357
+#: src/exm-browse-page.c:392
 msgid "Ascending Order"
 msgstr "Па ўзрастанні"
 
-#: src/exm-comment-dialog.blp:13 src/exm-detail-view.blp:249
+#: src/exm-comment-dialog.blp:13 src/exm-detail-view.blp:427
 msgid "Reviews and Comments"
 msgstr "Водгукі і каментары"
 
-#: src/exm-comment-dialog.blp:25 src/exm-detail-view.c:622
+#: src/exm-comment-dialog.blp:25 src/exm-detail-view.c:920
 #: src/exm-install-button.c:147
 msgid "Loading"
 msgstr "Загрузка"
 
-#: src/exm-comment-tile.blp:30 src/exm-detail-view.blp:128
+#: src/exm-comment-tile.blp:30 src/exm-detail-view.blp:152
 msgid "Author"
 msgstr "Аўтар"
 
-#: src/exm-detail-view.blp:41
+#: src/exm-detail-view.blp:51
 msgid "Loading Details"
 msgstr "Загрузка дэталяў"
 
-#: src/exm-detail-view.blp:60 src/exm-window.c:353
+#: src/exm-detail-view.blp:70 src/exm-window.c:411
 msgid "An Error Occurred"
 msgstr "Адбылася памылка"
 
-#: src/exm-detail-view.blp:61
+#: src/exm-detail-view.blp:71
 msgid "No extension details available"
 msgstr "Няма звестак аб пашырэнні"
 
-#: src/exm-detail-view.blp:114
+#. Translators: Banner title shown when the extension has a runtime error
+#: src/exm-detail-view.blp:84
+msgid "This extension has an error"
+msgstr ""
+
+#: src/exm-detail-view.blp:85
+#, fuzzy
+#| msgid "_Details"
+msgid "_View Details"
+msgstr "_Падрабязнасці"
+
+#: src/exm-detail-view.blp:137
 msgid "Name"
 msgstr "Па назве"
 
-#: src/exm-detail-view.blp:155
+#. Translators: Button tooltip to remove an installed extension
+#: src/exm-detail-view.blp:185
+#, fuzzy
+#| msgid "Use Extensions"
+msgid "Remove Extension"
+msgstr "Выкарыстоўваць пашырэнні"
+
+#. Translators: Button tooltip to open extension preferences
+#. Translators: Button's tooltip to open extension's preferences dialog
+#: src/exm-detail-view.blp:197 src/exm-extension-row.blp:72
+msgid "Open extension preferences"
+msgstr "Адкрыйце налады пашырэння"
+
+#. Translators: Switch tooltip to enable or disable the extension
+#: src/exm-detail-view.blp:205
+#, fuzzy
+#| msgid "Use Extensions"
+msgid "Toggle Extension"
+msgstr "Выкарыстоўваць пашырэнні"
+
+#: src/exm-detail-view.blp:229
 msgid "Enlarge Image"
 msgstr "Павялічыць малюнак"
 
-#: src/exm-detail-view.blp:173 src/exm-extension-row.blp:89
+#: src/exm-detail-view.blp:247
 msgid "Description"
 msgstr "Апісанне"
 
-#: src/exm-detail-view.blp:196
+#: src/exm-detail-view.blp:275
+msgctxt "Number of downloads"
+msgid "Downloads"
+msgstr "Загрузак"
+
+#: src/exm-detail-view.blp:295
+msgid "Version"
+msgstr "Версія"
+
+#. Translators: Icon's tooltip when an extension update is available
+#: src/exm-detail-view.blp:312 src/exm-extension-row.blp:26
+msgid "A newer version of this extension is available"
+msgstr "Даступная больш новая версія гэтага пашырэння"
+
+#. Translators: Icon's tooltip when an extension is incompatible
+#: src/exm-detail-view.blp:326 src/exm-extension-row.blp:43
+#: src/exm-install-button.c:142
+msgid "This extension is incompatible with your current version of GNOME"
+msgstr "Гэта пашырэнне несумяшчальна з вашай бягучай версіяй GNOME"
+
+#: src/exm-detail-view.blp:348
+msgid "Session Modes"
+msgstr "Рэжымы сесіі"
+
+#: src/exm-detail-view.blp:357
 msgid "Links"
 msgstr "Спасылкі"
 
-#: src/exm-detail-view.blp:204
+#: src/exm-detail-view.blp:367
 msgid "Homepage"
 msgstr "Хатняя старонка"
 
-#: src/exm-detail-view.blp:220
+#: src/exm-detail-view.blp:383 src/exm-detail-view.blp:398
 msgid "Donate"
 msgstr "Ахвяраваць"
 
-#: src/exm-detail-view.blp:229
+#: src/exm-detail-view.blp:409
 msgid "View on Extensions"
 msgstr "Праглядзець гэтае пашырэнне на сайце Extensions"
 
-#: src/exm-detail-view.blp:272
+#: src/exm-detail-view.blp:450
 msgid "Reviews and comments are disabled for this extension"
 msgstr "Водгукі і каментарыі для гэтага пашырэння адключаны"
 
-#: src/exm-detail-view.blp:315
+#: src/exm-detail-view.blp:493
 msgid "There are no reviews or comments"
 msgstr "Няма водгукаў і каментароў"
 
-#: src/exm-detail-view.blp:344
+#: src/exm-detail-view.blp:522
 msgid "_Show All"
 msgstr "_Паказаць усе"
 
-#: src/exm-detail-view.c:408 src/exm-detail-view.c:472
+#: src/exm-detail-view.c:463
+msgid "Unlock Dialog"
+msgstr "Акно разблакіроўкі"
+
+#: src/exm-detail-view.c:464
+msgid "GDM"
+msgstr "GDM"
+
+#: src/exm-detail-view.c:558 src/exm-detail-view.c:663
 msgid "Unsupported"
 msgstr "Не падтрымліваецца"
 
+#: src/exm-detail-view.c:711
+msgid "Unknown"
+msgstr "Невядома"
+
 #. Translators: '%s' = extension name
-#: src/exm-detail-view.c:535
+#: src/exm-detail-view.c:801
 #, c-format
 msgid "%s Icon"
 msgstr "Значок %s"
 
 #. Translators: '%s' = extension name
-#: src/exm-detail-view.c:568
+#: src/exm-detail-view.c:830
 #, c-format
 msgid "%s Screenshot"
 msgstr "Скрыншот %s"
@@ -233,7 +299,7 @@ msgstr "Справаздача пра памылку"
 msgid "An unexpected error occurred in Extension Manager"
 msgstr "Адбылася нечаканая памылка ў Менеджэры пашырэнняў"
 
-#: src/exm-error-dialog.blp:36
+#: src/exm-error-dialog.blp:36 src/exm-extension-error-dialog.blp:36
 msgid "Copy to Clipboard"
 msgstr "Капіяваць у буфер абмену"
 
@@ -242,7 +308,8 @@ msgid "_New Issue"
 msgstr "_Новая праблема"
 
 #. Success indicator
-#: src/exm-error-dialog.c:126 src/exm-upgrade-assistant.c:367
+#: src/exm-error-dialog.c:126 src/exm-extension-error-dialog.c:82
+#: src/exm-upgrade-assistant.c:367
 msgid "Copied"
 msgstr "Скапіравана"
 
@@ -263,78 +330,32 @@ msgstr ""
 "weight=\"bold\"> спачатку звяжыцеся з дыстрыб'ютарам пакета (%s)</span>, "
 "перш чым падаць заяву. Абавязкова прыкладзіце наступную інфармацыю:"
 
-#. Translators: Button's tooltip to open extension's preferences dialog
-#: src/exm-extension-row.blp:28
-msgid "Open extension preferences"
-msgstr "Адкрыйце налады пашырэння"
+#: src/exm-extension-error-dialog.blp:9
+#, fuzzy
+#| msgid "Extension Manager"
+msgid "Extension Error"
+msgstr "Менеджэр пашырэнняў"
 
-#. Translators: Icon's tooltip when an extension has an error
-#: src/exm-extension-row.blp:46
+#. Translators: Button to report an extension error to its developer
+#: src/exm-extension-error-dialog.blp:77
+#, fuzzy
+#| msgid "_New Issue"
+msgid "_Report Issue"
+msgstr "_Новая праблема"
+
+#: src/exm-extension-error-dialog.c:54
+#, c-format
+msgid "“%s” Failed to Load"
+msgstr ""
+
+#: src/exm-extension-error-dialog.c:55
+msgid "Extension Failed to Load"
+msgstr ""
+
+#. Translators: Button's tooltip to view an extension's error details
+#: src/exm-extension-row.blp:58
 msgid "An error occurred while loading this extension"
 msgstr "Падчас загрузкі гэтага пашырэння адбылася памылка"
-
-#. Translators: Icon's tooltip when an extension is incompatible
-#: src/exm-extension-row.blp:63 src/exm-install-button.c:142
-msgid "This extension is incompatible with your current version of GNOME"
-msgstr "Гэта пашырэнне несумяшчальна з вашай бягучай версіяй GNOME"
-
-#. Translators: Icon's tooltip when an extension update is available
-#: src/exm-extension-row.blp:80
-msgid "A newer version of this extension is available"
-msgstr "Даступная больш новая версія гэтага пашырэння"
-
-#: src/exm-extension-row.blp:98 src/exm-info-bar.blp:54
-msgid "Version"
-msgstr "Версія"
-
-#: src/exm-extension-row.blp:106 src/exm-info-bar.blp:79
-msgid "Session Modes"
-msgstr "Рэжымы сесіі"
-
-#: src/exm-extension-row.blp:136
-msgid "Error"
-msgstr "Памылка"
-
-#: src/exm-extension-row.blp:157
-msgid "See Details"
-msgstr "Паглядзець падрабязнасці"
-
-#: src/exm-extension-row.blp:168
-msgid "Remove…"
-msgstr "Выдаліць…"
-
-#: src/exm-extension-row.c:175 src/exm-info-bar.c:129
-msgid "Unlock Dialog"
-msgstr "Акно разблакіроўкі"
-
-#. Translators: GNOME Display Manager
-#: src/exm-extension-row.c:181
-msgid "GDM"
-msgstr "GDM"
-
-#. Translators: Label when an extension runs on both, login and lock screens
-#: src/exm-extension-row.c:189
-msgid ""
-"This extension will run while the screen is locked and no user is logged in"
-msgstr ""
-"Гэта пашырэнне будзе працаваць нават пры заблакіраваным экране і без ўваходу "
-"карыстальніка"
-
-#. Translators: Label when an extension runs on the lock screen
-#: src/exm-extension-row.c:194
-msgid "This extension will run while the screen is locked"
-msgstr "Гэта пашырэнне будзе працаваць, нават калі экран заблакіраваны"
-
-#. Translators: Label when an extension runs on the login screen
-#: src/exm-extension-row.c:199
-msgid "This extension will run while no user is logged in"
-msgstr ""
-"Гэта пашырэнне будзе працаваць, нават калі карыстальнік не ўвайшоў у сістэму"
-
-#: src/exm-info-bar.blp:30
-msgctxt "Number of downloads"
-msgid "Downloads"
-msgstr "Загрузак"
 
 #: src/exm-install-button.c:125
 msgid "Install…"
@@ -369,28 +390,35 @@ msgstr "Пашырэнні могуць выклікаць праблемы з �
 msgid "User-Installed Extensions"
 msgstr "Пашырэнні, устаноўленыя карыстальнікам"
 
-#: src/exm-installed-page.blp:40 src/exm-upgrade-assistant.blp:139
+#. Translators: Tooltip of the Select button in the user-installed extensions group
+#: src/exm-installed-page.blp:46 src/exm-window.c:506
+#, fuzzy
+#| msgid "Use Extensions"
+msgid "Select Extensions"
+msgstr "Выкарыстоўваць пашырэнні"
+
+#: src/exm-installed-page.blp:52 src/exm-upgrade-assistant.blp:139
 msgid "System Extensions"
 msgstr "Сістэмныя пашырэнні"
 
-#: src/exm-installed-page.blp:59
+#: src/exm-installed-page.blp:71
 msgid "Try a different search or search online"
 msgstr "Паспрабуйце іншы пошук або пошук у інтэрнэце"
 
-#: src/exm-installed-page.blp:66 src/exm-installed-page.blp:87
+#: src/exm-installed-page.blp:78 src/exm-installed-page.blp:99
 msgid "_Search Online"
 msgstr "_Пошук у Інтэрнэце"
 
-#: src/exm-installed-page.blp:79 src/exm-upgrade-assistant.c:496
+#: src/exm-installed-page.blp:91 src/exm-upgrade-assistant.c:496
 msgid "No Extensions Installed"
 msgstr "Няма ўсталяваных пашырэнняў"
 
-#: src/exm-installed-page.blp:80
+#: src/exm-installed-page.blp:92
 msgid "Search online to install extensions"
 msgstr "Скарыстайцеся пошукам, каб усталяваць пашырэнні"
 
 #. Translators: '%d' = number of extensions that will be updated
-#: src/exm-installed-page.c:315
+#: src/exm-installed-page.c:362
 #, c-format
 msgid "%d extension will be updated on next login"
 msgid_plural "%d extensions will be updated on next login"
@@ -548,52 +576,103 @@ msgstr ""
 "Вы зараз выкарыстоўваеце <b>GNOME %s</b>. Выберыце версію GNOME ніжэй і "
 "праверце, ці застануцца даступнымі вашы пашырэнні."
 
+#: src/exm-versions-dialog.blp:13
+#, fuzzy
+#| msgid "Version"
+msgid "Version History"
+msgstr "Версія"
+
+#: src/exm-versions-dialog.blp:25
+#, fuzzy
+#| msgid "Loading Details"
+msgid "Loading Versions"
+msgstr "Загрузка дэталяў"
+
+#: src/exm-versions-dialog.blp:34
+msgid "No Version History"
+msgstr ""
+
+#: src/exm-versions-dialog.blp:71
+#, fuzzy
+#| msgid "_Load More Results"
+msgid "_Load More Versions"
+msgstr "_Загрузіць больш вынікаў"
+
+#. Translators: Tooltip on the installed-version indicator in the versions dialog
+#: src/exm-versions-dialog.c:239
+#, fuzzy
+#| msgid "User-Installed Extensions"
+msgid "Installed Version"
+msgstr "Пашырэнні, устаноўленыя карыстальнікам"
+
+#: src/exm-window.blp:61
+msgid "Cancel"
+msgstr ""
+
 #. Translators: Tooltip of the search icon in the header bar
-#: src/exm-window.blp:39
+#: src/exm-window.blp:69
 msgid "Search Installed Extensions"
 msgstr "Пошук сярод усталяваных пашырэнняў"
 
-#: src/exm-window.blp:48
+#: src/exm-window.blp:78
 msgid "Main Menu"
 msgstr "Галоўнае меню"
 
-#: src/exm-window.blp:58
+#: src/exm-window.blp:88
 msgid "Search for installed extensions"
 msgstr "Пошук усталяваных пашырэнняў"
 
-#: src/exm-window.blp:69
+#: src/exm-window.blp:99
 msgctxt "Navigation"
 msgid "_Installed"
 msgstr "_Устаноўленыя"
 
-#: src/exm-window.blp:81
+#: src/exm-window.blp:111
 msgctxt "Navigation"
 msgid "_Browse"
 msgstr "_Пошук"
 
+#: src/exm-window.blp:129
+#, fuzzy
+#| msgid "Install…"
+msgid "Uninstall…"
+msgstr "Усталяваць…"
+
+#: src/exm-window.blp:164
+msgid "GNOME Shell Unavailable"
+msgstr ""
+
+#: src/exm-window.blp:165
+msgid "Log in to a GNOME session to manage extensions"
+msgstr ""
+
+#: src/exm-window.blp:174
+msgid "_Discover GNOME"
+msgstr ""
+
 #. Translators: the character preceded by "_" should not be the same
 #. as others in the same menu
-#: src/exm-window.blp:110
+#: src/exm-window.blp:190
 msgid "Sort _Enabled First"
 msgstr "Сартаваць _уключаныя пашырэнні"
 
-#: src/exm-window.blp:114
+#: src/exm-window.blp:194
 msgid "_Upgrade Assistant"
 msgstr "_Памочнік па абнаўленні"
 
-#: src/exm-window.blp:115
+#: src/exm-window.blp:195
 msgid "_Keyboard Shortcuts"
 msgstr "_Спалучэнні клавіш"
 
-#: src/exm-window.blp:116
+#: src/exm-window.blp:196
 msgid "_About Extension Manager"
 msgstr "_Пра Менеджэр пашырэнняў"
 
-#: src/exm-window.blp:121
+#: src/exm-window.blp:201
 msgid "Uninstall Extension?"
 msgstr "Выдаліць пашырэнне?"
 
-#: src/exm-window.blp:122
+#: src/exm-window.blp:203
 msgid ""
 "The extension's features and functionality will no longer be accessible. Are "
 "you sure you want to uninstall?"
@@ -601,19 +680,25 @@ msgstr ""
 "Функцыі і магчымасці пашырэння больш не будуць даступныя. Вы ўпэўненыя, што "
 "хочаце выдаліць пашырэнне?"
 
-#: src/exm-window.blp:127
+#: src/exm-window.blp:209 src/exm-window.blp:220
 msgid "_No"
 msgstr "_Не"
 
-#: src/exm-window.blp:128
+#: src/exm-window.blp:210 src/exm-window.blp:221
 msgid "_Yes"
 msgstr "_Так"
 
-#: src/exm-window.blp:133
+#: src/exm-window.blp:215
+#, fuzzy
+#| msgid "Uninstall Extension?"
+msgid "Uninstall Extensions?"
+msgstr "Выдаліць пашырэнне?"
+
+#: src/exm-window.blp:226
 msgid "Unsupported Extension"
 msgstr "Пашырэнне не падтрымліваецца"
 
-#: src/exm-window.blp:134
+#: src/exm-window.blp:227
 msgid ""
 "This extension does not support your GNOME Shell version. It may cause "
 "errors if installed."
@@ -621,19 +706,49 @@ msgstr ""
 "Гэта пашырэнне не падтрымлівае вашу версію абалонкі GNOME. Пры ўсталёўцы "
 "гэта можа выклікаць памылкі."
 
-#: src/exm-window.blp:140
+#: src/exm-window.blp:233
 msgid "_Install Anyway"
 msgstr "_У любым выпадку ўсталяваць"
 
-#: src/exm-window.blp:141
+#: src/exm-window.blp:234
 msgid "_Go Back"
 msgstr "_Павярнуцца назад"
 
-#: src/exm-window.c:354
+#: src/exm-window.c:412
 msgid "_Details"
 msgstr "_Падрабязнасці"
 
-#: src/web/exm-request-handler.c:99
+#. Translators: "%u" = number of selected extensions; shown as the header bar title
+#: src/exm-window.c:509
+#, c-format
+msgid "%u Selected"
+msgid_plural "%u Selected"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: src/exm-window.c:556
+#, fuzzy, c-format
+#| msgid ""
+#| "The extension's features and functionality will no longer be accessible. "
+#| "Are you sure you want to uninstall?"
+msgid ""
+"The extension's features and functionality will no longer be accessible. Are "
+"you sure you want to uninstall %u extension?"
+msgid_plural ""
+"Their features and functionality will no longer be accessible. Are you sure "
+"you want to uninstall %u extensions?"
+msgstr[0] ""
+"Функцыі і магчымасці пашырэння больш не будуць даступныя. Вы ўпэўненыя, што "
+"хочаце выдаліць пашырэнне?"
+msgstr[1] ""
+"Функцыі і магчымасці пашырэння больш не будуць даступныя. Вы ўпэўненыя, што "
+"хочаце выдаліць пашырэнне?"
+msgstr[2] ""
+"Функцыі і магчымасці пашырэння больш не будуць даступныя. Вы ўпэўненыя, што "
+"хочаце выдаліць пашырэнне?"
+
+#: src/web/exm-request-handler.c:133
 msgid ""
 "Check <a href='https://status.gnome.org/'>GNOME infrastructure status</a> "
 "and try again later"
@@ -641,9 +756,33 @@ msgstr ""
 "Праверце <a href='https://status.gnome.org/'>стан інфраструктуры GNOME</a> і "
 "паўтарыце спробу пазней"
 
-#: src/web/exm-request-handler.c:100
+#: src/web/exm-request-handler.c:134
 msgid "Check your network status and try again"
 msgstr "Праверце стан сеткі і паўтарыце спробу"
+
+#~ msgid "Error"
+#~ msgstr "Памылка"
+
+#~ msgid "See Details"
+#~ msgstr "Паглядзець падрабязнасці"
+
+#~ msgid "Remove…"
+#~ msgstr "Выдаліць…"
+
+#~ msgid ""
+#~ "This extension will run while the screen is locked and no user is logged "
+#~ "in"
+#~ msgstr ""
+#~ "Гэта пашырэнне будзе працаваць нават пры заблакіраваным экране і без "
+#~ "ўваходу карыстальніка"
+
+#~ msgid "This extension will run while the screen is locked"
+#~ msgstr "Гэта пашырэнне будзе працаваць, нават калі экран заблакіраваны"
+
+#~ msgid "This extension will run while no user is logged in"
+#~ msgstr ""
+#~ "Гэта пашырэнне будзе працаваць, нават калі карыстальнік не ўвайшоў у "
+#~ "сістэму"
 
 #~ msgctxt "shortcut window"
 #~ msgid "General"
@@ -710,9 +849,6 @@ msgstr "Праверце стан сеткі і паўтарыце спробу"
 
 #~ msgid "Supported"
 #~ msgstr "Падтрымліваецца"
-
-#~ msgid "Unknown"
-#~ msgstr "Невядома"
 
 #~ msgid "A utility for managing GNOME Shell Extensions"
 #~ msgstr "Утыліта для кіравання пашырэннямі абалонкі GNOME"
