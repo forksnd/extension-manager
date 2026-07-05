@@ -6,6 +6,7 @@
     <file>exm-comment-tile.ui</file>
     <file>exm-detail-view.ui</file>
     <file>exm-error-dialog.ui</file>
+    <file>exm-extension-error-dialog.ui</file>
     <file>exm-extension-row.ui</file>
     <file alias="shortcuts-dialog.ui">exm-shortcuts-dialog.ui</file>
     <file>exm-installed-page.ui</file>

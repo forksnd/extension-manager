@@ -25,6 +25,7 @@
 #include "exm-comment-tile.h"
 #include "exm-config.h"
 #include "exm-enums.h"
+#include "exm-extension-error-dialog.h"
 #include "exm-extension-toggle.h"
 #include "exm-install-button.h"
 #include "exm-screenshot.h"
@@ -85,7 +86,8 @@ struct _ExmDetailView
     GtkLabel *version_label;
     AdwActionRow *session_modes_row;
     GtkLabel *session_modes_label;
-    AdwActionRow *error_row;
+    AdwBanner *error_banner;
+    gchar *error_text;
     AdwPreferencesGroup *links_group;
     GtkWidget *comments_section;
     ExmVersionsDialog *ext_versions_dialog;
@@ -137,6 +139,7 @@ exm_detail_view_dispose (GObject *object)
     g_clear_object (&self->data);
     g_clear_object (&self->action_group);
     g_clear_pointer (&self->uuid, g_free);
+    g_clear_pointer (&self->error_text, g_free);
 
     G_OBJECT_CLASS (exm_detail_view_parent_class)->dispose (object);
 }
@@ -913,7 +916,7 @@ exm_detail_view_load_for_uuid (ExmDetailView *self,
 
     gtk_widget_set_visible (GTK_WIDGET (self->update_icon), FALSE);
     gtk_widget_set_visible (GTK_WIDGET (self->out_of_date_icon), FALSE);
-    gtk_widget_set_visible (GTK_WIDGET (self->error_row), FALSE);
+    adw_banner_set_revealed (self->error_banner, FALSE);
     gtk_label_set_label (self->version_label, _("Loading"));
     update_session_modes_row (self, NULL);
 
@@ -989,6 +992,36 @@ show_versions (GtkWidget  *widget,
     toplevel = GTK_WIDGET (gtk_widget_get_root (GTK_WIDGET (self)));
 
     adw_dialog_present (ADW_DIALOG (g_object_ref (self->ext_versions_dialog)), toplevel);
+}
+
+static void
+show_error (GtkWidget  *widget,
+            const char *action_name G_GNUC_UNUSED,
+            GVariant   *parameter G_GNUC_UNUSED)
+{
+    ExmDetailView *self;
+    GtkWidget *toplevel;
+    ExmExtensionErrorDialog *dialog;
+    const char *name = NULL;
+    char *homepage = NULL;
+
+    self = EXM_DETAIL_VIEW (widget);
+
+    if (!self->error_text)
+        return;
+
+    toplevel = GTK_WIDGET (gtk_widget_get_root (GTK_WIDGET (self)));
+
+    if (self->data)
+    {
+        name = exm_unified_data_get_name (self->data);
+        exm_unified_data_get_homepage (self->data, &homepage);
+    }
+
+    dialog = exm_extension_error_dialog_new (name, self->error_text, homepage);
+    adw_dialog_present (ADW_DIALOG (dialog), toplevel);
+
+    g_free (homepage);
 }
 
 static void
@@ -1117,9 +1150,10 @@ update_tools_stack (ExmDetailView *self)
 
             {
                 gboolean has_error = (error_msg != NULL) && (error_msg[0] != '\0');
-                if (has_error)
-                    adw_action_row_set_subtitle (self->error_row, error_msg);
-                gtk_widget_set_visible (GTK_WIDGET (self->error_row), has_error);
+
+                g_clear_pointer (&self->error_text, g_free);
+                self->error_text = has_error ? g_strdup (error_msg) : NULL;
+                adw_banner_set_revealed (self->error_banner, has_error);
             }
             g_free (error_msg);
 
@@ -1130,7 +1164,7 @@ update_tools_stack (ExmDetailView *self)
     {
         gtk_widget_set_visible (GTK_WIDGET (self->update_icon), FALSE);
         gtk_widget_set_visible (GTK_WIDGET (self->out_of_date_icon), FALSE);
-        gtk_widget_set_visible (GTK_WIDGET (self->error_row), FALSE);
+        adw_banner_set_revealed (self->error_banner, FALSE);
     }
 }
 
@@ -1257,7 +1291,7 @@ exm_detail_view_class_init (ExmDetailViewClass *klass)
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, version_label);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, session_modes_row);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, session_modes_label);
-    gtk_widget_class_bind_template_child (widget_class, ExmDetailView, error_row);
+    gtk_widget_class_bind_template_child (widget_class, ExmDetailView, error_banner);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, links_group);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, comments_section);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, link_homepage);
@@ -1277,6 +1311,7 @@ exm_detail_view_class_init (ExmDetailViewClass *klass)
     gtk_widget_class_bind_template_callback (widget_class, has_homepage);
 
     gtk_widget_class_install_action (widget_class, "detail.show-versions", NULL, show_versions);
+    gtk_widget_class_install_action (widget_class, "detail.show-error", NULL, show_error);
     gtk_widget_class_install_action (widget_class, "detail.open-extensions", NULL, (GtkWidgetActionActivateFunc) open_link);
     gtk_widget_class_install_action (widget_class, "detail.open-homepage", NULL, (GtkWidgetActionActivateFunc) open_link);
     gtk_widget_class_install_action (widget_class, "detail.open-donations", "i", (GtkWidgetActionActivateFunc) open_link);

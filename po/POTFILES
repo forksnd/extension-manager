@@ -12,6 +12,8 @@ src/exm-detail-view.blp
 src/exm-detail-view.c
 src/exm-error-dialog.blp
 src/exm-error-dialog.c
+src/exm-extension-error-dialog.blp
+src/exm-extension-error-dialog.c
 src/exm-extension-row.blp
 src/exm-extension-row.c
 src/exm-info-bar.blp

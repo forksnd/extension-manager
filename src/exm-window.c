@@ -25,6 +25,7 @@
 #include "exm-config.h"
 #include "exm-detail-view.h"
 #include "exm-error-dialog.h"
+#include "exm-extension-error-dialog.h"
 #include "exm-installed-page.h"
 #include "exm-screenshot-view.h"
 #include "exm-types.h"
@@ -131,6 +132,41 @@ extension_open_prefs (GtkWidget  *widget,
     extension = exm_manager_get_by_uuid (self->manager, uuid);
 
     exm_manager_open_prefs (self->manager, extension);
+}
+
+static void
+extension_show_error (GtkWidget  *widget,
+                      const char *action_name G_GNUC_UNUSED,
+                      GVariant   *param)
+{
+    ExmWindow *self;
+    ExmExtension *extension;
+    ExmExtensionErrorDialog *dialog;
+    gchar *uuid;
+    gchar *name = NULL;
+    gchar *error_text = NULL;
+    gchar *homepage = NULL;
+
+    self = EXM_WINDOW (widget);
+    g_variant_get (param, "s", &uuid);
+
+    extension = exm_manager_get_by_uuid (self->manager, uuid);
+
+    if (!extension)
+        return;
+
+    g_object_get (extension, "name", &name, "error", &error_text, "url", &homepage, NULL);
+
+    if (error_text && error_text[0])
+    {
+        dialog = exm_extension_error_dialog_new (name, error_text,
+                                                 (homepage && homepage[0]) ? homepage : NULL);
+        adw_dialog_present (ADW_DIALOG (dialog), widget);
+    }
+
+    g_free (name);
+    g_free (homepage);
+    g_free (error_text);
 }
 
 typedef struct
@@ -689,6 +725,7 @@ exm_window_class_init (ExmWindowClass *klass)
     gtk_widget_class_install_action (widget_class, "ext.install", "(sb)", extension_install);
     gtk_widget_class_install_action (widget_class, "ext.remove", "s", extension_remove);
     gtk_widget_class_install_action (widget_class, "ext.open-prefs", "s", extension_open_prefs);
+    gtk_widget_class_install_action (widget_class, "ext.show-error", "s", extension_show_error);
     gtk_widget_class_install_action (widget_class, "win.show-detail", "s", show_view);
     gtk_widget_class_install_action (widget_class, "win.show-main", NULL, show_view);
     gtk_widget_class_install_action (widget_class, "win.show-screenshot", NULL, show_view);

@@ -44,19 +44,17 @@ template $ExmExtensionRow: Adw.ActionRow {
   }
 
   [suffix]
-  Gtk.Image error_icon {
+  Gtk.Button error_btn {
     styles [
+      "flat",
       "error",
     ]
 
     icon-name: "dialog-error-symbolic";
     valign: center;
-    halign: center;
-    focusable: true;
-    margin-start: 9;
-    margin-end: 9;
+    action-name: "row.show-error";
     visible: bind $on_state_is_error(template.extension as <$ExmExtension>.state) as <bool>;
-    // Translators: Icon's tooltip when an extension has an error
+    // Translators: Button's tooltip to view an extension's error details
     tooltip-text: _("An error occurred while loading this extension");
   }
 

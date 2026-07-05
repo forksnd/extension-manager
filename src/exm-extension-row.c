@@ -45,7 +45,7 @@ struct _ExmExtensionRow
     GtkImage *nav_icon;
 
     GtkImage *update_icon;
-    GtkImage *error_icon;
+    GtkButton *error_btn;
     GtkImage *out_of_date_icon;
 
     gboolean selection_mode;
@@ -322,7 +322,7 @@ exm_extension_row_class_init (ExmExtensionRowClass *klass)
     gtk_widget_class_bind_template_child (widget_class, ExmExtensionRow, ext_toggle);
     gtk_widget_class_bind_template_child (widget_class, ExmExtensionRow, nav_icon);
     gtk_widget_class_bind_template_child (widget_class, ExmExtensionRow, update_icon);
-    gtk_widget_class_bind_template_child (widget_class, ExmExtensionRow, error_icon);
+    gtk_widget_class_bind_template_child (widget_class, ExmExtensionRow, error_btn);
     gtk_widget_class_bind_template_child (widget_class, ExmExtensionRow, out_of_date_icon);
 
     gtk_widget_class_bind_template_callback (widget_class, on_state_changed);
@@ -344,9 +344,22 @@ open_prefs (GSimpleAction   *action G_GNUC_UNUSED,
 }
 
 static void
+show_error (GSimpleAction   *action G_GNUC_UNUSED,
+           GVariant        *new_value G_GNUC_UNUSED,
+           ExmExtensionRow *self)
+{
+    g_return_if_fail (self->extension);
+
+    gtk_widget_activate_action (GTK_WIDGET (self),
+                                "ext.show-error",
+                                "s", self->uuid);
+}
+
+static void
 exm_extension_row_init (ExmExtensionRow *self)
 {
     GSimpleAction *open_prefs_action;
+    GSimpleAction *show_error_action;
 
     gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -365,7 +378,11 @@ exm_extension_row_init (ExmExtensionRow *self)
     open_prefs_action = g_simple_action_new ("open-prefs", NULL);
     g_signal_connect (open_prefs_action, "activate", G_CALLBACK (open_prefs), self);
 
+    show_error_action = g_simple_action_new ("show-error", NULL);
+    g_signal_connect (show_error_action, "activate", G_CALLBACK (show_error), self);
+
     g_action_map_add_action (G_ACTION_MAP (self->action_group), G_ACTION (open_prefs_action));
+    g_action_map_add_action (G_ACTION_MAP (self->action_group), G_ACTION (show_error_action));
 
     gtk_widget_insert_action_group (GTK_WIDGET (self), "row", G_ACTION_GROUP (self->action_group));
 }
