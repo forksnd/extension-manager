@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-05 15:52+0000\n"
-"PO-Revision-Date: 2026-04-10 16:09+0000\n"
+"PO-Revision-Date: 2026-07-06 17:48+0000\n"
 "Last-Translator: Димко <Dymkovych@proton.me>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/extension-"
 "manager/app/uk/>\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 2026.7.1.dev0\n"
 
 #: data/com.mattjakeman.ExtensionManager.desktop.in.in:2
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:6
@@ -180,8 +180,6 @@ msgid "This extension has an error"
 msgstr ""
 
 #: src/exm-detail-view.blp:85
-#, fuzzy
-#| msgid "_Details"
 msgid "_View Details"
 msgstr "_Подробиці"
 
@@ -191,10 +189,8 @@ msgstr "За назвою"
 
 #. Translators: Button tooltip to remove an installed extension
 #: src/exm-detail-view.blp:185
-#, fuzzy
-#| msgid "Use Extensions"
 msgid "Remove Extension"
-msgstr "Використовувати розширення"
+msgstr "Вилучити розширення"
 
 #. Translators: Button tooltip to open extension preferences
 #. Translators: Button's tooltip to open extension's preferences dialog
@@ -207,7 +203,7 @@ msgstr "Відкрити налаштування розширення"
 #, fuzzy
 #| msgid "Use Extensions"
 msgid "Toggle Extension"
-msgstr "Використовувати розширення"
+msgstr "Перемкнути розширення"
 
 #: src/exm-detail-view.blp:229
 msgid "Enlarge Image"
