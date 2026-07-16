@@ -176,13 +176,11 @@ msgstr "Информация о расширении отсутствует"
 #. Translators: Banner title shown when the extension has a runtime error
 #: src/exm-detail-view.blp:84
 msgid "This extension has an error"
-msgstr ""
+msgstr "У этого расширения есть ошибка"
 
 #: src/exm-detail-view.blp:85
-#, fuzzy
-#| msgid "_Details"
 msgid "_View Details"
-msgstr "_Подробности"
+msgstr "_Подробнее"
 
 #: src/exm-detail-view.blp:137
 msgid "Name"
@@ -190,10 +188,8 @@ msgstr "Название"
 
 #. Translators: Button tooltip to remove an installed extension
 #: src/exm-detail-view.blp:185
-#, fuzzy
-#| msgid "Use Extensions"
 msgid "Remove Extension"
-msgstr "Использовать расширения"
+msgstr "Удалить расширение"
 
 #. Translators: Button tooltip to open extension preferences
 #. Translators: Button's tooltip to open extension's preferences dialog
@@ -203,10 +199,8 @@ msgstr "Открыть параметры расширения"
 
 #. Translators: Switch tooltip to enable or disable the extension
 #: src/exm-detail-view.blp:205
-#, fuzzy
-#| msgid "Use Extensions"
 msgid "Toggle Extension"
-msgstr "Использовать расширения"
+msgstr "Включить/выключить расширение"
 
 #: src/exm-detail-view.blp:229
 msgid "Enlarge Image"
@@ -336,26 +330,22 @@ msgstr ""
 "информацию:"
 
 #: src/exm-extension-error-dialog.blp:9
-#, fuzzy
-#| msgid "Extension Manager"
 msgid "Extension Error"
-msgstr "Менеджер расширений"
+msgstr "Ошибка расширения"
 
 #. Translators: Button to report an extension error to its developer
 #: src/exm-extension-error-dialog.blp:77
-#, fuzzy
-#| msgid "_New Issue"
 msgid "_Report Issue"
-msgstr "_Новая проблема"
+msgstr "_Сообщить о проблеме"
 
 #: src/exm-extension-error-dialog.c:54
 #, c-format
 msgid "“%s” Failed to Load"
-msgstr ""
+msgstr "Не удалось загрузить «%s»"
 
 #: src/exm-extension-error-dialog.c:55
 msgid "Extension Failed to Load"
-msgstr ""
+msgstr "Не удалось загрузить расширение"
 
 #. Translators: Button's tooltip to view an extension's error details
 #: src/exm-extension-row.blp:58
@@ -398,10 +388,8 @@ msgstr "Расширения, установленные пользовател�
 
 #. Translators: Tooltip of the Select button in the user-installed extensions group
 #: src/exm-installed-page.blp:46 src/exm-window.c:506
-#, fuzzy
-#| msgid "Use Extensions"
 msgid "Select Extensions"
-msgstr "Использовать расширения"
+msgstr "Выбрать расширения"
 
 #: src/exm-installed-page.blp:52 src/exm-upgrade-assistant.blp:139
 msgid "System Extensions"
@@ -585,37 +573,29 @@ msgstr ""
 "и проверьте, будут ли ваши расширения по-прежнему доступны."
 
 #: src/exm-versions-dialog.blp:13
-#, fuzzy
-#| msgid "Version"
 msgid "Version History"
-msgstr "Версия"
+msgstr "История версий"
 
 #: src/exm-versions-dialog.blp:25
-#, fuzzy
-#| msgid "Loading Details"
 msgid "Loading Versions"
-msgstr "Загрузка подробностей"
+msgstr "Загрузка версий"
 
 #: src/exm-versions-dialog.blp:34
 msgid "No Version History"
-msgstr ""
+msgstr "История версий отсутствует"
 
 #: src/exm-versions-dialog.blp:71
-#, fuzzy
-#| msgid "_Load More Results"
 msgid "_Load More Versions"
-msgstr "_Загрузить больше результатов"
+msgstr "_Загрузить ещё версии"
 
 #. Translators: Tooltip on the installed-version indicator in the versions dialog
 #: src/exm-versions-dialog.c:239
-#, fuzzy
-#| msgid "User-Installed Extensions"
 msgid "Installed Version"
-msgstr "Расширения, установленные пользователем"
+msgstr "Установленная версия"
 
 #: src/exm-window.blp:61
 msgid "Cancel"
-msgstr ""
+msgstr "Отмена"
 
 #. Translators: Tooltip of the search icon in the header bar
 #: src/exm-window.blp:69
@@ -641,22 +621,20 @@ msgid "_Browse"
 msgstr "_Обзор"
 
 #: src/exm-window.blp:129
-#, fuzzy
-#| msgid "Install…"
 msgid "Uninstall…"
-msgstr "Установить…"
+msgstr "Удалить…"
 
 #: src/exm-window.blp:164
 msgid "GNOME Shell Unavailable"
-msgstr ""
+msgstr "GNOME Shell недоступен"
 
 #: src/exm-window.blp:165
 msgid "Log in to a GNOME session to manage extensions"
-msgstr ""
+msgstr "Войдите в сеанс GNOME для управления расширениями"
 
 #: src/exm-window.blp:174
 msgid "_Discover GNOME"
-msgstr ""
+msgstr "_Открыть GNOME"
 
 #. Translators: the character preceded by "_" should not be the same
 #. as others in the same menu
@@ -697,10 +675,8 @@ msgid "_Yes"
 msgstr "_Да"
 
 #: src/exm-window.blp:215
-#, fuzzy
-#| msgid "Uninstall Extension?"
 msgid "Uninstall Extensions?"
-msgstr "Удалить расширение?"
+msgstr "Удалить расширения?"
 
 #: src/exm-window.blp:226
 msgid "Unsupported Extension"
@@ -731,15 +707,12 @@ msgstr "_Подробности"
 #, c-format
 msgid "%u Selected"
 msgid_plural "%u Selected"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%u выбрано"
+msgstr[1] "%u выбрано"
+msgstr[2] "%u выбрано"
 
 #: src/exm-window.c:556
-#, fuzzy, c-format
-#| msgid ""
-#| "The extension's features and functionality will no longer be accessible. "
-#| "Are you sure you want to uninstall?"
+#, c-format
 msgid ""
 "The extension's features and functionality will no longer be accessible. Are "
 "you sure you want to uninstall %u extension?"
@@ -748,13 +721,13 @@ msgid_plural ""
 "you want to uninstall %u extensions?"
 msgstr[0] ""
 "Функции и возможности расширения больше не будут доступны. Вы уверены, что "
-"хотите удалить расширение?"
+"хотите удалить %u расширение?"
 msgstr[1] ""
 "Функции и возможности расширения больше не будут доступны. Вы уверены, что "
-"хотите удалить расширение?"
+"хотите удалить %u расширения?"
 msgstr[2] ""
 "Функции и возможности расширения больше не будут доступны. Вы уверены, что "
-"хотите удалить расширение?"
+"хотите удалить %u расширений?"
 
 #: src/web/exm-request-handler.c:133
 msgid ""
