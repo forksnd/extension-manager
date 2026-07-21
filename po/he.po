@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-05 15:52+0000\n"
-"PO-Revision-Date: 2026-07-20 19:01+0000\n"
+"PO-Revision-Date: 2026-07-22 06:01+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <https://hosted.weblate.org/projects/extension-manager/"
 "app/he/>\n"
@@ -165,7 +165,7 @@ msgstr "אין פרטים זמינים על ההרחבה"
 #. Translators: Banner title shown when the extension has a runtime error
 #: src/exm-detail-view.blp:84
 msgid "This extension has an error"
-msgstr ""
+msgstr "יש שגיאה בהרחבה הזאת"
 
 #: src/exm-detail-view.blp:85
 msgid "_View Details"
@@ -177,10 +177,8 @@ msgstr "שם"
 
 #. Translators: Button tooltip to remove an installed extension
 #: src/exm-detail-view.blp:185
-#, fuzzy
-#| msgid "Use Extensions"
 msgid "Remove Extension"
-msgstr "להשתמש בהרחבות"
+msgstr "הסרת הרחבה"
 
 #. Translators: Button tooltip to open extension preferences
 #. Translators: Button's tooltip to open extension's preferences dialog
@@ -190,10 +188,8 @@ msgstr "פתיחת העדפות ההרחבה"
 
 #. Translators: Switch tooltip to enable or disable the extension
 #: src/exm-detail-view.blp:205
-#, fuzzy
-#| msgid "Use Extensions"
 msgid "Toggle Extension"
-msgstr "להשתמש בהרחבות"
+msgstr "החלפת מצב הרחבה"
 
 #: src/exm-detail-view.blp:229
 msgid "Enlarge Image"
@@ -269,7 +265,7 @@ msgstr "לא נתמך"
 
 #: src/exm-detail-view.c:711
 msgid "Unknown"
-msgstr ""
+msgstr "לא ידועה"
 
 #. Translators: '%s' = extension name
 #: src/exm-detail-view.c:801
@@ -322,26 +318,22 @@ msgstr ""
 "תקלה. חשוב לצרף את הפרטים הבאים:"
 
 #: src/exm-extension-error-dialog.blp:9
-#, fuzzy
-#| msgid "Extension Manager"
 msgid "Extension Error"
-msgstr "מנהל הרחבות"
+msgstr "שגיאת הרחבה"
 
 #. Translators: Button to report an extension error to its developer
 #: src/exm-extension-error-dialog.blp:77
-#, fuzzy
-#| msgid "_New Issue"
 msgid "_Report Issue"
-msgstr "ת_קלה חדשה"
+msgstr "_דיווח על תקלה"
 
 #: src/exm-extension-error-dialog.c:54
 #, c-format
 msgid "“%s” Failed to Load"
-msgstr ""
+msgstr "הטעינה של „%s” נכשלה"
 
 #: src/exm-extension-error-dialog.c:55
 msgid "Extension Failed to Load"
-msgstr ""
+msgstr "טעינת ההרחבה נכשלה"
 
 #. Translators: Button's tooltip to view an extension's error details
 #: src/exm-extension-row.blp:58
@@ -383,10 +375,8 @@ msgstr "הרחבות שהותקנו על ידי המשתמשים"
 
 #. Translators: Tooltip of the Select button in the user-installed extensions group
 #: src/exm-installed-page.blp:46 src/exm-window.c:506
-#, fuzzy
-#| msgid "Use Extensions"
 msgid "Select Extensions"
-msgstr "להשתמש בהרחבות"
+msgstr "בחירת הרחבות"
 
 #: src/exm-installed-page.blp:52 src/exm-upgrade-assistant.blp:139
 msgid "System Extensions"
@@ -566,37 +556,29 @@ msgstr ""
 "ולבדוק האם ההרחבות שלך תמשכנה להיות זמינות."
 
 #: src/exm-versions-dialog.blp:13
-#, fuzzy
-#| msgid "Version"
 msgid "Version History"
-msgstr "גרסה"
+msgstr "היסטוריית גרסאות"
 
 #: src/exm-versions-dialog.blp:25
-#, fuzzy
-#| msgid "Loading Details"
 msgid "Loading Versions"
-msgstr "הפרטים נטענים"
+msgstr "הגרסאות נטענות"
 
 #: src/exm-versions-dialog.blp:34
 msgid "No Version History"
-msgstr ""
+msgstr "אין היסטוריית גרסאות"
 
 #: src/exm-versions-dialog.blp:71
-#, fuzzy
-#| msgid "_Load More Results"
 msgid "_Load More Versions"
-msgstr "_טעינת תוצאות נוספות"
+msgstr "_טעינת גרסאות נוספות"
 
 #. Translators: Tooltip on the installed-version indicator in the versions dialog
 #: src/exm-versions-dialog.c:239
-#, fuzzy
-#| msgid "User-Installed Extensions"
 msgid "Installed Version"
-msgstr "הרחבות שהותקנו על ידי המשתמשים"
+msgstr "גרסה מותקנת"
 
 #: src/exm-window.blp:61
 msgid "Cancel"
-msgstr ""
+msgstr "ביטול"
 
 #. Translators: Tooltip of the search icon in the header bar
 #: src/exm-window.blp:69
@@ -622,22 +604,20 @@ msgid "_Browse"
 msgstr "_עיון"
 
 #: src/exm-window.blp:129
-#, fuzzy
-#| msgid "Install…"
 msgid "Uninstall…"
-msgstr "התקנה…"
+msgstr "הסרה…"
 
 #: src/exm-window.blp:164
 msgid "GNOME Shell Unavailable"
-msgstr ""
+msgstr "מעטפת GNOME לא זמינה"
 
 #: src/exm-window.blp:165
 msgid "Log in to a GNOME session to manage extensions"
-msgstr ""
+msgstr "יש להיכנס להפעלה של GNOME כדי לנהל הרחבות"
 
 #: src/exm-window.blp:174
 msgid "_Discover GNOME"
-msgstr ""
+msgstr "_חשיפת GNOME"
 
 #. Translators: the character preceded by "_" should not be the same
 #. as others in the same menu
@@ -676,10 +656,8 @@ msgid "_Yes"
 msgstr "_כן"
 
 #: src/exm-window.blp:215
-#, fuzzy
-#| msgid "Uninstall Extension?"
 msgid "Uninstall Extensions?"
-msgstr "להסיר את ההרחבה?"
+msgstr "להסיר את ההרחבות?"
 
 #: src/exm-window.blp:226
 msgid "Unsupported Extension"
@@ -710,26 +688,23 @@ msgstr "_פרטים"
 #, c-format
 msgid "%u Selected"
 msgid_plural "%u Selected"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "נבחרה"
+msgstr[1] "שתיים נבחרו"
+msgstr[2] "%u נבחרו"
+msgstr[3] "%u נבחרו"
 
 #: src/exm-window.c:556
-#, fuzzy, c-format
-#| msgid ""
-#| "The extension's features and functionality will no longer be accessible. "
-#| "Are you sure you want to uninstall?"
+#, c-format
 msgid ""
 "The extension's features and functionality will no longer be accessible. Are "
 "you sure you want to uninstall %u extension?"
 msgid_plural ""
 "Their features and functionality will no longer be accessible. Are you sure "
 "you want to uninstall %u extensions?"
-msgstr[0] "היכולות ואופן התפקוד של ההרחבה לא יהיו זמינים עוד. להסיר?"
-msgstr[1] "היכולות ואופן התפקוד של ההרחבה לא יהיו זמינים עוד. להסיר?"
-msgstr[2] "היכולות ואופן התפקוד של ההרחבה לא יהיו זמינים עוד. להסיר?"
-msgstr[3] "היכולות ואופן התפקוד של ההרחבה לא יהיו זמינים עוד. להסיר?"
+msgstr[0] "היכולות ואופן התפקוד של ההרחבה לא יהיו זמינים עוד. להסיר הרחבה?"
+msgstr[1] "היכולות ואופן התפקוד של ההרחבה לא יהיו זמינים עוד. להסיר שתי הרחבות?"
+msgstr[2] "היכולות ואופן התפקוד לא יהיו זמינים עוד. להסיר %u הרחבות?"
+msgstr[3] "היכולות ואופן התפקוד לא יהיו זמינים עוד. להסיר %u הרחבות?"
 
 #: src/web/exm-request-handler.c:133
 msgid ""
