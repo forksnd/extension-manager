@@ -19,6 +19,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+#include <locale.h>
 #include <glib/gi18n.h>
 #include <signal.h>
 #include <sys/wait.h>
@@ -129,7 +130,8 @@ main (int   argc,
 
     use_crash_reporter = TRUE;
 
-	// Set up gettext translations
+    // Set up gettext translations
+	setlocale (LC_ALL, "");
 	bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
