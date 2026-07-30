@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-05 15:52+0000\n"
-"PO-Revision-Date: 2026-03-22 14:09+0000\n"
+"PO-Revision-Date: 2026-07-18 00:58+0000\n"
 "Last-Translator: Ryo Nakano <ryonakaknock3@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/extension-"
 "manager/app/ja/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 2026.8.dev0\n"
 
 #: data/com.mattjakeman.ExtensionManager.desktop.in.in:2
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:6
@@ -170,13 +170,11 @@ msgstr "拡張機能の詳細は利用不可"
 #. Translators: Banner title shown when the extension has a runtime error
 #: src/exm-detail-view.blp:84
 msgid "This extension has an error"
-msgstr ""
+msgstr "この拡張機能にはエラーがあります"
 
 #: src/exm-detail-view.blp:85
-#, fuzzy
-#| msgid "_Details"
 msgid "_View Details"
-msgstr "詳細(_D)"
+msgstr "詳細を表示(_V)"
 
 #: src/exm-detail-view.blp:137
 msgid "Name"
@@ -184,10 +182,8 @@ msgstr "名前順"
 
 #. Translators: Button tooltip to remove an installed extension
 #: src/exm-detail-view.blp:185
-#, fuzzy
-#| msgid "Use Extensions"
 msgid "Remove Extension"
-msgstr "GNOME Shell 拡張機能を使う"
+msgstr "拡張機能を削除"
 
 #. Translators: Button tooltip to open extension preferences
 #. Translators: Button's tooltip to open extension's preferences dialog
@@ -197,10 +193,8 @@ msgstr "拡張機能の設定を開く"
 
 #. Translators: Switch tooltip to enable or disable the extension
 #: src/exm-detail-view.blp:205
-#, fuzzy
-#| msgid "Use Extensions"
 msgid "Toggle Extension"
-msgstr "GNOME Shell 拡張機能を使う"
+msgstr "拡張機能を有効/無効にする"
 
 #: src/exm-detail-view.blp:229
 msgid "Enlarge Image"
@@ -329,26 +323,22 @@ msgstr ""
 "際、以下の情報を添付してください:"
 
 #: src/exm-extension-error-dialog.blp:9
-#, fuzzy
-#| msgid "Extension Manager"
 msgid "Extension Error"
-msgstr "Extension Manager"
+msgstr "拡張機能エラー"
 
 #. Translators: Button to report an extension error to its developer
 #: src/exm-extension-error-dialog.blp:77
-#, fuzzy
-#| msgid "_New Issue"
 msgid "_Report Issue"
-msgstr "問題を報告(_N)"
+msgstr "問題を報告(_R)"
 
 #: src/exm-extension-error-dialog.c:54
 #, c-format
 msgid "“%s” Failed to Load"
-msgstr ""
+msgstr "“%s” の読み込みに失敗しました"
 
 #: src/exm-extension-error-dialog.c:55
 msgid "Extension Failed to Load"
-msgstr ""
+msgstr "拡張機能の読み込みに失敗しました"
 
 #. Translators: Button's tooltip to view an extension's error details
 #: src/exm-extension-row.blp:58
@@ -382,7 +372,9 @@ msgstr "GNOME Shell 拡張機能を使う"
 
 #: src/exm-installed-page.blp:29
 msgid "Extensions can cause performance and stability issues"
-msgstr "拡張機能を使うと、動作が安定しなくなるかもしれません"
+msgstr ""
+"拡張機能によってはシステムのパフォーマンスや安定性に影響を及ぼすことがありま"
+"す"
 
 #: src/exm-installed-page.blp:35 src/exm-upgrade-assistant.blp:135
 msgid "User-Installed Extensions"
@@ -390,10 +382,8 @@ msgstr "ユーザーがインストールした拡張機能"
 
 #. Translators: Tooltip of the Select button in the user-installed extensions group
 #: src/exm-installed-page.blp:46 src/exm-window.c:506
-#, fuzzy
-#| msgid "Use Extensions"
 msgid "Select Extensions"
-msgstr "GNOME Shell 拡張機能を使う"
+msgstr "拡張機能を選択"
 
 #: src/exm-installed-page.blp:52 src/exm-upgrade-assistant.blp:139
 msgid "System Extensions"
@@ -420,13 +410,13 @@ msgstr "拡張機能をインストールするにはオンラインで検索し
 #, c-format
 msgid "%d extension will be updated on next login"
 msgid_plural "%d extensions will be updated on next login"
-msgstr[0] "%d個の拡張機能が次回ログイン時にアップデートされます"
+msgstr[0] "%d 個の拡張機能が次回ログイン時にアップデートされます"
 
 #: src/exm-rating.c:142
 #, c-format
 msgid "%i Star"
 msgid_plural "%i Stars"
-msgstr[0] "%iつ星"
+msgstr[0] "星 %i"
 
 #. Translators: Button's tooltip to zoom out screenshots
 #: src/exm-screenshot-view.blp:37
@@ -513,7 +503,7 @@ msgstr "クリップボードにコピー(_C)"
 #: src/exm-upgrade-assistant.c:189
 #, c-format
 msgid "Checked %d/%d Extensions"
-msgstr "%d/%d の拡張機能を確認済み"
+msgstr "%d/%d 個の拡張機能を確認済み"
 
 #. Set percentage text
 #: src/exm-upgrade-assistant.c:208
@@ -527,7 +517,7 @@ msgid ""
 "<b>%d out of %d</b> extensions currently installed on this system have been "
 "marked as supporting <b>GNOME %s</b>"
 msgstr ""
-"現在システムにインストール済みの拡張機能のうち、<b>%d/%d個</b>が <b>GNOME "
+"現在システムにインストール済みの拡張機能のうち、<b>%d/%d 個</b>が <b>GNOME "
 "%s</b> への対応を謳っています"
 
 #: src/exm-upgrade-assistant.c:231
@@ -540,7 +530,8 @@ msgstr ""
 #, c-format
 msgid "If you switch to GNOME %s now, %d of your extensions might not work"
 msgstr ""
-"今 GNOME %s に移行すると、利用中の%d個の拡張機能が動作しない可能性があります"
+"今 GNOME %s に移行すると、利用中の %d 個の拡張機能が動作しない可能性がありま"
+"す"
 
 #. Translators: Icon's tooltip when an extension is compatible
 #: src/exm-upgrade-assistant.c:566
@@ -572,37 +563,29 @@ msgstr ""
 "を確認できます。"
 
 #: src/exm-versions-dialog.blp:13
-#, fuzzy
-#| msgid "Version"
 msgid "Version History"
-msgstr "バージョン"
+msgstr "バージョン履歴"
 
 #: src/exm-versions-dialog.blp:25
-#, fuzzy
-#| msgid "Loading Details"
 msgid "Loading Versions"
-msgstr "詳細を読み込み中"
+msgstr "バージョンを読み込み中"
 
 #: src/exm-versions-dialog.blp:34
 msgid "No Version History"
-msgstr ""
+msgstr "バージョン履歴なし"
 
 #: src/exm-versions-dialog.blp:71
-#, fuzzy
-#| msgid "_Load More Results"
 msgid "_Load More Versions"
-msgstr "結果をさらに表示(_L)"
+msgstr "バージョンをさらに表示(_L)"
 
 #. Translators: Tooltip on the installed-version indicator in the versions dialog
 #: src/exm-versions-dialog.c:239
-#, fuzzy
-#| msgid "User-Installed Extensions"
 msgid "Installed Version"
-msgstr "ユーザーがインストールした拡張機能"
+msgstr "インストール済みのバージョン"
 
 #: src/exm-window.blp:61
 msgid "Cancel"
-msgstr ""
+msgstr "キャンセル"
 
 #. Translators: Tooltip of the search icon in the header bar
 #: src/exm-window.blp:69
@@ -628,22 +611,20 @@ msgid "_Browse"
 msgstr "探す(_B)"
 
 #: src/exm-window.blp:129
-#, fuzzy
-#| msgid "Install…"
 msgid "Uninstall…"
-msgstr "インストール…"
+msgstr "アンインストール…"
 
 #: src/exm-window.blp:164
 msgid "GNOME Shell Unavailable"
-msgstr ""
+msgstr "GNOME Shell が利用できません"
 
 #: src/exm-window.blp:165
 msgid "Log in to a GNOME session to manage extensions"
-msgstr ""
+msgstr "拡張機能を管理するには GNOME セッションにログインしてください"
 
 #: src/exm-window.blp:174
 msgid "_Discover GNOME"
-msgstr ""
+msgstr "GNOME について知る(_D)"
 
 #. Translators: the character preceded by "_" should not be the same
 #. as others in the same menu
@@ -665,13 +646,13 @@ msgstr "Extension Manager について(_A)"
 
 #: src/exm-window.blp:201
 msgid "Uninstall Extension?"
-msgstr "拡張機能を削除しますか?"
+msgstr "拡張機能をアンインストールしますか?"
 
 #: src/exm-window.blp:203
 msgid ""
 "The extension's features and functionality will no longer be accessible. Are "
 "you sure you want to uninstall?"
-msgstr "この拡張機能を利用できなくなります。削除しますか?"
+msgstr "この拡張機能を利用できなくなります。アンインストールしてもよろしいですか?"
 
 #: src/exm-window.blp:209 src/exm-window.blp:220
 msgid "_No"
@@ -682,10 +663,8 @@ msgid "_Yes"
 msgstr "はい(_Y)"
 
 #: src/exm-window.blp:215
-#, fuzzy
-#| msgid "Uninstall Extension?"
 msgid "Uninstall Extensions?"
-msgstr "拡張機能を削除しますか?"
+msgstr "拡張機能をアンインストールしますか?"
 
 #: src/exm-window.blp:226
 msgid "Unsupported Extension"
@@ -716,20 +695,19 @@ msgstr "詳細(_D)"
 #, c-format
 msgid "%u Selected"
 msgid_plural "%u Selected"
-msgstr[0] ""
+msgstr[0] "%u 個を選択中"
 
 #: src/exm-window.c:556
-#, fuzzy, c-format
-#| msgid ""
-#| "The extension's features and functionality will no longer be accessible. "
-#| "Are you sure you want to uninstall?"
+#, c-format
 msgid ""
 "The extension's features and functionality will no longer be accessible. Are "
 "you sure you want to uninstall %u extension?"
 msgid_plural ""
 "Their features and functionality will no longer be accessible. Are you sure "
 "you want to uninstall %u extensions?"
-msgstr[0] "この拡張機能を利用できなくなります。削除しますか?"
+msgstr[0] ""
+"拡張機能を利用できなくなります。%u 個の拡張機能をアンインストールしてもよろし"
+"いですか?"
 
 #: src/web/exm-request-handler.c:133
 msgid ""

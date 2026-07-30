@@ -12,8 +12,9 @@ msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-05 15:52+0000\n"
-"PO-Revision-Date: 2026-03-18 11:10+0000\n"
-"Last-Translator: jonnysemon <jonnysemon@users.noreply.hosted.weblate.org>\n"
+"PO-Revision-Date: 2026-07-16 11:01+0000\n"
+"Last-Translator: Muhammed Al-Basha "
+"<mu7basha@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/extension-manager/"
 "app/ar/>\n"
 "Language: ar\n"
@@ -22,7 +23,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 5.17-dev\n"
+"X-Generator: Weblate 2026.8.dev0\n"
 
 #: data/com.mattjakeman.ExtensionManager.desktop.in.in:2
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:6
@@ -170,13 +171,11 @@ msgstr "لا توجد تفاصيل متاحة لهذا الامتداد"
 #. Translators: Banner title shown when the extension has a runtime error
 #: src/exm-detail-view.blp:84
 msgid "This extension has an error"
-msgstr ""
+msgstr "هذا الامتداد به خطأ"
 
 #: src/exm-detail-view.blp:85
-#, fuzzy
-#| msgid "_Details"
 msgid "_View Details"
-msgstr "ا_لتفاصيل"
+msgstr "_اعرض التفاصيل"
 
 #: src/exm-detail-view.blp:137
 msgid "Name"
@@ -184,10 +183,8 @@ msgstr "الاسم"
 
 #. Translators: Button tooltip to remove an installed extension
 #: src/exm-detail-view.blp:185
-#, fuzzy
-#| msgid "Use Extensions"
 msgid "Remove Extension"
-msgstr "فعِّل الامتدادات"
+msgstr "أزِل الامتدادة"
 
 #. Translators: Button tooltip to open extension preferences
 #. Translators: Button's tooltip to open extension's preferences dialog
@@ -197,10 +194,8 @@ msgstr "افتح تفضيلات الامتداد"
 
 #. Translators: Switch tooltip to enable or disable the extension
 #: src/exm-detail-view.blp:205
-#, fuzzy
-#| msgid "Use Extensions"
 msgid "Toggle Extension"
-msgstr "فعِّل الامتدادات"
+msgstr "بدّل الامتدادة"
 
 #: src/exm-detail-view.blp:229
 msgid "Enlarge Image"
@@ -329,26 +324,22 @@ msgstr ""
 "من إرفاق المعلومات التالية:"
 
 #: src/exm-extension-error-dialog.blp:9
-#, fuzzy
-#| msgid "Extension Manager"
 msgid "Extension Error"
-msgstr "مدير الامتدادات"
+msgstr "خطأ في الامتدادة"
 
 #. Translators: Button to report an extension error to its developer
 #: src/exm-extension-error-dialog.blp:77
-#, fuzzy
-#| msgid "_New Issue"
 msgid "_Report Issue"
 msgstr "_بلِّغ عن العلة"
 
 #: src/exm-extension-error-dialog.c:54
 #, c-format
 msgid "“%s” Failed to Load"
-msgstr ""
+msgstr "فشل تحميل \"%s\""
 
 #: src/exm-extension-error-dialog.c:55
 msgid "Extension Failed to Load"
-msgstr ""
+msgstr "فشل تحميل الامتدادة"
 
 #. Translators: Button's tooltip to view an extension's error details
 #: src/exm-extension-row.blp:58
@@ -390,10 +381,8 @@ msgstr "الامتدادات التي نصَّبها المستخدم"
 
 #. Translators: Tooltip of the Select button in the user-installed extensions group
 #: src/exm-installed-page.blp:46 src/exm-window.c:506
-#, fuzzy
-#| msgid "Use Extensions"
 msgid "Select Extensions"
-msgstr "فعِّل الامتدادات"
+msgstr "حدّد الامتدادات"
 
 #: src/exm-installed-page.blp:52 src/exm-upgrade-assistant.blp:139
 msgid "System Extensions"
@@ -578,37 +567,29 @@ msgstr ""
 "امتداداتك معه."
 
 #: src/exm-versions-dialog.blp:13
-#, fuzzy
-#| msgid "Version"
 msgid "Version History"
-msgstr "رقم الإصدار"
+msgstr "تأريخ الإصدار"
 
 #: src/exm-versions-dialog.blp:25
-#, fuzzy
-#| msgid "Loading Details"
 msgid "Loading Versions"
-msgstr "يُحمِّل التفاصيل"
+msgstr "يُحمِّل الإصدارات"
 
 #: src/exm-versions-dialog.blp:34
 msgid "No Version History"
-msgstr ""
+msgstr "لا تأريخ الإصدار"
 
 #: src/exm-versions-dialog.blp:71
-#, fuzzy
-#| msgid "_Load More Results"
 msgid "_Load More Versions"
-msgstr "_حمِّل المزيد من النتائج"
+msgstr "_حمِّل المزيد من الإصدارات"
 
 #. Translators: Tooltip on the installed-version indicator in the versions dialog
 #: src/exm-versions-dialog.c:239
-#, fuzzy
-#| msgid "User-Installed Extensions"
 msgid "Installed Version"
-msgstr "الامتدادات التي نصَّبها المستخدم"
+msgstr "الإصدار المنصّب"
 
 #: src/exm-window.blp:61
 msgid "Cancel"
-msgstr ""
+msgstr "ألغِ"
 
 #. Translators: Tooltip of the search icon in the header bar
 #: src/exm-window.blp:69
@@ -634,22 +615,20 @@ msgid "_Browse"
 msgstr "_التصفح"
 
 #: src/exm-window.blp:129
-#, fuzzy
-#| msgid "Install…"
 msgid "Uninstall…"
-msgstr "نصِّب…"
+msgstr "ألغِ الثبيت…"
 
 #: src/exm-window.blp:164
 msgid "GNOME Shell Unavailable"
-msgstr ""
+msgstr "GNOME Shell غير متوفرة"
 
 #: src/exm-window.blp:165
 msgid "Log in to a GNOME session to manage extensions"
-msgstr ""
+msgstr "لِج إلى جلسة GNOME لإدارة الامتدادات"
 
 #: src/exm-window.blp:174
 msgid "_Discover GNOME"
-msgstr ""
+msgstr "_استكشف GNOME"
 
 #. Translators: the character preceded by "_" should not be the same
 #. as others in the same menu
@@ -690,10 +669,8 @@ msgid "_Yes"
 msgstr "_نعم"
 
 #: src/exm-window.blp:215
-#, fuzzy
-#| msgid "Uninstall Extension?"
 msgid "Uninstall Extensions?"
-msgstr "أتُزيل الإضافة؟"
+msgstr "ألغِ تنصيب الامتدادات؟"
 
 #: src/exm-window.blp:226
 msgid "Unsupported Extension"
@@ -722,18 +699,15 @@ msgstr "ا_لتفاصيل"
 #, c-format
 msgid "%u Selected"
 msgid_plural "%u Selected"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "%u مُحدّد"
+msgstr[1] "%u مُحدّد"
+msgstr[2] "%u مُحدّد"
+msgstr[3] "%u مُحدّد"
+msgstr[4] "%u مُحدّد"
+msgstr[5] "%u مُحدّد"
 
 #: src/exm-window.c:556
-#, fuzzy, c-format
-#| msgid ""
-#| "The extension's features and functionality will no longer be accessible. "
-#| "Are you sure you want to uninstall?"
+#, c-format
 msgid ""
 "The extension's features and functionality will no longer be accessible. Are "
 "you sure you want to uninstall %u extension?"
@@ -741,23 +715,21 @@ msgid_plural ""
 "Their features and functionality will no longer be accessible. Are you sure "
 "you want to uninstall %u extensions?"
 msgstr[0] ""
-"لن تُتاح ميزات ووظائف هذا الامتداد بعد إزالته، فهل أنت متأكد من أنك تريد "
-"الإزالة؟"
+"لن تُتاح ميزات ووظائف هذا الامتداد بعد إزالته، هل ترغب في إلغاء تثبيت %u إضافة؟"
 msgstr[1] ""
-"لن تُتاح ميزات ووظائف هذا الامتداد بعد إزالته، فهل أنت متأكد من أنك تريد "
-"الإزالة؟"
+"لن تُتاح ميزات ووظائف هذا الامتداد بعد إزالته، هل ترغب في إلغاء تثبيت %u إضافة؟"
 msgstr[2] ""
-"لن تُتاح ميزات ووظائف هذا الامتداد بعد إزالته، فهل أنت متأكد من أنك تريد "
-"الإزالة؟"
+"لن تُتاح ميزات ووظائف هذان الامتدادان بعد إزالتهما، هل ترغب في إلغاء تثبيت %u "
+"إضافة؟"
 msgstr[3] ""
-"لن تُتاح ميزات ووظائف هذا الامتداد بعد إزالته، فهل أنت متأكد من أنك تريد "
-"الإزالة؟"
+"لن تُتاح ميزات ووظائف هذه الامتدادات بعد إزالتها، هل ترغب في إلغاء تثبيت %u "
+"إضافات؟"
 msgstr[4] ""
-"لن تُتاح ميزات ووظائف هذا الامتداد بعد إزالته، فهل أنت متأكد من أنك تريد "
-"الإزالة؟"
+"لن تُتاح ميزات ووظائف هذه الامتدادات بعد إزالتها، هل ترغب في إلغاء تثبيت %u "
+"إضافة؟"
 msgstr[5] ""
-"لن تُتاح ميزات ووظائف هذا الامتداد بعد إزالته، فهل أنت متأكد من أنك تريد "
-"الإزالة؟"
+"لن تُتاح ميزات ووظائف هذه الامتدادات بعد إزالتها، هل ترغب في إلغاء تثبيت %u "
+"إضافة؟"
 
 #: src/web/exm-request-handler.c:133
 msgid ""
