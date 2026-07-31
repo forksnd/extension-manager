@@ -12,7 +12,8 @@
         "--device=dri",
         "--socket=wayland",
         "--talk-name=org.gnome.Shell.Extensions",
-        "--talk-name=org.gnome.SessionManager"
+        "--talk-name=org.gnome.SessionManager",
+        "--filesystem=~/.local/share/gnome-shell/extensions"
     ],
     "cleanup" : [
         "/include",
