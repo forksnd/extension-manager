@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-05 15:52+0000\n"
+"POT-Creation-Date: 2026-07-31 19:23+0000\n"
 "PO-Revision-Date: 2026-06-25 10:01+0000\n"
 "Last-Translator: தமிழ்நேரம் <tamilneram247@gmail.com>\n"
 "Language-Team: Tamil <https://hosted.weblate.org/projects/extension-manager/"
@@ -130,7 +130,7 @@ msgid "Try a different search"
 msgstr "வேறு தேடலை முயற்சிக்கவும்"
 
 #: src/exm-browse-page.blp:186 src/exm-comment-dialog.blp:34
-#: src/exm-detail-view.blp:60 src/exm-detail-view.blp:470
+#: src/exm-detail-view.blp:60 src/exm-detail-view.blp:482
 #: src/exm-upgrade-assistant.blp:99
 msgid "Connection Error"
 msgstr "இணைப்பு பிழை"
@@ -139,11 +139,11 @@ msgstr "இணைப்பு பிழை"
 msgid "Ascending Order"
 msgstr "ஏறுவரிசை"
 
-#: src/exm-comment-dialog.blp:13 src/exm-detail-view.blp:427
+#: src/exm-comment-dialog.blp:13 src/exm-detail-view.blp:439
 msgid "Reviews and Comments"
 msgstr "கருத்துகள் மற்றும் மதிப்புரைகள்"
 
-#: src/exm-comment-dialog.blp:25 src/exm-detail-view.c:920
+#: src/exm-comment-dialog.blp:25 src/exm-detail-view.c:921
 #: src/exm-install-button.c:147
 msgid "Loading"
 msgstr "ஏற்றுகிறது"
@@ -192,97 +192,102 @@ msgstr "நீட்டிப்புகளைப் பயன்படுத�
 msgid "Open extension preferences"
 msgstr "நீட்டிப்பு விருப்பத்தேர்வுகளைத் திறக்கவும்"
 
+#. Translators: Button tooltip to show extension directory in Files
+#: src/exm-detail-view.blp:209
+msgid "Show in Files"
+msgstr ""
+
 #. Translators: Switch tooltip to enable or disable the extension
-#: src/exm-detail-view.blp:205
+#: src/exm-detail-view.blp:217
 #, fuzzy
 #| msgid "Use Extensions"
 msgid "Toggle Extension"
 msgstr "நீட்டிப்புகளைப் பயன்படுத்தவும்"
 
-#: src/exm-detail-view.blp:229
+#: src/exm-detail-view.blp:241
 msgid "Enlarge Image"
 msgstr "படத்தை பெரிதாக்குங்கள்"
 
-#: src/exm-detail-view.blp:247
+#: src/exm-detail-view.blp:259
 msgid "Description"
 msgstr "விளக்கம்"
 
-#: src/exm-detail-view.blp:275
+#: src/exm-detail-view.blp:287
 msgctxt "Number of downloads"
 msgid "Downloads"
 msgstr "பதிவிறக்கங்கள்"
 
-#: src/exm-detail-view.blp:295
+#: src/exm-detail-view.blp:307
 msgid "Version"
 msgstr "பதிப்பு"
 
 #. Translators: Icon's tooltip when an extension update is available
-#: src/exm-detail-view.blp:312 src/exm-extension-row.blp:26
+#: src/exm-detail-view.blp:324 src/exm-extension-row.blp:26
 msgid "A newer version of this extension is available"
 msgstr "இந்த நீட்டிப்பின் புதிய பதிப்பு கிடைக்கிறது"
 
 #. Translators: Icon's tooltip when an extension is incompatible
-#: src/exm-detail-view.blp:326 src/exm-extension-row.blp:43
+#: src/exm-detail-view.blp:338 src/exm-extension-row.blp:43
 #: src/exm-install-button.c:142
 msgid "This extension is incompatible with your current version of GNOME"
 msgstr "இந்த நீட்டிப்பு உங்கள் தற்போதைய GNOME பதிப்போடு பொருந்தாது"
 
-#: src/exm-detail-view.blp:348
+#: src/exm-detail-view.blp:360
 msgid "Session Modes"
 msgstr "அமர்வு முறைகள்"
 
-#: src/exm-detail-view.blp:357
+#: src/exm-detail-view.blp:369
 msgid "Links"
 msgstr "இணைப்புகள்"
 
-#: src/exm-detail-view.blp:367
+#: src/exm-detail-view.blp:379
 msgid "Homepage"
 msgstr "முகப்புப்பக்கம்"
 
-#: src/exm-detail-view.blp:383 src/exm-detail-view.blp:398
+#: src/exm-detail-view.blp:395 src/exm-detail-view.blp:410
 msgid "Donate"
 msgstr "நன்கொடை"
 
-#: src/exm-detail-view.blp:409
+#: src/exm-detail-view.blp:421
 msgid "View on Extensions"
 msgstr "நீட்டிப்புகளில் காண்க"
 
-#: src/exm-detail-view.blp:450
+#: src/exm-detail-view.blp:462
 msgid "Reviews and comments are disabled for this extension"
 msgstr "இந்த நீட்டிப்புக்கு மதிப்புரைகள் மற்றும் கருத்துகள் முடக்கப்பட்டுள்ளன"
 
-#: src/exm-detail-view.blp:493
+#: src/exm-detail-view.blp:505
 msgid "There are no reviews or comments"
 msgstr "மதிப்புரைகள் அல்லது கருத்துகள் எதுவும் இல்லை"
 
-#: src/exm-detail-view.blp:522
+#: src/exm-detail-view.blp:534
 msgid "_Show All"
 msgstr "எல்லாம் காட்டு"
 
-#: src/exm-detail-view.c:463
+#: src/exm-detail-view.c:464
 msgid "Unlock Dialog"
 msgstr "உரையாடலைத் திறக்கவும்"
 
-#: src/exm-detail-view.c:464
+#: src/exm-detail-view.c:465
 msgid "GDM"
 msgstr "சி.டி.எம்"
 
-#: src/exm-detail-view.c:558 src/exm-detail-view.c:663
+#: src/exm-detail-view.c:559 src/exm-detail-view.c:664
 msgid "Unsupported"
 msgstr "ஆதரவற்றது"
 
-#: src/exm-detail-view.c:711
+#: src/exm-detail-view.c:712
 msgid "Unknown"
 msgstr "தெரியாதது"
 
 #. Translators: '%s' = extension name
-#: src/exm-detail-view.c:801
+#: src/exm-detail-view.c:802
 #, c-format
 msgid "%s Icon"
 msgstr "%s படவுரு"
 
 #. Translators: '%s' = extension name
-#: src/exm-detail-view.c:830
+#: src/exm-detail-view.c:831
 #, c-format
 msgid "%s Screenshot"
 msgstr "%s திரை காட்சி"

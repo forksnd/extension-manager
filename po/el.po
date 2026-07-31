@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-05 15:52+0000\n"
+"POT-Creation-Date: 2026-07-31 19:23+0000\n"
 "PO-Revision-Date: 2025-08-14 17:21+0000\n"
 "Last-Translator: Óscar Fernández Díaz "
 "<42654671+oscfdezdz@users.noreply.github.com>\n"
@@ -138,7 +138,7 @@ msgid "Try a different search"
 msgstr "Δοκιμάστε μια διαφορετική αναζήτηση"
 
 #: src/exm-browse-page.blp:186 src/exm-comment-dialog.blp:34
-#: src/exm-detail-view.blp:60 src/exm-detail-view.blp:470
+#: src/exm-detail-view.blp:60 src/exm-detail-view.blp:482
 #: src/exm-upgrade-assistant.blp:99
 msgid "Connection Error"
 msgstr "Σφάλμα σύνδεσης"
@@ -147,11 +147,11 @@ msgstr "Σφάλμα σύνδεσης"
 msgid "Ascending Order"
 msgstr ""
 
-#: src/exm-comment-dialog.blp:13 src/exm-detail-view.blp:427
+#: src/exm-comment-dialog.blp:13 src/exm-detail-view.blp:439
 msgid "Reviews and Comments"
 msgstr "Κριτικές και σχόλια"
 
-#: src/exm-comment-dialog.blp:25 src/exm-detail-view.c:920
+#: src/exm-comment-dialog.blp:25 src/exm-detail-view.c:921
 #: src/exm-install-button.c:147
 msgid "Loading"
 msgstr "Φόρτωση"
@@ -200,97 +200,102 @@ msgstr "Χρήση επεκτάσεων"
 msgid "Open extension preferences"
 msgstr "Ανοίξτε τις προτιμήσεις επέκτασης"
 
+#. Translators: Button tooltip to show extension directory in Files
+#: src/exm-detail-view.blp:209
+msgid "Show in Files"
+msgstr ""
+
 #. Translators: Switch tooltip to enable or disable the extension
-#: src/exm-detail-view.blp:205
+#: src/exm-detail-view.blp:217
 #, fuzzy
 #| msgid "Use Extensions"
 msgid "Toggle Extension"
 msgstr "Χρήση επεκτάσεων"
 
-#: src/exm-detail-view.blp:229
+#: src/exm-detail-view.blp:241
 msgid "Enlarge Image"
 msgstr "Μεγέθυνση εικόνας"
 
-#: src/exm-detail-view.blp:247
+#: src/exm-detail-view.blp:259
 msgid "Description"
 msgstr "Περιγραφή"
 
-#: src/exm-detail-view.blp:275
+#: src/exm-detail-view.blp:287
 msgctxt "Number of downloads"
 msgid "Downloads"
 msgstr "Λήψεις"
 
-#: src/exm-detail-view.blp:295
+#: src/exm-detail-view.blp:307
 msgid "Version"
 msgstr "Έκδοση"
 
 #. Translators: Icon's tooltip when an extension update is available
-#: src/exm-detail-view.blp:312 src/exm-extension-row.blp:26
+#: src/exm-detail-view.blp:324 src/exm-extension-row.blp:26
 msgid "A newer version of this extension is available"
 msgstr "Μια νεότερη εκδοσή αυτής της επέκτασης είναι διαθέσιμη"
 
 #. Translators: Icon's tooltip when an extension is incompatible
-#: src/exm-detail-view.blp:326 src/exm-extension-row.blp:43
+#: src/exm-detail-view.blp:338 src/exm-extension-row.blp:43
 #: src/exm-install-button.c:142
 msgid "This extension is incompatible with your current version of GNOME"
 msgstr "Αυτή η επέκταση είναι μη συμβατή με την τρέχουσα εκδοσή GNOME"
 
-#: src/exm-detail-view.blp:348
+#: src/exm-detail-view.blp:360
 msgid "Session Modes"
 msgstr "Λειτουργίες συνόδου"
 
-#: src/exm-detail-view.blp:357
+#: src/exm-detail-view.blp:369
 msgid "Links"
 msgstr "Σύνδεσμοι"
 
-#: src/exm-detail-view.blp:367
+#: src/exm-detail-view.blp:379
 msgid "Homepage"
 msgstr "Αρχική Σελίδα"
 
-#: src/exm-detail-view.blp:383 src/exm-detail-view.blp:398
+#: src/exm-detail-view.blp:395 src/exm-detail-view.blp:410
 msgid "Donate"
 msgstr "Δωρεά"
 
-#: src/exm-detail-view.blp:409
+#: src/exm-detail-view.blp:421
 msgid "View on Extensions"
 msgstr "Δείτε στης Επεκτάσεις"
 
-#: src/exm-detail-view.blp:450
+#: src/exm-detail-view.blp:462
 msgid "Reviews and comments are disabled for this extension"
 msgstr "Οι κριτικές και τα σχόλια είναι απενεργοποιημένα για αυτή την επέκταση"
 
-#: src/exm-detail-view.blp:493
+#: src/exm-detail-view.blp:505
 msgid "There are no reviews or comments"
 msgstr "Δεν υπάρχουν κριτικές ή σχόλια"
 
-#: src/exm-detail-view.blp:522
+#: src/exm-detail-view.blp:534
 msgid "_Show All"
 msgstr "_Εμφάνιση όλων"
 
-#: src/exm-detail-view.c:463
+#: src/exm-detail-view.c:464
 msgid "Unlock Dialog"
 msgstr "Διάλογος ξεκλειδώματος"
 
-#: src/exm-detail-view.c:464
+#: src/exm-detail-view.c:465
 msgid "GDM"
 msgstr "ΔΟG"
 
-#: src/exm-detail-view.c:558 src/exm-detail-view.c:663
+#: src/exm-detail-view.c:559 src/exm-detail-view.c:664
 msgid "Unsupported"
 msgstr "Δεν Υποστηρίζεται"
 
-#: src/exm-detail-view.c:711
+#: src/exm-detail-view.c:712
 msgid "Unknown"
 msgstr "Άγνωστο"
 
 #. Translators: '%s' = extension name
-#: src/exm-detail-view.c:801
+#: src/exm-detail-view.c:802
 #, c-format
 msgid "%s Icon"
 msgstr "Εικονίδιο %s"
 
 #. Translators: '%s' = extension name
-#: src/exm-detail-view.c:830
+#: src/exm-detail-view.c:831
 #, c-format
 msgid "%s Screenshot"
 msgstr "%s Στιγμιότυπο οθόνης"

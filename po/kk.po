@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-05 15:52+0000\n"
+"POT-Creation-Date: 2026-07-31 19:23+0000\n"
 "PO-Revision-Date: 2025-09-01 20:34+0000\n"
 "Last-Translator: AnmiTaliDev <anmitali198@gmail.com>\n"
 "Language-Team: Kazakh <https://hosted.weblate.org/projects/extension-manager/"
@@ -127,7 +127,7 @@ msgid "Try a different search"
 msgstr "Басқа іздеу жасап көріңіз"
 
 #: src/exm-browse-page.blp:186 src/exm-comment-dialog.blp:34
-#: src/exm-detail-view.blp:60 src/exm-detail-view.blp:470
+#: src/exm-detail-view.blp:60 src/exm-detail-view.blp:482
 #: src/exm-upgrade-assistant.blp:99
 msgid "Connection Error"
 msgstr "Байланыс қатесі"
@@ -136,11 +136,11 @@ msgstr "Байланыс қатесі"
 msgid "Ascending Order"
 msgstr "Өсу тәртібі"
 
-#: src/exm-comment-dialog.blp:13 src/exm-detail-view.blp:427
+#: src/exm-comment-dialog.blp:13 src/exm-detail-view.blp:439
 msgid "Reviews and Comments"
 msgstr "Пікірлер мен түсініктемелер"
 
-#: src/exm-comment-dialog.blp:25 src/exm-detail-view.c:920
+#: src/exm-comment-dialog.blp:25 src/exm-detail-view.c:921
 #: src/exm-install-button.c:147
 msgid "Loading"
 msgstr "Жүктелуде"
@@ -189,97 +189,102 @@ msgstr "Кеңейтулерді пайдалану"
 msgid "Open extension preferences"
 msgstr "Кеңейту баптауларын ашу"
 
+#. Translators: Button tooltip to show extension directory in Files
+#: src/exm-detail-view.blp:209
+msgid "Show in Files"
+msgstr ""
+
 #. Translators: Switch tooltip to enable or disable the extension
-#: src/exm-detail-view.blp:205
+#: src/exm-detail-view.blp:217
 #, fuzzy
 #| msgid "Use Extensions"
 msgid "Toggle Extension"
 msgstr "Кеңейтулерді пайдалану"
 
-#: src/exm-detail-view.blp:229
+#: src/exm-detail-view.blp:241
 msgid "Enlarge Image"
 msgstr "Суретті үлкейту"
 
-#: src/exm-detail-view.blp:247
+#: src/exm-detail-view.blp:259
 msgid "Description"
 msgstr "Сипаттамасы"
 
-#: src/exm-detail-view.blp:275
+#: src/exm-detail-view.blp:287
 msgctxt "Number of downloads"
 msgid "Downloads"
 msgstr "Жүктеулер"
 
-#: src/exm-detail-view.blp:295
+#: src/exm-detail-view.blp:307
 msgid "Version"
 msgstr "Нұсқасы"
 
 #. Translators: Icon's tooltip when an extension update is available
-#: src/exm-detail-view.blp:312 src/exm-extension-row.blp:26
+#: src/exm-detail-view.blp:324 src/exm-extension-row.blp:26
 msgid "A newer version of this extension is available"
 msgstr "Бұл кеңейтудің жаңа нұсқасы қол жетімді"
 
 #. Translators: Icon's tooltip when an extension is incompatible
-#: src/exm-detail-view.blp:326 src/exm-extension-row.blp:43
+#: src/exm-detail-view.blp:338 src/exm-extension-row.blp:43
 #: src/exm-install-button.c:142
 msgid "This extension is incompatible with your current version of GNOME"
 msgstr "Бұл кеңейту сіздің ағымдағы GNOME нұсқаңызбен үйлесімсіз"
 
-#: src/exm-detail-view.blp:348
+#: src/exm-detail-view.blp:360
 msgid "Session Modes"
 msgstr "Сеанс режимдері"
 
-#: src/exm-detail-view.blp:357
+#: src/exm-detail-view.blp:369
 msgid "Links"
 msgstr "Сілтемелер"
 
-#: src/exm-detail-view.blp:367
+#: src/exm-detail-view.blp:379
 msgid "Homepage"
 msgstr "Басты бет"
 
-#: src/exm-detail-view.blp:383 src/exm-detail-view.blp:398
+#: src/exm-detail-view.blp:395 src/exm-detail-view.blp:410
 msgid "Donate"
 msgstr "Ақшалай көмек"
 
-#: src/exm-detail-view.blp:409
+#: src/exm-detail-view.blp:421
 msgid "View on Extensions"
 msgstr "Extensions сайтында көру"
 
-#: src/exm-detail-view.blp:450
+#: src/exm-detail-view.blp:462
 msgid "Reviews and comments are disabled for this extension"
 msgstr "Бұл кеңейту үшін пікірлер мен түсініктемелер өшірілген"
 
-#: src/exm-detail-view.blp:493
+#: src/exm-detail-view.blp:505
 msgid "There are no reviews or comments"
 msgstr "Пікірлер мен түсініктемелер жоқ"
 
-#: src/exm-detail-view.blp:522
+#: src/exm-detail-view.blp:534
 msgid "_Show All"
 msgstr "_Барлығын көрсету"
 
-#: src/exm-detail-view.c:463
+#: src/exm-detail-view.c:464
 msgid "Unlock Dialog"
 msgstr "Құлыпты ашу диалогы"
 
-#: src/exm-detail-view.c:464
+#: src/exm-detail-view.c:465
 msgid "GDM"
 msgstr "GDM"
 
-#: src/exm-detail-view.c:558 src/exm-detail-view.c:663
+#: src/exm-detail-view.c:559 src/exm-detail-view.c:664
 msgid "Unsupported"
 msgstr "Қолдау көрсетілмейтін"
 
-#: src/exm-detail-view.c:711
+#: src/exm-detail-view.c:712
 msgid "Unknown"
 msgstr ""
 
 #. Translators: '%s' = extension name
-#: src/exm-detail-view.c:801
+#: src/exm-detail-view.c:802
 #, c-format
 msgid "%s Icon"
 msgstr "%s белгішесі"
 
 #. Translators: '%s' = extension name
-#: src/exm-detail-view.c:830
+#: src/exm-detail-view.c:831
 #, c-format
 msgid "%s Screenshot"
 msgstr "%s скриншоты"
