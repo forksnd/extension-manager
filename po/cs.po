@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-05 15:52+0000\n"
-"PO-Revision-Date: 2026-07-05 16:18+0000\n"
-"Last-Translator: Fjuro <fjuro@users.noreply.hosted.weblate.org>\n"
+"PO-Revision-Date: 2026-07-31 20:52+0000\n"
+"Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/extension-manager/"
 "app/cs/>\n"
 "Language: cs\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 2026.7.1.dev0\n"
+"X-Generator: Weblate 2026.8.dev0\n"
 
 #: data/com.mattjakeman.ExtensionManager.desktop.in.in:2
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:6
@@ -200,7 +200,7 @@ msgstr "Otevřít předvolby rozšíření"
 #. Translators: Switch tooltip to enable or disable the extension
 #: src/exm-detail-view.blp:205
 msgid "Toggle Extension"
-msgstr "Přepnout rozšíření"
+msgstr "Vyp/zapnout rozšíření"
 
 #: src/exm-detail-view.blp:229
 msgid "Enlarge Image"
@@ -704,8 +704,8 @@ msgstr "_Podrobnosti"
 #, c-format
 msgid "%u Selected"
 msgid_plural "%u Selected"
-msgstr[0] "Vybrána %u"
-msgstr[1] "Vybrány %u"
+msgstr[0] "Vybráno %u"
+msgstr[1] "Vybrána %u"
 msgstr[2] "Vybráno %u"
 
 #: src/exm-window.c:556
@@ -717,13 +717,13 @@ msgid_plural ""
 "Their features and functionality will no longer be accessible. Are you sure "
 "you want to uninstall %u extensions?"
 msgstr[0] ""
-"Funkce tohoto rozšíření již nebudou nadále k dispozici. Opravdu chcete "
+"Funkce tohoto rozšíření už nebudou nadále k dispozici. Opravdu chcete "
 "odinstalovat %u rozšíření?"
 msgstr[1] ""
-"Jejich funkce již nebudou nadále k dispozici. Opravdu chcete odinstalovat %u "
+"Jejich funkce už nebudou nadále k dispozici. Opravdu chcete odinstalovat %u "
 "rozšíření?"
 msgstr[2] ""
-"Jejich funkce již nebudou nadále k dispozici. Opravdu chcete odinstalovat %u "
+"Jejich funkce už nebudou nadále k dispozici. Opravdu chcete odinstalovat %u "
 "rozšíření?"
 
 #: src/web/exm-request-handler.c:133
