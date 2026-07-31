@@ -310,6 +310,49 @@ exm_manager_open_prefs (ExmManager   *self,
                                                   create_callback_data (self, extension));
 }
 
+static void
+show_files_done (GObject         *source_object G_GNUC_UNUSED,
+                 GAsyncResult    *result,
+                 ExmCallbackData *data)
+{
+    GError *error = NULL;
+    gboolean success = g_app_info_launch_default_for_uri_finish (result, &error);
+
+    if (!success)
+    {
+        if (error)
+        {
+            g_warning ("Could not Show extension in Files: %s", error->message);
+            g_error_free (error);
+        }
+        else
+        {
+            g_warning ("Could not Show extension in Files: unknown failure");
+        }
+    }
+
+    free_callback_data (data);
+}
+
+void
+exm_manager_show_files (ExmManager   *self,
+                        ExmExtension *extension)
+{
+    gchar *path;
+    g_object_get (extension, "path", &path, NULL);
+
+    gchar *uri = g_filename_to_uri(path, NULL, NULL);
+
+    g_app_info_launch_default_for_uri_async (uri,
+                                             NULL,
+                                             NULL,
+                                             (GAsyncReadyCallback) show_files_done,
+                                             create_callback_data (self, extension));
+
+    g_free (uri);
+    g_free (path);
+}
+
 static gpointer
 list_model_get_by_uuid (GListModel  *model,
                         const gchar *uuid)
@@ -549,6 +592,7 @@ parse_single_extension (ExmExtension **extension,
     gchar *description = NULL;
     ExmExtensionState state = EXM_EXTENSION_STATE_INITIALIZED;
     gboolean enabled = FALSE;
+    gchar *path = NULL;
     gchar *url = NULL;
     gchar *version = NULL;
     gchar *version_name = NULL;
@@ -603,6 +647,10 @@ parse_single_extension (ExmExtension **extension,
         else if (g_strcmp0 (prop_name, "enabled") == 0)
         {
             g_variant_get (prop_value, "b", &enabled);
+        }
+        else if (g_strcmp0 (prop_name, "path") == 0)
+        {
+            g_variant_get (prop_value, "s", &path);
         }
         else if (g_strcmp0 (prop_name, "url") == 0)
         {
@@ -692,6 +740,7 @@ parse_single_extension (ExmExtension **extension,
                   "description", description,
                   "state", state,
                   "enabled", enabled,
+                  "path", path,
                   "url", url,
                   "version", version,
                   "version-name", version_name,
@@ -707,6 +756,7 @@ parse_single_extension (ExmExtension **extension,
     g_free (uuid);
     g_free (name);
     g_free (description);
+    g_free (path);
     g_free (url);
     g_free (version);
     g_free (version_name);

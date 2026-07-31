@@ -70,6 +70,7 @@ struct _ExmDetailView
     GtkButton *ext_install;
     GtkButton *remove_btn;
     GtkButton *prefs_btn;
+    GtkButton *files_btn;
     GtkSwitch *ext_toggle;
     GtkLabel *ext_description;
     GtkImage *ext_icon;
@@ -1089,6 +1090,19 @@ page_remove (GSimpleAction *action G_GNUC_UNUSED,
         exm_manager_remove_extension (self->manager, extension);
 }
 
+static void
+page_show_files (GSimpleAction *action G_GNUC_UNUSED,
+                 GVariant      *param G_GNUC_UNUSED,
+                 ExmDetailView *self)
+{
+    if (!self->uuid || !self->manager)
+        return;
+
+    ExmExtension *extension = exm_manager_get_by_uuid (self->manager, self->uuid);
+    if (extension)
+        exm_manager_show_files (self->manager, extension);
+}
+
 static gboolean
 on_toggle_changed (GtkSwitch     *toggle,
                    gboolean       state,
@@ -1142,6 +1156,8 @@ update_tools_stack (ExmDetailView *self)
             gtk_widget_set_visible (GTK_WIDGET (self->prefs_btn), has_prefs);
 
             gtk_widget_set_visible (GTK_WIDGET (self->remove_btn), is_user);
+
+            gtk_widget_set_visible (GTK_WIDGET (self->files_btn), is_user);
 
             gtk_widget_set_visible (GTK_WIDGET (self->update_icon), has_update);
 
@@ -1279,6 +1295,7 @@ exm_detail_view_class_init (ExmDetailViewClass *klass)
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, ext_install);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, remove_btn);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, prefs_btn);
+    gtk_widget_class_bind_template_child (widget_class, ExmDetailView, files_btn);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, ext_toggle);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, ext_screenshot);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, ext_screenshot_container);
@@ -1325,6 +1342,7 @@ exm_detail_view_init (ExmDetailView *self)
 
     GSimpleAction *open_prefs_action;
     GSimpleAction *remove_action;
+    GSimpleAction *show_files_action;
 
     g_type_ensure (EXM_TYPE_INSTALL_BUTTON);
     g_type_ensure (EXM_TYPE_SCREENSHOT);
@@ -1350,8 +1368,12 @@ exm_detail_view_init (ExmDetailView *self)
     remove_action = g_simple_action_new ("remove", NULL);
     g_signal_connect (remove_action, "activate", G_CALLBACK (page_remove), self);
 
+    show_files_action = g_simple_action_new ("show-files", NULL);
+    g_signal_connect (show_files_action, "activate", G_CALLBACK (page_show_files), self);
+
     g_action_map_add_action (G_ACTION_MAP (self->action_group), G_ACTION (open_prefs_action));
     g_action_map_add_action (G_ACTION_MAP (self->action_group), G_ACTION (remove_action));
+    g_action_map_add_action (G_ACTION_MAP (self->action_group), G_ACTION (show_files_action));
 
     gtk_widget_insert_action_group (GTK_WIDGET (self), "page", G_ACTION_GROUP (self->action_group));
 }
