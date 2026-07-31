@@ -33,6 +33,7 @@ struct _ExmExtension
     gchar *description;
     ExmExtensionState state;
     gboolean enabled;
+    gchar *path;
     gchar *url;
     gchar *version;
     gchar *version_name;
@@ -54,6 +55,7 @@ enum {
     PROP_DESCRIPTION,
     PROP_STATE,
     PROP_ENABLED,
+    PROP_PATH,
     PROP_URL,
     PROP_VERSION,
     PROP_VERSION_NAME,
@@ -101,6 +103,9 @@ exm_extension_get_property (GObject    *object,
         break;
     case PROP_ENABLED:
         g_value_set_boolean (value, self->enabled);
+        break;
+    case PROP_PATH:
+        g_value_set_string (value, self->path);
         break;
     case PROP_URL:
         g_value_set_string (value, self->url);
@@ -164,6 +169,10 @@ exm_extension_set_property (GObject      *object,
         break;
     case PROP_ENABLED:
         self->enabled = g_value_get_boolean (value);
+        break;
+    case PROP_PATH:
+        g_free (self->path);
+        self->path = g_value_dup_string (value);
         break;
     case PROP_URL:
         g_free (self->url);
@@ -270,6 +279,13 @@ exm_extension_class_init (ExmExtensionClass *klass)
                               "Enabled",
                               FALSE,
                               G_PARAM_READWRITE);
+    
+    properties [PROP_PATH] =
+        g_param_spec_string ("path",
+                             "PATH",
+                             "PATH",
+                             NULL,
+                             G_PARAM_READWRITE);
 
     properties [PROP_URL] =
         g_param_spec_string ("url",

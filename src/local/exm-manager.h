@@ -41,6 +41,8 @@ void          exm_manager_remove_extension  (ExmManager           *self,
                                              ExmExtension         *extension);
 void          exm_manager_open_prefs        (ExmManager           *self,
                                              ExmExtension         *extension);
+void          exm_manager_show_files        (ExmManager           *self,
+                                             ExmExtension         *extension);
 void          exm_manager_check_for_updates (ExmManager           *self);
 gboolean      exm_manager_is_installed_uuid (ExmManager           *self,
                                              const gchar          *uuid);
