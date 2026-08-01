@@ -12,9 +12,8 @@ msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-31 19:23+0000\n"
-"PO-Revision-Date: 2026-07-16 11:01+0000\n"
-"Last-Translator: Muhammed Al-Basha "
-"<mu7basha@users.noreply.hosted.weblate.org>\n"
+"PO-Revision-Date: 2026-08-02 13:01+0000\n"
+"Last-Translator: jonnysemon <jonnysemon@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/extension-manager/"
 "app/ar/>\n"
 "Language: ar\n"
@@ -195,7 +194,7 @@ msgstr "افتح تفضيلات الامتداد"
 #. Translators: Button tooltip to show extension directory in Files
 #: src/exm-detail-view.blp:209
 msgid "Show in Files"
-msgstr ""
+msgstr "أظهر في الملفات"
 
 #. Translators: Switch tooltip to enable or disable the extension
 #: src/exm-detail-view.blp:217
@@ -304,7 +303,7 @@ msgstr "انسخ إلى الحافظة"
 
 #: src/exm-error-dialog.blp:77
 msgid "_New Issue"
-msgstr "_بلِّغ عن العلة"
+msgstr "_علة جديدة"
 
 #. Success indicator
 #: src/exm-error-dialog.c:126 src/exm-extension-error-dialog.c:82
