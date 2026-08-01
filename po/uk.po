@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-31 19:23+0000\n"
-"PO-Revision-Date: 2026-07-25 10:13+0000\n"
+"PO-Revision-Date: 2026-08-01 12:12+0000\n"
 "Last-Translator: Димко <Dymkovych@proton.me>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/extension-"
 "manager/app/uk/>\n"
@@ -31,17 +31,18 @@ msgstr ""
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:6
 #: src/exm-window.blp:7
 msgid "Extension Manager"
-msgstr "Менеджер розширень"
+msgstr "Управитель розширень"
 
 #: data/com.mattjakeman.ExtensionManager.desktop.in.in:12
 msgid "Manage GNOME Shell Extensions"
-msgstr "Керуйте розширеннями оболонки GNOME"
+msgstr "Керування розширеннями оболонки GNOME"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons. The list MUST also end with a semicolon.
 #. Make sure to leave the original strings and add your translations afterwards, so that users can search both in English and your language.
 #: data/com.mattjakeman.ExtensionManager.desktop.in.in:15
 msgid "extension;manager;shell;"
-msgstr "extension;manager;shell;розширення;менеджер;гном;застосунки;додатки;кастомізація;налаштування;оболонка;"
+msgstr ""
+"extension;manager;shell;розширення;управитель;керування;менеджер;гном;застосунки;додатки;кастомізація;налаштування;оболонка;"
 
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:7
 msgid "Install GNOME Extensions"
@@ -50,8 +51,8 @@ msgstr "Встановлення розширень GNOME"
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:13
 msgid "Browse and install GNOME Shell extensions to customise your desktop."
 msgstr ""
-"Перегляньте та встановіть розширення оболонки GNOME для налаштування "
-"середовища."
+"Підлаштовуйте своє середовище GNOME: переглядайте й встановлюйте розширення "
+"оболонки."
 
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:14
 msgid "Features:"
@@ -60,12 +61,12 @@ msgstr "Можливості:"
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:16
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:26
 msgid "Browse extensions.gnome.org right inside the app"
-msgstr "Шукайте розширення з extensions.gnome.org прямо в програмі"
+msgstr "Шукайте на extensions.gnome.org прямо у програмі"
 
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:17
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:22
 msgid "Manage the extensions you already have installed"
-msgstr "Керуйте уже встановленими розширеннями"
+msgstr "Керуйте вже встановленими розширеннями"
 
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:30
 msgid "See all the details of your extensions"
