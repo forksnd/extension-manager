@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-31 19:23+0000\n"
-"PO-Revision-Date: 2026-08-01 12:12+0000\n"
+"PO-Revision-Date: 2026-08-02 13:01+0000\n"
 "Last-Translator: Димко <Dymkovych@proton.me>\n"
 "Language-Team: Ukrainian <https://hosted.weblate.org/projects/extension-"
 "manager/app/uk/>\n"
@@ -31,7 +31,7 @@ msgstr ""
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:6
 #: src/exm-window.blp:7
 msgid "Extension Manager"
-msgstr "Управитель розширень"
+msgstr "Розпорядник розширень"
 
 #: data/com.mattjakeman.ExtensionManager.desktop.in.in:12
 msgid "Manage GNOME Shell Extensions"
@@ -42,7 +42,7 @@ msgstr "Керування розширеннями оболонки GNOME"
 #: data/com.mattjakeman.ExtensionManager.desktop.in.in:15
 msgid "extension;manager;shell;"
 msgstr ""
-"extension;manager;shell;розширення;управитель;керування;менеджер;гном;застосунки;додатки;кастомізація;налаштування;оболонка;"
+"extension;manager;shell;розширення;розпорядник;управитель;керування;менеджер;гном;застосунки;додатки;кастомізація;налаштування;оболонка;"
 
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:7
 msgid "Install GNOME Extensions"
@@ -139,7 +139,7 @@ msgstr "Нічого не знайдено"
 
 #: src/exm-browse-page.blp:152
 msgid "Try a different search"
-msgstr "Спробуйте інший пошуковий запит"
+msgstr "Спробуйте змінити запит"
 
 #: src/exm-browse-page.blp:186 src/exm-comment-dialog.blp:34
 #: src/exm-detail-view.blp:60 src/exm-detail-view.blp:482
@@ -203,7 +203,7 @@ msgstr "Параметри"
 #. Translators: Button tooltip to show extension directory in Files
 #: src/exm-detail-view.blp:209
 msgid "Show in Files"
-msgstr ""
+msgstr "Відкрити у Файлах"
 
 #. Translators: Switch tooltip to enable or disable the extension
 #: src/exm-detail-view.blp:217
@@ -304,7 +304,7 @@ msgstr "Звіт про помилку"
 
 #: src/exm-error-dialog.blp:22
 msgid "An unexpected error occurred in Extension Manager"
-msgstr "Неочікувана помилка в Менеджері розширень"
+msgstr "Неочікувана помилка в Розпоряднику розширень"
 
 #: src/exm-error-dialog.blp:36 src/exm-extension-error-dialog.blp:36
 msgid "Copy to Clipboard"
@@ -332,7 +332,7 @@ msgid ""
 "weight=\"bold\">contact the package distributor (%s) first</span> before "
 "filing an issue. Be sure to attach the following information:"
 msgstr ""
-"Ви використовуєте сторонню збірку Менеджера розширень. Перш ніж створювати "
+"Ви використовуєте сторонню збірку Розпорядника. Перш ніж створювати "
 "звернення <span weight=\"bold\">зверніться до постачальника (%s) </span>. Не "
 "забудьте додати таку інформацію:"
 
@@ -403,7 +403,7 @@ msgstr "Системні розширення"
 
 #: src/exm-installed-page.blp:71
 msgid "Try a different search or search online"
-msgstr "Спробуйте інший пошуковий запит або шукайте онлайн"
+msgstr "Спробуйте змінити запит або шукайте онлайн"
 
 #: src/exm-installed-page.blp:78 src/exm-installed-page.blp:99
 msgid "_Search Online"
@@ -656,7 +656,7 @@ msgstr "_Клавіатурні скорочення"
 
 #: src/exm-window.blp:196
 msgid "_About Extension Manager"
-msgstr "_Про Менеджер розширень"
+msgstr "_Про Розпорядник розширень"
 
 #: src/exm-window.blp:201
 msgid "Uninstall Extension?"
