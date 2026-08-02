@@ -310,49 +310,6 @@ exm_manager_open_prefs (ExmManager   *self,
                                                   create_callback_data (self, extension));
 }
 
-static void
-show_files_done (GObject         *source_object G_GNUC_UNUSED,
-                 GAsyncResult    *result,
-                 ExmCallbackData *data)
-{
-    GError *error = NULL;
-    gboolean success = g_app_info_launch_default_for_uri_finish (result, &error);
-
-    if (!success)
-    {
-        if (error)
-        {
-            g_warning ("Could not Show extension in Files: %s", error->message);
-            g_error_free (error);
-        }
-        else
-        {
-            g_warning ("Could not Show extension in Files: unknown failure");
-        }
-    }
-
-    free_callback_data (data);
-}
-
-void
-exm_manager_show_files (ExmManager   *self,
-                        ExmExtension *extension)
-{
-    gchar *path;
-    g_object_get (extension, "path", &path, NULL);
-
-    gchar *uri = g_filename_to_uri(path, NULL, NULL);
-
-    g_app_info_launch_default_for_uri_async (uri,
-                                             NULL,
-                                             NULL,
-                                             (GAsyncReadyCallback) show_files_done,
-                                             create_callback_data (self, extension));
-
-    g_free (uri);
-    g_free (path);
-}
-
 static gpointer
 list_model_get_by_uuid (GListModel  *model,
                         const gchar *uuid)
