@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-31 19:23+0000\n"
+"POT-Creation-Date: 2026-08-02 13:12+0000\n"
 "PO-Revision-Date: 2026-08-01 09:38+0000\n"
 "Last-Translator: Quentin PAGÈS <quentinantonin@free.fr>\n"
 "Language-Team: Occitan <https://hosted.weblate.org/projects/extension-"
@@ -131,7 +131,7 @@ msgid "Try a different search"
 msgstr "Ensajatz una recèrca diferenta"
 
 #: src/exm-browse-page.blp:186 src/exm-comment-dialog.blp:34
-#: src/exm-detail-view.blp:60 src/exm-detail-view.blp:482
+#: src/exm-detail-view.blp:61 src/exm-detail-view.blp:491
 #: src/exm-upgrade-assistant.blp:99
 msgid "Connection Error"
 msgstr "Error de connexion"
@@ -140,152 +140,157 @@ msgstr "Error de connexion"
 msgid "Ascending Order"
 msgstr "Òrdre ascendent"
 
-#: src/exm-comment-dialog.blp:13 src/exm-detail-view.blp:439
+#: src/exm-comment-dialog.blp:13 src/exm-detail-view.blp:448
 msgid "Reviews and Comments"
 msgstr "Avises e comentaris"
 
-#: src/exm-comment-dialog.blp:25 src/exm-detail-view.c:921
+#: src/exm-comment-dialog.blp:25 src/exm-detail-view.c:924
 #: src/exm-install-button.c:147
 msgid "Loading"
 msgstr "Cargament"
 
-#: src/exm-comment-tile.blp:30 src/exm-detail-view.blp:152
+#: src/exm-comment-tile.blp:30 src/exm-detail-view.blp:153
 msgid "Author"
 msgstr "Autor"
 
-#: src/exm-detail-view.blp:51
+#: src/exm-detail-view.blp:52
 msgid "Loading Details"
 msgstr "Cargament de las informacions"
 
-#: src/exm-detail-view.blp:70 src/exm-window.c:411
+#: src/exm-detail-view.blp:71 src/exm-window.c:411
 msgid "An Error Occurred"
 msgstr "Una error s'es producha"
 
-#: src/exm-detail-view.blp:71
+#: src/exm-detail-view.blp:72
 msgid "No extension details available"
 msgstr "Cap de detalh de l'extension pas disponible"
 
 #. Translators: Banner title shown when the extension has a runtime error
-#: src/exm-detail-view.blp:84
+#: src/exm-detail-view.blp:85
 msgid "This extension has an error"
 msgstr "Aquesta extension a conegut una error"
 
-#: src/exm-detail-view.blp:85
+#: src/exm-detail-view.blp:86
 msgid "_View Details"
 msgstr "_Veire los detalhs"
 
-#: src/exm-detail-view.blp:137
+#: src/exm-detail-view.blp:138
 msgid "Name"
 msgstr "Nom"
 
 #. Translators: Button tooltip to remove an installed extension
-#: src/exm-detail-view.blp:185
+#: src/exm-detail-view.blp:186
 msgid "Remove Extension"
 msgstr "Suprimir l’extension"
 
 #. Translators: Button tooltip to open extension preferences
 #. Translators: Button's tooltip to open extension's preferences dialog
-#: src/exm-detail-view.blp:197 src/exm-extension-row.blp:72
+#: src/exm-detail-view.blp:198 src/exm-extension-row.blp:72
 msgid "Open extension preferences"
 msgstr "Dobrir las preferéncias de l’extension"
 
-#. Translators: Button tooltip to show extension directory in Files
-#: src/exm-detail-view.blp:209
-msgid "Show in Files"
-msgstr "Afichar dins Fichièrs"
-
 #. Translators: Switch tooltip to enable or disable the extension
-#: src/exm-detail-view.blp:217
+#: src/exm-detail-view.blp:206
 msgid "Toggle Extension"
 msgstr "Activar/Desactivar l’extension"
 
-#: src/exm-detail-view.blp:241
+#: src/exm-detail-view.blp:230
 msgid "Enlarge Image"
 msgstr "Agrandir l'imatge"
 
-#: src/exm-detail-view.blp:259
+#: src/exm-detail-view.blp:248
 msgid "Description"
 msgstr "Descripcion"
 
-#: src/exm-detail-view.blp:287
+#: src/exm-detail-view.blp:276
 msgctxt "Number of downloads"
 msgid "Downloads"
 msgstr "Telecargaments"
 
-#: src/exm-detail-view.blp:307
+#: src/exm-detail-view.blp:296
 msgid "Version"
 msgstr "Version"
 
 #. Translators: Icon's tooltip when an extension update is available
-#: src/exm-detail-view.blp:324 src/exm-extension-row.blp:26
+#: src/exm-detail-view.blp:313 src/exm-extension-row.blp:26
 msgid "A newer version of this extension is available"
 msgstr "Una version mai novèla d’aquesta extension es disponibla"
 
 #. Translators: Icon's tooltip when an extension is incompatible
-#: src/exm-detail-view.blp:338 src/exm-extension-row.blp:43
+#: src/exm-detail-view.blp:327 src/exm-extension-row.blp:43
 #: src/exm-install-button.c:142
 msgid "This extension is incompatible with your current version of GNOME"
 msgstr "Aquesta extension es incompatibla amb vòstra version actuala de GNOME"
 
-#: src/exm-detail-view.blp:360
+#: src/exm-detail-view.blp:349
 msgid "Session Modes"
 msgstr "Mòdes de session"
 
-#: src/exm-detail-view.blp:369
+#: src/exm-detail-view.blp:364
+msgid "Location"
+msgstr ""
+
+#: src/exm-detail-view.blp:378
 msgid "Links"
 msgstr "Ligams"
 
-#: src/exm-detail-view.blp:379
+#: src/exm-detail-view.blp:388
 msgid "Homepage"
 msgstr "Pagina d’acuèlh"
 
-#: src/exm-detail-view.blp:395 src/exm-detail-view.blp:410
+#: src/exm-detail-view.blp:404 src/exm-detail-view.blp:419
 msgid "Donate"
 msgstr "Donar"
 
-#: src/exm-detail-view.blp:421
+#: src/exm-detail-view.blp:430
 msgid "View on Extensions"
 msgstr "Veire sus Extensions"
 
-#: src/exm-detail-view.blp:462
+#: src/exm-detail-view.blp:471
 msgid "Reviews and comments are disabled for this extension"
 msgstr "Los avises e comentaris son desactivats per aquesta extension"
 
-#: src/exm-detail-view.blp:505
+#: src/exm-detail-view.blp:514
 msgid "There are no reviews or comments"
 msgstr "Cap de nòta nimai comentari"
 
-#: src/exm-detail-view.blp:534
+#: src/exm-detail-view.blp:543
 msgid "_Show All"
 msgstr "_Tot afichar"
 
-#: src/exm-detail-view.c:464
+#: src/exm-detail-view.c:467
 msgid "Unlock Dialog"
 msgstr "Desverrolhar la fenèstra de dialòg"
 
-#: src/exm-detail-view.c:465
+#: src/exm-detail-view.c:468
 msgid "GDM"
 msgstr "GDM"
 
-#: src/exm-detail-view.c:559 src/exm-detail-view.c:664
+#: src/exm-detail-view.c:562 src/exm-detail-view.c:667
 msgid "Unsupported"
 msgstr "Pas presa en carga"
 
-#: src/exm-detail-view.c:712
+#: src/exm-detail-view.c:715
 msgid "Unknown"
 msgstr "Desconeguts"
 
 #. Translators: '%s' = extension name
-#: src/exm-detail-view.c:802
+#: src/exm-detail-view.c:805
 #, c-format
 msgid "%s Icon"
 msgstr "Icòna de %s"
 
 #. Translators: '%s' = extension name
-#: src/exm-detail-view.c:831
+#: src/exm-detail-view.c:834
 #, c-format
 msgid "%s Screenshot"
 msgstr "Captura d'ecran de %s"
+
+#. Success indicator
+#: src/exm-detail-view.c:1071 src/exm-error-dialog.c:126
+#: src/exm-extension-error-dialog.c:82 src/exm-upgrade-assistant.c:367
+msgid "Copied"
+msgstr "Copiat"
 
 #: src/exm-error-dialog.blp:7
 msgid "Error Report"
@@ -302,12 +307,6 @@ msgstr "Copiar al quichapapièrs"
 #: src/exm-error-dialog.blp:77
 msgid "_New Issue"
 msgstr "_Anomalia novèla"
-
-#. Success indicator
-#: src/exm-error-dialog.c:126 src/exm-extension-error-dialog.c:82
-#: src/exm-upgrade-assistant.c:367
-msgid "Copied"
-msgstr "Copiat"
 
 #: src/exm-error-dialog.c:174
 msgid "Please open a new issue and attach the following information:"
@@ -733,6 +732,9 @@ msgstr ""
 #: src/web/exm-request-handler.c:134
 msgid "Check your network status and try again"
 msgstr "Verificatz l'estat de vòstre ret e tornatz ensajar"
+
+#~ msgid "Show in Files"
+#~ msgstr "Afichar dins Fichièrs"
 
 #~ msgid "Error"
 #~ msgstr "Error"
