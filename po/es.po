@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-08-02 13:12+0000\n"
-"PO-Revision-Date: 2026-08-01 09:38+0000\n"
+"PO-Revision-Date: 2026-08-02 13:20+0000\n"
 "Last-Translator: Óscar Fernández Díaz "
 "<42654671+oscfdezdz@users.noreply.github.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/extension-"
@@ -230,7 +230,7 @@ msgstr "Modos de sesión"
 
 #: src/exm-detail-view.blp:364
 msgid "Location"
-msgstr ""
+msgstr "Ubicación"
 
 #: src/exm-detail-view.blp:378
 msgid "Links"
