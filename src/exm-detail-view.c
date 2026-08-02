@@ -63,6 +63,7 @@ struct _ExmDetailView
 
     AdwHeaderBar *header_bar;
     GtkRevealer *title_revealer;
+    AdwToastOverlay *toast_overlay;
     GtkStack *stack;
     GtkLabel *error_label;
     AdwStatusPage *error_status;
@@ -88,6 +89,7 @@ struct _ExmDetailView
     GtkLabel *session_modes_label;
     AdwActionRow *location_row;
     GtkImage *location_row_folder_icon;
+    GtkImage *location_row_copy_icon;
     AdwBanner *error_banner;
     gchar *error_text;
     AdwPreferencesGroup *links_group;
@@ -1027,29 +1029,47 @@ show_error (GtkWidget  *widget,
 }
 
 static void
-show_file (ExmDetailView *self,
+show_files_or_copy_path (ExmDetailView *self,
            const char    *action_name G_GNUC_UNUSED,
            GVariant      *param G_GNUC_UNUSED)
 {
-    GtkWidget *toplevel;
     ExmExtension *extension;
+    gboolean is_user;
     g_autofree gchar *path = NULL;
-    g_autoptr (GFile) file = NULL;
-    g_autoptr (GtkFileLauncher) launcher = NULL;
-
-    toplevel = GTK_WIDGET (gtk_widget_get_root (GTK_WIDGET (self)));
 
     extension = exm_manager_get_by_uuid (self->manager, self->uuid);
 
     g_object_get (extension,
+                  "is_user", &is_user,
                   "path", &path,
                   NULL);
 
-    file = g_file_new_for_path (path);
+    if (is_user) 
+    {
+        GtkWidget *toplevel;
+        g_autoptr (GFile) file = NULL;
+        g_autoptr (GtkFileLauncher) launcher = NULL;
 
-    launcher = gtk_file_launcher_new (file);
+        toplevel = GTK_WIDGET (gtk_widget_get_root (GTK_WIDGET (self)));
 
-    gtk_file_launcher_launch (launcher, GTK_WINDOW (toplevel), NULL, NULL, NULL);
+        file = g_file_new_for_path (path);
+
+        launcher = gtk_file_launcher_new (file);
+
+        gtk_file_launcher_launch (launcher, GTK_WINDOW (toplevel), NULL, NULL, NULL);
+    }
+    else
+    {
+        GdkDisplay *display;
+        GdkClipboard *clipboard;
+
+        display = gdk_display_get_default ();
+        clipboard = gdk_display_get_clipboard (display);
+
+        gdk_clipboard_set_text (clipboard, path);
+
+        adw_toast_overlay_add_toast (self->toast_overlay, adw_toast_new (_("Copied")));
+    }
 }
 
 static void
@@ -1181,7 +1201,7 @@ update_tools_stack (ExmDetailView *self)
             adw_action_row_set_subtitle(self->location_row, path);
             gtk_widget_set_visible (GTK_WIDGET (self->location_row), TRUE);
             gtk_widget_set_visible (GTK_WIDGET (self->location_row_folder_icon), is_user);
-            gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (self->location_row), is_user);
+            gtk_widget_set_visible (GTK_WIDGET (self->location_row_copy_icon), !is_user);
 
             {
                 gboolean has_error = (error_msg != NULL) && (error_msg[0] != '\0');
@@ -1304,6 +1324,7 @@ exm_detail_view_class_init (ExmDetailViewClass *klass)
 
     gtk_widget_class_set_template_from_resource (widget_class, g_strdup_printf ("%s/exm-detail-view.ui", RESOURCE_PATH));
 
+    gtk_widget_class_bind_template_child (widget_class, ExmDetailView, toast_overlay);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, header_bar);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, title_revealer);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, stack);
@@ -1331,6 +1352,7 @@ exm_detail_view_class_init (ExmDetailViewClass *klass)
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, session_modes_label);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, location_row);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, location_row_folder_icon);
+    gtk_widget_class_bind_template_child (widget_class, ExmDetailView, location_row_copy_icon);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, error_banner);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, links_group);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, comments_section);
@@ -1352,7 +1374,7 @@ exm_detail_view_class_init (ExmDetailViewClass *klass)
 
     gtk_widget_class_install_action (widget_class, "detail.show-versions", NULL, show_versions);
     gtk_widget_class_install_action (widget_class, "detail.show-error", NULL, show_error);
-    gtk_widget_class_install_action (widget_class, "detail.show-files", NULL, (GtkWidgetActionActivateFunc) show_file);
+    gtk_widget_class_install_action (widget_class, "detail.show-files-or-copy-path", NULL, (GtkWidgetActionActivateFunc) show_files_or_copy_path);
     gtk_widget_class_install_action (widget_class, "detail.open-extensions", NULL, (GtkWidgetActionActivateFunc) open_link);
     gtk_widget_class_install_action (widget_class, "detail.open-homepage", NULL, (GtkWidgetActionActivateFunc) open_link);
     gtk_widget_class_install_action (widget_class, "detail.open-donations", "i", (GtkWidgetActionActivateFunc) open_link);
