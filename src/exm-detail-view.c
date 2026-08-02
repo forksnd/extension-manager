@@ -70,7 +70,6 @@ struct _ExmDetailView
     GtkButton *ext_install;
     GtkButton *remove_btn;
     GtkButton *prefs_btn;
-    GtkButton *files_btn;
     GtkSwitch *ext_toggle;
     GtkLabel *ext_description;
     GtkImage *ext_icon;
@@ -1173,8 +1172,6 @@ update_tools_stack (ExmDetailView *self)
             gtk_widget_set_visible (GTK_WIDGET (self->prefs_btn), has_prefs);
 
             gtk_widget_set_visible (GTK_WIDGET (self->remove_btn), is_user);
-
-            gtk_widget_set_visible (GTK_WIDGET (self->files_btn), is_user);
 
             gtk_widget_set_visible (GTK_WIDGET (self->update_icon), has_update);
 
