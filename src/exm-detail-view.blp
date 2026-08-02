@@ -197,18 +197,6 @@ template $ExmDetailView: Adw.NavigationPage {
                                 tooltip-text: _("Open extension preferences");
                                 action-name: "page.open-prefs";
                               }
-
-                              Gtk.Button files_btn {
-                                styles [
-                                  "circular",
-                                ]
-
-                                icon-name: "folder-open-symbolic";
-                                valign: center;
-                                // Translators: Button tooltip to show extension directory in Files
-                                tooltip-text: _("Show in Files");
-                                action-name: "page.show-files";
-                              }
                             }
 
                             Gtk.Switch ext_toggle {
@@ -362,6 +350,21 @@ template $ExmDetailView: Adw.NavigationPage {
 
                       [suffix]
                       Gtk.Label session_modes_label {}
+                    }
+
+                    Adw.ActionRow location_row {
+                      [prefix]
+                      Gtk.Image {
+                        icon-name: "system-file-manager-symbolic";
+                      }
+
+                      action-name: "detail.show-files";
+                      title: _("Location");
+
+                      [suffix]
+                      Gtk.Image location_row_folder_icon {
+                        icon-name: "folder-open-symbolic";
+                      }
                     }
                   }
 

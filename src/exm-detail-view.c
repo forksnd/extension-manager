@@ -87,6 +87,8 @@ struct _ExmDetailView
     GtkLabel *version_label;
     AdwActionRow *session_modes_row;
     GtkLabel *session_modes_label;
+    AdwActionRow *location_row;
+    GtkImage *location_row_folder_icon;
     AdwBanner *error_banner;
     gchar *error_text;
     AdwPreferencesGroup *links_group;
@@ -1026,6 +1028,32 @@ show_error (GtkWidget  *widget,
 }
 
 static void
+show_file (ExmDetailView *self,
+           const char    *action_name G_GNUC_UNUSED,
+           GVariant      *param G_GNUC_UNUSED)
+{
+    GtkWidget *toplevel;
+    ExmExtension *extension;
+    g_autofree gchar *path = NULL;
+    g_autoptr (GFile) file = NULL;
+    g_autoptr (GtkFileLauncher) launcher = NULL;
+
+    toplevel = GTK_WIDGET (gtk_widget_get_root (GTK_WIDGET (self)));
+
+    extension = exm_manager_get_by_uuid (self->manager, self->uuid);
+
+    g_object_get (extension,
+                  "path", &path,
+                  NULL);
+
+    file = g_file_new_for_path (path);
+
+    launcher = gtk_file_launcher_new (file);
+
+    gtk_file_launcher_launch (launcher, GTK_WINDOW (toplevel), NULL, NULL, NULL);
+}
+
+static void
 open_link (ExmDetailView *self,
            const char    *action_name,
            GVariant      *param)
@@ -1090,19 +1118,6 @@ page_remove (GSimpleAction *action G_GNUC_UNUSED,
         exm_manager_remove_extension (self->manager, extension);
 }
 
-static void
-page_show_files (GSimpleAction *action G_GNUC_UNUSED,
-                 GVariant      *param G_GNUC_UNUSED,
-                 ExmDetailView *self)
-{
-    if (!self->uuid || !self->manager)
-        return;
-
-    ExmExtension *extension = exm_manager_get_by_uuid (self->manager, self->uuid);
-    if (extension)
-        exm_manager_show_files (self->manager, extension);
-}
-
 static gboolean
 on_toggle_changed (GtkSwitch     *toggle,
                    gboolean       state,
@@ -1144,12 +1159,14 @@ update_tools_stack (ExmDetailView *self)
         {
             gboolean has_prefs, is_user, has_update;
             ExmExtensionState state;
+            gchar *path = NULL;
             char *error_msg = NULL;
             g_object_get (extension,
                           "has-prefs",  &has_prefs,
                           "is-user",    &is_user,
                           "state",      &state,
                           "has-update", &has_update,
+                          "path",       &path,
                           "error",      &error_msg,
                           NULL);
 
@@ -1164,6 +1181,11 @@ update_tools_stack (ExmDetailView *self)
             gtk_widget_set_visible (GTK_WIDGET (self->out_of_date_icon),
                                     state == EXM_EXTENSION_STATE_OUT_OF_DATE);
 
+            adw_action_row_set_subtitle(self->location_row, path);
+            gtk_widget_set_visible (GTK_WIDGET (self->location_row), TRUE);
+            gtk_widget_set_visible (GTK_WIDGET (self->location_row_folder_icon), is_user);
+            gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (self->location_row), is_user);
+
             {
                 gboolean has_error = (error_msg != NULL) && (error_msg[0] != '\0');
 
@@ -1171,6 +1193,7 @@ update_tools_stack (ExmDetailView *self)
                 self->error_text = has_error ? g_strdup (error_msg) : NULL;
                 adw_banner_set_revealed (self->error_banner, has_error);
             }
+            g_free (path);
             g_free (error_msg);
 
             exm_extension_bind_toggle (extension, self->ext_toggle);
@@ -1181,6 +1204,8 @@ update_tools_stack (ExmDetailView *self)
         gtk_widget_set_visible (GTK_WIDGET (self->update_icon), FALSE);
         gtk_widget_set_visible (GTK_WIDGET (self->out_of_date_icon), FALSE);
         adw_banner_set_revealed (self->error_banner, FALSE);
+
+        gtk_widget_set_visible (GTK_WIDGET (self->location_row), FALSE);
     }
 }
 
@@ -1295,7 +1320,6 @@ exm_detail_view_class_init (ExmDetailViewClass *klass)
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, ext_install);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, remove_btn);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, prefs_btn);
-    gtk_widget_class_bind_template_child (widget_class, ExmDetailView, files_btn);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, ext_toggle);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, ext_screenshot);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, ext_screenshot_container);
@@ -1308,6 +1332,8 @@ exm_detail_view_class_init (ExmDetailViewClass *klass)
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, version_label);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, session_modes_row);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, session_modes_label);
+    gtk_widget_class_bind_template_child (widget_class, ExmDetailView, location_row);
+    gtk_widget_class_bind_template_child (widget_class, ExmDetailView, location_row_folder_icon);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, error_banner);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, links_group);
     gtk_widget_class_bind_template_child (widget_class, ExmDetailView, comments_section);
@@ -1329,6 +1355,7 @@ exm_detail_view_class_init (ExmDetailViewClass *klass)
 
     gtk_widget_class_install_action (widget_class, "detail.show-versions", NULL, show_versions);
     gtk_widget_class_install_action (widget_class, "detail.show-error", NULL, show_error);
+    gtk_widget_class_install_action (widget_class, "detail.show-files", NULL, (GtkWidgetActionActivateFunc) show_file);
     gtk_widget_class_install_action (widget_class, "detail.open-extensions", NULL, (GtkWidgetActionActivateFunc) open_link);
     gtk_widget_class_install_action (widget_class, "detail.open-homepage", NULL, (GtkWidgetActionActivateFunc) open_link);
     gtk_widget_class_install_action (widget_class, "detail.open-donations", "i", (GtkWidgetActionActivateFunc) open_link);
@@ -1342,7 +1369,6 @@ exm_detail_view_init (ExmDetailView *self)
 
     GSimpleAction *open_prefs_action;
     GSimpleAction *remove_action;
-    GSimpleAction *show_files_action;
 
     g_type_ensure (EXM_TYPE_INSTALL_BUTTON);
     g_type_ensure (EXM_TYPE_SCREENSHOT);
@@ -1368,12 +1394,8 @@ exm_detail_view_init (ExmDetailView *self)
     remove_action = g_simple_action_new ("remove", NULL);
     g_signal_connect (remove_action, "activate", G_CALLBACK (page_remove), self);
 
-    show_files_action = g_simple_action_new ("show-files", NULL);
-    g_signal_connect (show_files_action, "activate", G_CALLBACK (page_show_files), self);
-
     g_action_map_add_action (G_ACTION_MAP (self->action_group), G_ACTION (open_prefs_action));
     g_action_map_add_action (G_ACTION_MAP (self->action_group), G_ACTION (remove_action));
-    g_action_map_add_action (G_ACTION_MAP (self->action_group), G_ACTION (show_files_action));
 
     gtk_widget_insert_action_group (GTK_WIDGET (self), "page", G_ACTION_GROUP (self->action_group));
 }
