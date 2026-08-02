@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-05 15:52+0000\n"
-"PO-Revision-Date: 2026-07-05 16:18+0000\n"
+"POT-Creation-Date: 2026-08-02 13:12+0000\n"
+"PO-Revision-Date: 2026-08-01 09:38+0000\n"
 "Last-Translator: Fjuro <fjuro@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/extension-manager/"
 "app/cs/>\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
-"X-Generator: Weblate 2026.7.1.dev0\n"
+"X-Generator: Weblate 2026.8.dev0\n"
 
 #: data/com.mattjakeman.ExtensionManager.desktop.in.in:2
 #: data/com.mattjakeman.ExtensionManager.metainfo.xml.in.in:6
@@ -139,7 +139,7 @@ msgid "Try a different search"
 msgstr "Zkuste vyhledat něco jiného"
 
 #: src/exm-browse-page.blp:186 src/exm-comment-dialog.blp:34
-#: src/exm-detail-view.blp:60 src/exm-detail-view.blp:470
+#: src/exm-detail-view.blp:61 src/exm-detail-view.blp:491
 #: src/exm-upgrade-assistant.blp:99
 msgid "Connection Error"
 msgstr "Chyba připojení"
@@ -148,148 +148,158 @@ msgstr "Chyba připojení"
 msgid "Ascending Order"
 msgstr "Vzestupné pořadí"
 
-#: src/exm-comment-dialog.blp:13 src/exm-detail-view.blp:427
+#: src/exm-comment-dialog.blp:13 src/exm-detail-view.blp:448
 msgid "Reviews and Comments"
 msgstr "Recenze a komentáře"
 
-#: src/exm-comment-dialog.blp:25 src/exm-detail-view.c:920
+#: src/exm-comment-dialog.blp:25 src/exm-detail-view.c:924
 #: src/exm-install-button.c:147
 msgid "Loading"
 msgstr "Načítání"
 
-#: src/exm-comment-tile.blp:30 src/exm-detail-view.blp:152
+#: src/exm-comment-tile.blp:30 src/exm-detail-view.blp:153
 msgid "Author"
 msgstr "Autor"
 
-#: src/exm-detail-view.blp:51
+#: src/exm-detail-view.blp:52
 msgid "Loading Details"
 msgstr "Načítání podrobností"
 
-#: src/exm-detail-view.blp:70 src/exm-window.c:411
+#: src/exm-detail-view.blp:71 src/exm-window.c:411
 msgid "An Error Occurred"
 msgstr "Došlo k chybě"
 
-#: src/exm-detail-view.blp:71
+#: src/exm-detail-view.blp:72
 msgid "No extension details available"
 msgstr "Nejsou k dispozici žádné podrobnosti o rozšíření"
 
 #. Translators: Banner title shown when the extension has a runtime error
-#: src/exm-detail-view.blp:84
+#: src/exm-detail-view.blp:85
 msgid "This extension has an error"
 msgstr "Toto rozšíření má chybu"
 
-#: src/exm-detail-view.blp:85
+#: src/exm-detail-view.blp:86
 msgid "_View Details"
 msgstr "_Zobrazit podrobnosti"
 
-#: src/exm-detail-view.blp:137
+#: src/exm-detail-view.blp:138
 msgid "Name"
 msgstr "Název"
 
 #. Translators: Button tooltip to remove an installed extension
-#: src/exm-detail-view.blp:185
+#: src/exm-detail-view.blp:186
 msgid "Remove Extension"
 msgstr "Odstranit rozšíření"
 
 #. Translators: Button tooltip to open extension preferences
 #. Translators: Button's tooltip to open extension's preferences dialog
-#: src/exm-detail-view.blp:197 src/exm-extension-row.blp:72
+#: src/exm-detail-view.blp:198 src/exm-extension-row.blp:72
 msgid "Open extension preferences"
 msgstr "Otevřít předvolby rozšíření"
 
 #. Translators: Switch tooltip to enable or disable the extension
-#: src/exm-detail-view.blp:205
+#: src/exm-detail-view.blp:206
 msgid "Toggle Extension"
-msgstr "Přepnout rozšíření"
+msgstr "Vyp/zapnout rozšíření"
 
-#: src/exm-detail-view.blp:229
+#: src/exm-detail-view.blp:230
 msgid "Enlarge Image"
 msgstr "Zvětšit obrázek"
 
-#: src/exm-detail-view.blp:247
+#: src/exm-detail-view.blp:248
 msgid "Description"
 msgstr "Popis"
 
-#: src/exm-detail-view.blp:275
+#: src/exm-detail-view.blp:276
 msgctxt "Number of downloads"
 msgid "Downloads"
 msgstr "Počet stažení"
 
-#: src/exm-detail-view.blp:295
+#: src/exm-detail-view.blp:296
 msgid "Version"
 msgstr "Verze"
 
 #. Translators: Icon's tooltip when an extension update is available
-#: src/exm-detail-view.blp:312 src/exm-extension-row.blp:26
+#: src/exm-detail-view.blp:313 src/exm-extension-row.blp:26
 msgid "A newer version of this extension is available"
 msgstr "Je k dispozici novější verze tohoto rozšíření"
 
 #. Translators: Icon's tooltip when an extension is incompatible
-#: src/exm-detail-view.blp:326 src/exm-extension-row.blp:43
+#: src/exm-detail-view.blp:327 src/exm-extension-row.blp:43
 #: src/exm-install-button.c:142
 msgid "This extension is incompatible with your current version of GNOME"
 msgstr ""
 "Toto rozšíření není kompatibilní s vámi provozovanou verzí prostředí GNOME"
 
-#: src/exm-detail-view.blp:348
+#: src/exm-detail-view.blp:349
 msgid "Session Modes"
 msgstr "Režimy relací"
 
-#: src/exm-detail-view.blp:357
+#: src/exm-detail-view.blp:364
+msgid "Location"
+msgstr ""
+
+#: src/exm-detail-view.blp:378
 msgid "Links"
 msgstr "Odkazy"
 
-#: src/exm-detail-view.blp:367
+#: src/exm-detail-view.blp:388
 msgid "Homepage"
 msgstr "Domovská stránka"
 
-#: src/exm-detail-view.blp:383 src/exm-detail-view.blp:398
+#: src/exm-detail-view.blp:404 src/exm-detail-view.blp:419
 msgid "Donate"
 msgstr "Podpořit vývoj darem"
 
-#: src/exm-detail-view.blp:409
+#: src/exm-detail-view.blp:430
 msgid "View on Extensions"
 msgstr "Zobrazit na webu"
 
-#: src/exm-detail-view.blp:450
+#: src/exm-detail-view.blp:471
 msgid "Reviews and comments are disabled for this extension"
 msgstr "Recenze a komentáře jsou u tohoto rozšíření vypnuty"
 
-#: src/exm-detail-view.blp:493
+#: src/exm-detail-view.blp:514
 msgid "There are no reviews or comments"
 msgstr "Toto rozšíření nemá žádné recenze ani komentáře"
 
-#: src/exm-detail-view.blp:522
+#: src/exm-detail-view.blp:543
 msgid "_Show All"
 msgstr "_Zobrazit vše"
 
-#: src/exm-detail-view.c:463
+#: src/exm-detail-view.c:467
 msgid "Unlock Dialog"
 msgstr "Dialog odemčení"
 
-#: src/exm-detail-view.c:464
+#: src/exm-detail-view.c:468
 msgid "GDM"
 msgstr "GDM"
 
-#: src/exm-detail-view.c:558 src/exm-detail-view.c:663
+#: src/exm-detail-view.c:562 src/exm-detail-view.c:667
 msgid "Unsupported"
 msgstr "Nepodporované"
 
-#: src/exm-detail-view.c:711
+#: src/exm-detail-view.c:715
 msgid "Unknown"
 msgstr "Neznámé"
 
 #. Translators: '%s' = extension name
-#: src/exm-detail-view.c:801
+#: src/exm-detail-view.c:805
 #, c-format
 msgid "%s Icon"
 msgstr "Ikona rozšíření %s"
 
 #. Translators: '%s' = extension name
-#: src/exm-detail-view.c:830
+#: src/exm-detail-view.c:834
 #, c-format
 msgid "%s Screenshot"
 msgstr "Snímek obrazovky rozšíření %s"
+
+#. Success indicator
+#: src/exm-detail-view.c:1071 src/exm-error-dialog.c:126
+#: src/exm-extension-error-dialog.c:82 src/exm-upgrade-assistant.c:367
+msgid "Copied"
+msgstr "Zkopírováno"
 
 #: src/exm-error-dialog.blp:7
 msgid "Error Report"
@@ -306,12 +316,6 @@ msgstr "Kopírovat do schránky"
 #: src/exm-error-dialog.blp:77
 msgid "_New Issue"
 msgstr "_Nový problém"
-
-#. Success indicator
-#: src/exm-error-dialog.c:126 src/exm-extension-error-dialog.c:82
-#: src/exm-upgrade-assistant.c:367
-msgid "Copied"
-msgstr "Zkopírováno"
 
 #: src/exm-error-dialog.c:174
 msgid "Please open a new issue and attach the following information:"
@@ -704,8 +708,8 @@ msgstr "_Podrobnosti"
 #, c-format
 msgid "%u Selected"
 msgid_plural "%u Selected"
-msgstr[0] "Vybrána %u"
-msgstr[1] "Vybrány %u"
+msgstr[0] "Vybráno %u"
+msgstr[1] "Vybrána %u"
 msgstr[2] "Vybráno %u"
 
 #: src/exm-window.c:556
@@ -717,13 +721,13 @@ msgid_plural ""
 "Their features and functionality will no longer be accessible. Are you sure "
 "you want to uninstall %u extensions?"
 msgstr[0] ""
-"Funkce tohoto rozšíření již nebudou nadále k dispozici. Opravdu chcete "
+"Funkce tohoto rozšíření už nebudou nadále k dispozici. Opravdu chcete "
 "odinstalovat %u rozšíření?"
 msgstr[1] ""
-"Jejich funkce již nebudou nadále k dispozici. Opravdu chcete odinstalovat %u "
+"Jejich funkce už nebudou nadále k dispozici. Opravdu chcete odinstalovat %u "
 "rozšíření?"
 msgstr[2] ""
-"Jejich funkce již nebudou nadále k dispozici. Opravdu chcete odinstalovat %u "
+"Jejich funkce už nebudou nadále k dispozici. Opravdu chcete odinstalovat %u "
 "rozšíření?"
 
 #: src/web/exm-request-handler.c:133
@@ -737,6 +741,9 @@ msgstr ""
 #: src/web/exm-request-handler.c:134
 msgid "Check your network status and try again"
 msgstr "Zkontrolujte stav své sítě a zkuste to znovu"
+
+#~ msgid "Show in Files"
+#~ msgstr "Zobrazit v Souborech"
 
 #~ msgid "Error"
 #~ msgstr "Chyba"

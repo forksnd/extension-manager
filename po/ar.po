@@ -11,10 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-05 15:52+0000\n"
-"PO-Revision-Date: 2026-07-16 11:01+0000\n"
-"Last-Translator: Muhammed Al-Basha "
-"<mu7basha@users.noreply.hosted.weblate.org>\n"
+"POT-Creation-Date: 2026-08-02 13:12+0000\n"
+"PO-Revision-Date: 2026-08-02 13:01+0000\n"
+"Last-Translator: jonnysemon <jonnysemon@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/extension-manager/"
 "app/ar/>\n"
 "Language: ar\n"
@@ -134,7 +133,7 @@ msgid "Try a different search"
 msgstr "جرّب بحثا مختلفا"
 
 #: src/exm-browse-page.blp:186 src/exm-comment-dialog.blp:34
-#: src/exm-detail-view.blp:60 src/exm-detail-view.blp:470
+#: src/exm-detail-view.blp:61 src/exm-detail-view.blp:491
 #: src/exm-upgrade-assistant.blp:99
 msgid "Connection Error"
 msgstr "خطأ في الاتصال"
@@ -143,147 +142,157 @@ msgstr "خطأ في الاتصال"
 msgid "Ascending Order"
 msgstr "ترتيب تصاعدي"
 
-#: src/exm-comment-dialog.blp:13 src/exm-detail-view.blp:427
+#: src/exm-comment-dialog.blp:13 src/exm-detail-view.blp:448
 msgid "Reviews and Comments"
 msgstr "التقييمات وتعاليق"
 
-#: src/exm-comment-dialog.blp:25 src/exm-detail-view.c:920
+#: src/exm-comment-dialog.blp:25 src/exm-detail-view.c:924
 #: src/exm-install-button.c:147
 msgid "Loading"
 msgstr "جارِ التحميل"
 
-#: src/exm-comment-tile.blp:30 src/exm-detail-view.blp:152
+#: src/exm-comment-tile.blp:30 src/exm-detail-view.blp:153
 msgid "Author"
 msgstr "المطوِّر"
 
-#: src/exm-detail-view.blp:51
+#: src/exm-detail-view.blp:52
 msgid "Loading Details"
 msgstr "يُحمِّل التفاصيل"
 
-#: src/exm-detail-view.blp:70 src/exm-window.c:411
+#: src/exm-detail-view.blp:71 src/exm-window.c:411
 msgid "An Error Occurred"
 msgstr "حدث خطأ"
 
-#: src/exm-detail-view.blp:71
+#: src/exm-detail-view.blp:72
 msgid "No extension details available"
 msgstr "لا توجد تفاصيل متاحة لهذا الامتداد"
 
 #. Translators: Banner title shown when the extension has a runtime error
-#: src/exm-detail-view.blp:84
+#: src/exm-detail-view.blp:85
 msgid "This extension has an error"
 msgstr "هذا الامتداد به خطأ"
 
-#: src/exm-detail-view.blp:85
+#: src/exm-detail-view.blp:86
 msgid "_View Details"
 msgstr "_اعرض التفاصيل"
 
-#: src/exm-detail-view.blp:137
+#: src/exm-detail-view.blp:138
 msgid "Name"
 msgstr "الاسم"
 
 #. Translators: Button tooltip to remove an installed extension
-#: src/exm-detail-view.blp:185
+#: src/exm-detail-view.blp:186
 msgid "Remove Extension"
 msgstr "أزِل الامتدادة"
 
 #. Translators: Button tooltip to open extension preferences
 #. Translators: Button's tooltip to open extension's preferences dialog
-#: src/exm-detail-view.blp:197 src/exm-extension-row.blp:72
+#: src/exm-detail-view.blp:198 src/exm-extension-row.blp:72
 msgid "Open extension preferences"
 msgstr "افتح تفضيلات الامتداد"
 
 #. Translators: Switch tooltip to enable or disable the extension
-#: src/exm-detail-view.blp:205
+#: src/exm-detail-view.blp:206
 msgid "Toggle Extension"
 msgstr "بدّل الامتدادة"
 
-#: src/exm-detail-view.blp:229
+#: src/exm-detail-view.blp:230
 msgid "Enlarge Image"
 msgstr "كبِّر الصورة"
 
-#: src/exm-detail-view.blp:247
+#: src/exm-detail-view.blp:248
 msgid "Description"
 msgstr "الوصف"
 
-#: src/exm-detail-view.blp:275
+#: src/exm-detail-view.blp:276
 msgctxt "Number of downloads"
 msgid "Downloads"
 msgstr "عدد التنزيلات"
 
-#: src/exm-detail-view.blp:295
+#: src/exm-detail-view.blp:296
 msgid "Version"
 msgstr "رقم الإصدار"
 
 #. Translators: Icon's tooltip when an extension update is available
-#: src/exm-detail-view.blp:312 src/exm-extension-row.blp:26
+#: src/exm-detail-view.blp:313 src/exm-extension-row.blp:26
 msgid "A newer version of this extension is available"
 msgstr "يُوجَّد إصدار أحدث لهذا الامتداد"
 
 #. Translators: Icon's tooltip when an extension is incompatible
-#: src/exm-detail-view.blp:326 src/exm-extension-row.blp:43
+#: src/exm-detail-view.blp:327 src/exm-extension-row.blp:43
 #: src/exm-install-button.c:142
 msgid "This extension is incompatible with your current version of GNOME"
 msgstr "هذا الامتداد غير مُتوافِق مع إصدار جنوم لديك"
 
-#: src/exm-detail-view.blp:348
+#: src/exm-detail-view.blp:349
 msgid "Session Modes"
 msgstr "أوضاع الجلسة"
 
-#: src/exm-detail-view.blp:357
+#: src/exm-detail-view.blp:364
+msgid "Location"
+msgstr ""
+
+#: src/exm-detail-view.blp:378
 msgid "Links"
 msgstr "الروابط"
 
-#: src/exm-detail-view.blp:367
+#: src/exm-detail-view.blp:388
 msgid "Homepage"
 msgstr "الصفحة الرئيسية"
 
-#: src/exm-detail-view.blp:383 src/exm-detail-view.blp:398
+#: src/exm-detail-view.blp:404 src/exm-detail-view.blp:419
 msgid "Donate"
 msgstr "تبرّع"
 
-#: src/exm-detail-view.blp:409
+#: src/exm-detail-view.blp:430
 msgid "View on Extensions"
 msgstr "اعرض على موقع الامتدادات"
 
-#: src/exm-detail-view.blp:450
+#: src/exm-detail-view.blp:471
 msgid "Reviews and comments are disabled for this extension"
 msgstr "لقد تم تعطيل التقييمات والتعاليق لهذا الملحق"
 
-#: src/exm-detail-view.blp:493
+#: src/exm-detail-view.blp:514
 msgid "There are no reviews or comments"
 msgstr "ليس هناك تقييمات أو تعاليق"
 
-#: src/exm-detail-view.blp:522
+#: src/exm-detail-view.blp:543
 msgid "_Show All"
 msgstr "_أظهر الكل"
 
-#: src/exm-detail-view.c:463
+#: src/exm-detail-view.c:467
 msgid "Unlock Dialog"
 msgstr "افتح الحوار"
 
-#: src/exm-detail-view.c:464
+#: src/exm-detail-view.c:468
 msgid "GDM"
 msgstr "مدير المكتب جنوم (GDM)"
 
-#: src/exm-detail-view.c:558 src/exm-detail-view.c:663
+#: src/exm-detail-view.c:562 src/exm-detail-view.c:667
 msgid "Unsupported"
 msgstr "غير مُتوافِق"
 
-#: src/exm-detail-view.c:711
+#: src/exm-detail-view.c:715
 msgid "Unknown"
 msgstr "مجهول"
 
 #. Translators: '%s' = extension name
-#: src/exm-detail-view.c:801
+#: src/exm-detail-view.c:805
 #, c-format
 msgid "%s Icon"
 msgstr "أيقونة %s"
 
 #. Translators: '%s' = extension name
-#: src/exm-detail-view.c:830
+#: src/exm-detail-view.c:834
 #, c-format
 msgid "%s Screenshot"
 msgstr "لقطة شاشة %s"
+
+#. Success indicator
+#: src/exm-detail-view.c:1071 src/exm-error-dialog.c:126
+#: src/exm-extension-error-dialog.c:82 src/exm-upgrade-assistant.c:367
+msgid "Copied"
+msgstr "نُسخَت"
 
 #: src/exm-error-dialog.blp:7
 msgid "Error Report"
@@ -299,13 +308,7 @@ msgstr "انسخ إلى الحافظة"
 
 #: src/exm-error-dialog.blp:77
 msgid "_New Issue"
-msgstr "_بلِّغ عن العلة"
-
-#. Success indicator
-#: src/exm-error-dialog.c:126 src/exm-extension-error-dialog.c:82
-#: src/exm-upgrade-assistant.c:367
-msgid "Copied"
-msgstr "نُسخَت"
+msgstr "_علة جديدة"
 
 #: src/exm-error-dialog.c:174
 msgid "Please open a new issue and attach the following information:"
@@ -715,9 +718,11 @@ msgid_plural ""
 "Their features and functionality will no longer be accessible. Are you sure "
 "you want to uninstall %u extensions?"
 msgstr[0] ""
-"لن تُتاح ميزات ووظائف هذا الامتداد بعد إزالته، هل ترغب في إلغاء تثبيت %u إضافة؟"
+"لن تُتاح ميزات ووظائف هذا الامتداد بعد إزالته، هل ترغب في إلغاء تثبيت %u "
+"إضافة؟"
 msgstr[1] ""
-"لن تُتاح ميزات ووظائف هذا الامتداد بعد إزالته، هل ترغب في إلغاء تثبيت %u إضافة؟"
+"لن تُتاح ميزات ووظائف هذا الامتداد بعد إزالته، هل ترغب في إلغاء تثبيت %u "
+"إضافة؟"
 msgstr[2] ""
 "لن تُتاح ميزات ووظائف هذان الامتدادان بعد إزالتهما، هل ترغب في إلغاء تثبيت %u "
 "إضافة؟"
@@ -742,6 +747,9 @@ msgstr ""
 #: src/web/exm-request-handler.c:134
 msgid "Check your network status and try again"
 msgstr "تحقق من حالة الشبكة وحاول مرة أخرى"
+
+#~ msgid "Show in Files"
+#~ msgstr "أظهر في الملفات"
 
 #~ msgid "Error"
 #~ msgstr "خطأ"

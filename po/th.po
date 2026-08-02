@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: extension-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-05 15:52+0000\n"
+"POT-Creation-Date: 2026-08-02 13:12+0000\n"
 "PO-Revision-Date: 2025-12-27 10:00+0000\n"
 "Last-Translator: Nico <creeperexplodemonderland@gmail.com>\n"
 "Language-Team: Thai <https://hosted.weblate.org/projects/extension-manager/"
@@ -125,7 +125,7 @@ msgid "Try a different search"
 msgstr "ลองคำค้นหาอื่นๆดู"
 
 #: src/exm-browse-page.blp:186 src/exm-comment-dialog.blp:34
-#: src/exm-detail-view.blp:60 src/exm-detail-view.blp:470
+#: src/exm-detail-view.blp:61 src/exm-detail-view.blp:491
 #: src/exm-upgrade-assistant.blp:99
 msgid "Connection Error"
 msgstr "การเชื่อมต่อผิดพลาด"
@@ -134,48 +134,48 @@ msgstr "การเชื่อมต่อผิดพลาด"
 msgid "Ascending Order"
 msgstr "เรียงจากน้อยไปมาก"
 
-#: src/exm-comment-dialog.blp:13 src/exm-detail-view.blp:427
+#: src/exm-comment-dialog.blp:13 src/exm-detail-view.blp:448
 msgid "Reviews and Comments"
 msgstr "รีวิวและความคิดเห็น"
 
-#: src/exm-comment-dialog.blp:25 src/exm-detail-view.c:920
+#: src/exm-comment-dialog.blp:25 src/exm-detail-view.c:924
 #: src/exm-install-button.c:147
 msgid "Loading"
 msgstr "กำลังโหลด"
 
-#: src/exm-comment-tile.blp:30 src/exm-detail-view.blp:152
+#: src/exm-comment-tile.blp:30 src/exm-detail-view.blp:153
 msgid "Author"
 msgstr "ผู้สร้าง"
 
-#: src/exm-detail-view.blp:51
+#: src/exm-detail-view.blp:52
 msgid "Loading Details"
 msgstr "กำลังโหลดข้อมูล"
 
-#: src/exm-detail-view.blp:70 src/exm-window.c:411
+#: src/exm-detail-view.blp:71 src/exm-window.c:411
 msgid "An Error Occurred"
 msgstr "เกิดข้อผิดพลาดขึ้น"
 
-#: src/exm-detail-view.blp:71
+#: src/exm-detail-view.blp:72
 msgid "No extension details available"
 msgstr "ไม่มีข้อมูลส่วนขยาย"
 
 #. Translators: Banner title shown when the extension has a runtime error
-#: src/exm-detail-view.blp:84
+#: src/exm-detail-view.blp:85
 msgid "This extension has an error"
 msgstr ""
 
-#: src/exm-detail-view.blp:85
+#: src/exm-detail-view.blp:86
 #, fuzzy
 #| msgid "_Details"
 msgid "_View Details"
 msgstr "_รายละเอียด"
 
-#: src/exm-detail-view.blp:137
+#: src/exm-detail-view.blp:138
 msgid "Name"
 msgstr "ชื่อ"
 
 #. Translators: Button tooltip to remove an installed extension
-#: src/exm-detail-view.blp:185
+#: src/exm-detail-view.blp:186
 #, fuzzy
 #| msgid "Use Extensions"
 msgid "Remove Extension"
@@ -183,104 +183,114 @@ msgstr "ใช้งานส่วนขยาย"
 
 #. Translators: Button tooltip to open extension preferences
 #. Translators: Button's tooltip to open extension's preferences dialog
-#: src/exm-detail-view.blp:197 src/exm-extension-row.blp:72
+#: src/exm-detail-view.blp:198 src/exm-extension-row.blp:72
 msgid "Open extension preferences"
 msgstr "เปิดการตั้งค่าส่วนขยาย"
 
 #. Translators: Switch tooltip to enable or disable the extension
-#: src/exm-detail-view.blp:205
+#: src/exm-detail-view.blp:206
 #, fuzzy
 #| msgid "Use Extensions"
 msgid "Toggle Extension"
 msgstr "ใช้งานส่วนขยาย"
 
-#: src/exm-detail-view.blp:229
+#: src/exm-detail-view.blp:230
 msgid "Enlarge Image"
 msgstr "ขยายรูปภาพ"
 
-#: src/exm-detail-view.blp:247
+#: src/exm-detail-view.blp:248
 msgid "Description"
 msgstr "คำอธิบาย"
 
-#: src/exm-detail-view.blp:275
+#: src/exm-detail-view.blp:276
 msgctxt "Number of downloads"
 msgid "Downloads"
 msgstr "ดาวน์โหลด"
 
-#: src/exm-detail-view.blp:295
+#: src/exm-detail-view.blp:296
 msgid "Version"
 msgstr "เวอร์ชั่น"
 
 #. Translators: Icon's tooltip when an extension update is available
-#: src/exm-detail-view.blp:312 src/exm-extension-row.blp:26
+#: src/exm-detail-view.blp:313 src/exm-extension-row.blp:26
 msgid "A newer version of this extension is available"
 msgstr "มีรุ่นใหม่ของส่วนขยายนี้"
 
 #. Translators: Icon's tooltip when an extension is incompatible
-#: src/exm-detail-view.blp:326 src/exm-extension-row.blp:43
+#: src/exm-detail-view.blp:327 src/exm-extension-row.blp:43
 #: src/exm-install-button.c:142
 msgid "This extension is incompatible with your current version of GNOME"
 msgstr "ส่วนขยายนี้ไม่รองรับกับเวอร์ชั่น GNOME ที่คุณใช้อยู่"
 
-#: src/exm-detail-view.blp:348
+#: src/exm-detail-view.blp:349
 msgid "Session Modes"
 msgstr "โหมดเซสชั่น"
 
-#: src/exm-detail-view.blp:357
+#: src/exm-detail-view.blp:364
+msgid "Location"
+msgstr ""
+
+#: src/exm-detail-view.blp:378
 msgid "Links"
 msgstr "ลิ้งค์"
 
-#: src/exm-detail-view.blp:367
+#: src/exm-detail-view.blp:388
 msgid "Homepage"
 msgstr "หน้าหลัก"
 
-#: src/exm-detail-view.blp:383 src/exm-detail-view.blp:398
+#: src/exm-detail-view.blp:404 src/exm-detail-view.blp:419
 msgid "Donate"
 msgstr "บริจาค"
 
-#: src/exm-detail-view.blp:409
+#: src/exm-detail-view.blp:430
 msgid "View on Extensions"
 msgstr "ดูส่วนขยาย"
 
-#: src/exm-detail-view.blp:450
+#: src/exm-detail-view.blp:471
 msgid "Reviews and comments are disabled for this extension"
 msgstr "รีวิวและความคิดเห็นถูกปิดสำหรับส่วนขยายนี้"
 
-#: src/exm-detail-view.blp:493
+#: src/exm-detail-view.blp:514
 msgid "There are no reviews or comments"
 msgstr "ไม่มีริวิวหรือคอมเมนต์"
 
-#: src/exm-detail-view.blp:522
+#: src/exm-detail-view.blp:543
 msgid "_Show All"
 msgstr "_ดูทั้งหมด"
 
-#: src/exm-detail-view.c:463
+#: src/exm-detail-view.c:467
 msgid "Unlock Dialog"
 msgstr "ปลดล็อกกล่องโต้ตอบ"
 
-#: src/exm-detail-view.c:464
+#: src/exm-detail-view.c:468
 msgid "GDM"
 msgstr "GDM"
 
-#: src/exm-detail-view.c:558 src/exm-detail-view.c:663
+#: src/exm-detail-view.c:562 src/exm-detail-view.c:667
 msgid "Unsupported"
 msgstr "ไม่รองรับ"
 
-#: src/exm-detail-view.c:711
+#: src/exm-detail-view.c:715
 msgid "Unknown"
 msgstr ""
 
 #. Translators: '%s' = extension name
-#: src/exm-detail-view.c:801
+#: src/exm-detail-view.c:805
 #, c-format
 msgid "%s Icon"
 msgstr "%s ไอคอน"
 
 #. Translators: '%s' = extension name
-#: src/exm-detail-view.c:830
+#: src/exm-detail-view.c:834
 #, c-format
 msgid "%s Screenshot"
 msgstr "%s ภาพถ่ายหน้าจอ"
+
+#. Success indicator
+#: src/exm-detail-view.c:1071 src/exm-error-dialog.c:126
+#: src/exm-extension-error-dialog.c:82 src/exm-upgrade-assistant.c:367
+msgid "Copied"
+msgstr "คัดลอกแล้ว"
 
 #: src/exm-error-dialog.blp:7
 msgid "Error Report"
@@ -297,12 +307,6 @@ msgstr "คัดลอกลงคลิปบอร์ด"
 #: src/exm-error-dialog.blp:77
 msgid "_New Issue"
 msgstr "_ปัญหาใหม่"
-
-#. Success indicator
-#: src/exm-error-dialog.c:126 src/exm-extension-error-dialog.c:82
-#: src/exm-upgrade-assistant.c:367
-msgid "Copied"
-msgstr "คัดลอกแล้ว"
 
 #: src/exm-error-dialog.c:174
 msgid "Please open a new issue and attach the following information:"
